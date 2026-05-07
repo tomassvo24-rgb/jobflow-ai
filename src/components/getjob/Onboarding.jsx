@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { base44 } from "@/api/base44Client";
 
 const POSITION_TYPES = ["Stáž / Internship", "Part-time", "Zkrácený úvazek", "Fulltime junior", "Remote", "Trainee program"];
 const INDUSTRIES = ["Finance & Banking", "Právo & Advokacie", "IT & Tech", "Marketing & PR", "Consulting", "Startup / VC", "E-commerce", "HR & Recruitment", "Design & UX", "Účetnictví & Daně"];
@@ -27,8 +28,50 @@ export default function Onboarding({ onComplete }) {
     field: "", level: "", skills: "", langs: "",
     types: [], industries: [], extra: "",
   });
+  const [cvLoading, setCvLoading] = useState(false);
+  const [cvDone, setCvDone] = useState(false);
+  const [cvError, setCvError] = useState("");
+  const fileInputRef = useRef(null);
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
+
+  const handleCvUpload = async (file) => {
+    if (!file) return;
+    setCvLoading(true);
+    setCvError("");
+    setCvDone(false);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      const result = await base44.integrations.Core.ExtractDataFromUploadedFile({
+        file_url,
+        json_schema: {
+          type: "object",
+          properties: {
+            field: { type: "string", description: "Obor nebo zaměření (např. IT, Marketing, Právo)" },
+            level: { type: "string", description: "Úroveň zkušeností (Junior, Mid, Senior, Absolvent atd.)" },
+            skills: { type: "string", description: "Klíčové dovednosti, projekty, certifikáty – jako jeden odstavec" },
+            langs: { type: "string", description: "Jazyky a jejich úroveň, např. Čeština (rodilý), Angličtina B2" },
+          },
+        },
+      });
+      if (result.status === "success" && result.output) {
+        const d = result.output;
+        setForm(f => ({
+          ...f,
+          field: d.field || f.field,
+          level: d.level || f.level,
+          skills: d.skills || f.skills,
+          langs: d.langs || f.langs,
+        }));
+        setCvDone(true);
+      } else {
+        setCvError("AI nedokázala zpracovat CV. Zkus jiný soubor.");
+      }
+    } catch (e) {
+      setCvError("Chyba při nahrávání. Zkus to znovu.");
+    }
+    setCvLoading(false);
+  };
 
   const toggleArr = (key, val) => {
     setForm(f => {
@@ -39,7 +82,7 @@ export default function Onboarding({ onComplete }) {
 
   const validate = (s) => {
     if (s === 0 && (!form.name.trim() || !form.email.trim())) return "Zadej jméno a email";
-    if (s === 1 && !form.field.trim()) return "Zadej svůj obor";
+    if (s === 1 && !cvDone) return "Nahraj CV nebo klikni na 'Přeskočit'";
     return null;
   };
 
@@ -87,25 +130,95 @@ export default function Onboarding({ onComplete }) {
       ),
     },
     {
-      title: "Vzdělání & zkušenosti",
-      sub: "Čím více toho o sobě řekneš, tím přesnější výsledky.",
+      title: "Nahraj své CV 📄",
+      sub: "AI z CV automaticky vytáhne tvůj obor, zkušenosti, dovednosti i jazyky.",
       content: (
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-3">
-            <Field label="Obor / zaměření" value={form.field} onChange={v => set("field", v)} placeholder="Právo, IT, Marketing..." />
-            <div>
-              <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Úroveň</label>
-              <select value={form.level} onChange={e => set("level", e.target.value)} className="w-full bg-card border border-border rounded-lg px-3 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary transition-colors">
-                <option value="">Vyber...</option>
-                {LEVELS.map(l => <option key={l}>{l}</option>)}
-              </select>
+          {/* Upload zone */}
+          <div
+            onClick={() => !cvLoading && fileInputRef.current?.click()}
+            className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all ${
+              cvDone ? "border-primary bg-accent" : "border-border hover:border-primary/50 hover:bg-secondary"
+            }`}
+          >
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".pdf,.doc,.docx"
+              className="hidden"
+              onChange={e => handleCvUpload(e.target.files?.[0])}
+            />
+            {cvLoading ? (
+              <div>
+                <div className="text-4xl mb-3 animate-pulse-slow">🤖</div>
+                <p className="font-semibold text-foreground mb-1">AI čte tvoje CV...</p>
+                <p className="text-sm text-muted-foreground">Vytahuji dovednosti, zkušenosti a jazyky</p>
+              </div>
+            ) : cvDone ? (
+              <div>
+                <div className="text-4xl mb-3">✅</div>
+                <p className="font-semibold text-accent-foreground mb-1">CV zpracováno!</p>
+                <p className="text-sm text-muted-foreground">AI vyplnila tvůj profil. Klikni pro nahrání jiného CV.</p>
+              </div>
+            ) : (
+              <div>
+                <div className="text-4xl mb-3">📄</div>
+                <p className="font-semibold text-foreground mb-1">Klikni pro nahrání CV</p>
+                <p className="text-sm text-muted-foreground">Podporované formáty: PDF, DOC, DOCX</p>
+              </div>
+            )}
+          </div>
+
+          {cvError && <p className="text-sm text-destructive font-medium">{cvError}</p>}
+
+          {/* Preview of extracted data */}
+          {cvDone && (
+            <div className="bg-secondary border border-border rounded-xl p-4 space-y-2">
+              <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-3">Vytaženo z CV</p>
+              {form.field && <div className="flex gap-2 text-sm"><span className="text-muted-foreground w-20 shrink-0">Obor:</span><span className="font-medium">{form.field}</span></div>}
+              {form.level && <div className="flex gap-2 text-sm"><span className="text-muted-foreground w-20 shrink-0">Úroveň:</span><span className="font-medium">{form.level}</span></div>}
+              {form.langs && <div className="flex gap-2 text-sm"><span className="text-muted-foreground w-20 shrink-0">Jazyky:</span><span className="font-medium">{form.langs}</span></div>}
+              {form.skills && <div className="flex gap-2 text-sm"><span className="text-muted-foreground w-20 shrink-0">Dovednosti:</span><span className="font-medium line-clamp-2">{form.skills}</span></div>}
             </div>
-          </div>
-          <div>
-            <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Dovednosti & zkušenosti</label>
-            <textarea value={form.skills} onChange={e => set("skills", e.target.value)} placeholder="Co umíš, projekty, certifikáty, úspěchy..." rows={4} className="w-full bg-card border border-border rounded-lg px-3 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary transition-colors resize-none leading-relaxed" />
-          </div>
-          <Field label="Jazyky" value={form.langs} onChange={v => set("langs", v)} placeholder="Čeština (rodilý), Angličtina B2..." />
+          )}
+
+          {/* Skip option */}
+          {!cvDone && !cvLoading && (
+            <p className="text-xs text-center text-muted-foreground">
+              Nemáš CV po ruce?{" "}
+              <button
+                type="button"
+                onClick={() => { setCvDone(true); }}
+                className="text-primary underline hover:no-underline"
+              >
+                Přeskočit a vyplnit ručně
+              </button>
+            </p>
+          )}
+
+          {/* Manual fallback fields shown after skip */}
+          {cvDone && !cvLoading && (
+            <details className="text-sm">
+              <summary className="text-muted-foreground cursor-pointer hover:text-foreground transition-colors">✏️ Upravit / doplnit ručně</summary>
+              <div className="mt-3 space-y-3">
+                <div className="grid grid-cols-2 gap-3">
+                  <Field label="Obor" value={form.field} onChange={v => set("field", v)} placeholder="Právo, IT, Marketing..." />
+                  <div>
+                    <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Úroveň</label>
+                    <select value={form.level} onChange={e => set("level", e.target.value)} className="w-full bg-card border border-border rounded-lg px-3 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary transition-colors">
+                      <option value="">Vyber...</option>
+                      {LEVELS.map(l => <option key={l}>{l}</option>)}
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Dovednosti & zkušenosti</label>
+                  <textarea value={form.skills} onChange={e => set("skills", e.target.value)} placeholder="Co umíš, projekty, certifikáty..." rows={3} className="w-full bg-card border border-border rounded-lg px-3 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary transition-colors resize-none" />
+                </div>
+                <Field label="Jazyky" value={form.langs} onChange={v => set("langs", v)} placeholder="Čeština (rodilý), Angličtina B2..." />
+              </div>
+            </details>
+          )}
         </div>
       ),
     },
