@@ -79,8 +79,8 @@ export default function Onboarding({ onComplete }) {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <Field label="Jméno" value={form.name} onChange={v => set("name", v)} placeholder="Jan Novák" />
-            <Field label="Email" value={form.email} onChange={v => set("email", v)} placeholder="jan@email.cz" />
-            <Field label="Telefon (volitelné)" value={form.phone} onChange={v => set("phone", v)} placeholder="+420 123 456 789" />
+            <EmailField label="Email" value={form.email} onChange={v => set("email", v)} placeholder="jan@gmail.com" />
+            <PhoneField label="Telefon (volitelné)" value={form.phone} onChange={v => set("phone", v)} />
             <Field label="Město" value={form.city} onChange={v => set("city", v)} placeholder="Praha" />
           </div>
         </div>
@@ -185,6 +185,83 @@ export default function Onboarding({ onComplete }) {
             </motion.div>
           </AnimatePresence>
         </div>
+      </div>
+    </div>
+  );
+}
+
+const EMAIL_DOMAINS = ["gmail.com", "seznam.cz", "email.cz", "centrum.cz", "outlook.com", "hotmail.com", "icloud.com", "yahoo.com"];
+
+function EmailField({ label, value, onChange, placeholder }) {
+  const [suggestions, setSuggestions] = useState([]);
+
+  const handleChange = (v) => {
+    onChange(v);
+    if (v.includes("@")) {
+      const [local, partial] = v.split("@");
+      if (local) {
+        const filtered = EMAIL_DOMAINS.filter(d => d.startsWith(partial || ""));
+        setSuggestions(filtered.map(d => `${local}@${d}`));
+      }
+    } else {
+      setSuggestions([]);
+    }
+  };
+
+  return (
+    <div className="relative">
+      <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">{label}</label>
+      <input
+        type="email"
+        value={value}
+        onChange={e => handleChange(e.target.value)}
+        placeholder={placeholder}
+        autoComplete="off"
+        className="w-full bg-card border border-border rounded-lg px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+      />
+      {suggestions.length > 0 && (
+        <div className="absolute z-20 top-full left-0 right-0 mt-1 bg-card border border-border rounded-lg shadow-lg overflow-hidden">
+          {suggestions.map(s => (
+            <button
+              key={s}
+              type="button"
+              onMouseDown={() => { onChange(s); setSuggestions([]); }}
+              className="w-full text-left px-3 py-2 text-sm hover:bg-accent transition-colors"
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PhoneField({ label, value, onChange, placeholder }) {
+  const handleChange = (v) => {
+    // If empty, keep empty; if user starts typing digits without prefix, add +420
+    if (v === "") { onChange(""); return; }
+    if (!v.startsWith("+")) {
+      onChange("+420 " + v.replace(/\s/g, ""));
+    } else {
+      onChange(v);
+    }
+  };
+
+  return (
+    <div>
+      <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">{label}</label>
+      <div className="flex">
+        <span className="flex items-center px-3 bg-secondary border border-r-0 border-border rounded-l-lg text-sm font-medium text-muted-foreground whitespace-nowrap">
+          🇨🇿 +420
+        </span>
+        <input
+          type="tel"
+          value={value.replace(/^\+420\s?/, "")}
+          onChange={e => onChange("+420 " + e.target.value)}
+          placeholder="123 456 789"
+          className="flex-1 bg-card border border-border rounded-r-lg px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+        />
       </div>
     </div>
   );
