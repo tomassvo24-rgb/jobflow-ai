@@ -3,10 +3,15 @@ import DiscoverTab from "./DiscoverTab";
 import GeneratorTab from "./GeneratorTab";
 import TrackerTab from "./TrackerTab";
 import ProfileTab from "./ProfileTab";
+import CVBuilderTab from "./CVBuilderTab";
+import NewsTab from "./NewsTab";
+import { LogoFull } from "./Onboarding";
 
 const TABS = [
   { id: "discover", label: "🔍 Discover" },
   { id: "generator", label: "✉️ Generátor" },
+  { id: "cvbuilder", label: "📝 CV Builder" },
+  { id: "news", label: "📰 Novinky" },
   { id: "tracker", label: "📊 Tracker" },
   { id: "profile", label: "👤 Profil" },
 ];
@@ -15,84 +20,51 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
   const [tab, setTab] = useState("discover");
   const [generatorPreset, setGeneratorPreset] = useState(null);
 
-  const openGenerator = (company) => {
-    setGeneratorPreset(company);
+  const openGenerator = (company, type = "mail") => {
+    setGeneratorPreset({ ...company, genType: type });
     setTab("generator");
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
-      <header className="bg-card border-b border-border sticky top-0 z-20">
-        <div className="flex items-center px-4 overflow-x-auto">
-          <div className="font-syne text-lg font-black text-primary tracking-tight py-4 pr-4 border-r border-border mr-2 whitespace-nowrap shrink-0">
-            getjob<span className="opacity-40 font-normal">.cz</span>
-          </div>
-          {TABS.map((t, i) => (
-            <button
-              key={t.id}
-              onClick={() => setTab(t.id)}
-              className={`px-3 py-5 text-sm font-medium whitespace-nowrap border-b-2 transition-all ${
-                tab === t.id
-                  ? "text-primary border-primary"
-                  : "text-muted-foreground border-transparent hover:text-foreground"
-              }`}
-            >
-              {t.id === "tracker" && tracker.length > 0
-                ? `📊 Tracker (${tracker.length})`
-                : t.label}
+    <div className="min-h-screen bg-[#f4f4f0] flex flex-col">
+      <header className="bg-white border-b border-border sticky top-0 z-20 h-14 flex items-center px-6">
+        <div className="pr-4 border-r border-border mr-2 shrink-0">
+          <LogoFull small />
+        </div>
+        <div className="flex flex-1 overflow-x-auto">
+          {TABS.map(t => (
+            <button key={t.id} onClick={() => setTab(t.id)}
+              className={`px-3 h-14 text-[13px] font-medium whitespace-nowrap border-b-[2.5px] transition-all flex items-center gap-1 ${tab === t.id ? "text-blue-600 border-blue-600" : "text-muted-foreground border-transparent hover:text-foreground hover:bg-[#f4f4f0]"}`}>
+              {t.id === "tracker" && tracker.length > 0 ? `📊 Tracker (${tracker.length})` : t.label}
             </button>
           ))}
-          <div className="ml-auto pl-4 shrink-0">
-            <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground font-syne text-sm font-bold flex items-center justify-center">
-              {profile.name?.[0]?.toUpperCase() || "?"}
-            </div>
+        </div>
+        <div className="ml-auto pl-4 shrink-0">
+          <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-playfair text-sm font-bold flex items-center justify-center">
+            {profile.name?.[0]?.toUpperCase() || "?"}
           </div>
         </div>
       </header>
 
-      {/* Main content */}
-      <main className="flex-1 w-full max-w-3xl mx-auto px-4 py-6">
-        {tab === "discover" && (
-          <DiscoverTab
-            profile={profile}
-            discover={discover}
-            custom={custom}
-            tracker={tracker}
-            onDiscoverSave={onDiscoverSave}
-            onCustomSave={onCustomSave}
-            onTrackerSave={onTrackerSave}
-            onOpenGenerator={openGenerator}
-          />
-        )}
-        {tab === "generator" && (
-          <GeneratorTab
-            profile={profile}
-            allCompanies={[...discover, ...custom]}
-            tracker={tracker}
-            onTrackerSave={onTrackerSave}
-            preset={generatorPreset}
-            onPresetConsumed={() => setGeneratorPreset(null)}
-          />
-        )}
-        {tab === "tracker" && (
-          <TrackerTab
-            tracker={tracker}
-            onTrackerSave={onTrackerSave}
-          />
-        )}
-        {tab === "profile" && (
-          <ProfileTab
-            profile={profile}
-            onSave={onProfileSave}
-            onReset={onReset}
-          />
-        )}
+      <main className="flex-1 w-full max-w-[960px] mx-auto px-5 py-6">
+        {tab === "discover" && <DiscoverTab profile={profile} discover={discover} custom={custom} tracker={tracker} onDiscoverSave={onDiscoverSave} onCustomSave={onCustomSave} onTrackerSave={onTrackerSave} onOpenGenerator={openGenerator} />}
+        {tab === "generator" && <GeneratorTab profile={profile} allCompanies={[...discover, ...custom]} tracker={tracker} onTrackerSave={onTrackerSave} preset={generatorPreset} onPresetConsumed={() => setGeneratorPreset(null)} />}
+        {tab === "cvbuilder" && <CVBuilderTab profile={profile} />}
+        {tab === "news" && <NewsTab />}
+        {tab === "tracker" && <TrackerTab tracker={tracker} onTrackerSave={onTrackerSave} />}
+        {tab === "profile" && <ProfileTab profile={profile} onSave={onProfileSave} onReset={onReset} />}
       </main>
 
-      <footer className="bg-card border-t border-border py-4 text-center text-xs text-muted-foreground">
-        getjob.cz &nbsp;·&nbsp; Powered by AI &nbsp;·&nbsp;
-        <a href="mailto:info@getjob.cz" className="hover:text-primary transition-colors">Kontakt</a>
+      <footer className="bg-white border-t border-border py-5 mt-5">
+        <div className="max-w-[960px] mx-auto px-6 flex items-center justify-between flex-wrap gap-4">
+          <div className="font-playfair text-base font-extrabold">Get<span className="text-blue-600">Job</span><span className="text-muted-foreground font-bold text-sm">.cz</span></div>
+          <div className="flex gap-4 text-xs text-muted-foreground">
+            <span className="hover:text-blue-600 cursor-pointer transition-colors">O projektu</span>
+            <span className="hover:text-blue-600 cursor-pointer transition-colors">Kontakt</span>
+            <span className="hover:text-blue-600 cursor-pointer transition-colors">Ochrana dat</span>
+          </div>
+          <div className="text-xs text-muted-foreground font-mono">© 2026 getjob.cz · Powered by AI</div>
+        </div>
       </footer>
     </div>
   );

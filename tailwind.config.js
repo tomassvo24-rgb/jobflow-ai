@@ -10,7 +10,7 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
       fontFamily: {
-        syne: ['var(--font-syne)'],
+        playfair: ['Playfair Display', 'serif'],
         inter: ['var(--font-inter)'],
         mono: ['var(--font-mono)'],
       },

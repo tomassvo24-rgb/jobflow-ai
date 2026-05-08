@@ -6,10 +6,10 @@ function Field({ label, value, onChange, placeholder, multiline }) {
       <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">{label}</label>
       {multiline ? (
         <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={4}
-          className="w-full bg-background border border-border rounded-lg px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none leading-relaxed" />
+          className="w-full bg-[#f4f4f0] border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition-colors resize-none leading-relaxed" />
       ) : (
         <input value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-          className="w-full bg-background border border-border rounded-lg px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors" />
+          className="w-full bg-[#f4f4f0] border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition-colors" />
       )}
     </div>
   );
@@ -17,8 +17,8 @@ function Field({ label, value, onChange, placeholder, multiline }) {
 
 function Section({ title, children }) {
   return (
-    <div className="bg-card border border-border rounded-xl p-5 mb-4">
-      <h3 className="font-syne font-bold text-sm mb-4 text-foreground">{title}</h3>
+    <div className="bg-white border border-border rounded-xl p-5 mb-4 shadow-sm">
+      <h3 className="font-playfair font-bold text-sm mb-4 flex items-center gap-2">{title}</h3>
       {children}
     </div>
   );
@@ -27,7 +27,6 @@ function Section({ title, children }) {
 export default function ProfileTab({ profile, onSave, onReset }) {
   const [form, setForm] = useState({ ...profile });
   const [saved, setSaved] = useState(false);
-
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
 
   const handleSave = () => {
@@ -37,16 +36,14 @@ export default function ProfileTab({ profile, onSave, onReset }) {
   };
 
   const handleReset = () => {
-    if (window.confirm("Opravdu smazat vše? Profil, pozice i tracker.")) {
-      onReset();
-    }
+    if (window.confirm("Opravdu smazat vše? Profil, pozice i tracker.")) onReset();
   };
 
   return (
     <div>
-      <h2 className="font-syne text-xl font-bold mb-5">Můj profil 👤</h2>
+      <h2 className="font-playfair text-[22px] font-bold mb-5">Můj profil 👤</h2>
 
-      <Section title="Základní info">
+      <Section title="👤 Základní info">
         <div className="grid grid-cols-2 gap-3">
           <Field label="Jméno" value={form.name || ""} onChange={v => set("name", v)} placeholder="Jan Novák" />
           <Field label="Email" value={form.email || ""} onChange={v => set("email", v)} placeholder="jan@email.cz" />
@@ -55,7 +52,7 @@ export default function ProfileTab({ profile, onSave, onReset }) {
         </div>
       </Section>
 
-      <Section title="Vzdělání & zkušenosti">
+      <Section title="🎓 Vzdělání & zkušenosti">
         <div className="grid grid-cols-2 gap-3 mb-3">
           <Field label="Obor" value={form.field || ""} onChange={v => set("field", v)} placeholder="Právo, IT, Marketing..." />
           <Field label="Úroveň" value={form.level || ""} onChange={v => set("level", v)} placeholder="Junior, Senior..." />
@@ -66,19 +63,19 @@ export default function ProfileTab({ profile, onSave, onReset }) {
         </div>
       </Section>
 
-      <Section title="Co hledám">
+      <Section title="🎯 Co hledám">
         <div className="space-y-3">
           <Field label="Typ pozice" value={form.ttype || ""} onChange={v => set("ttype", v)} placeholder="Stáž, Part-time, Fulltime..." />
           <Field label="Odvětví" value={form.tind || ""} onChange={v => set("tind", v)} placeholder="Finance, IT, Marketing..." />
-          <Field label="Ostatní" value={form.extra || ""} onChange={v => set("extra", v)} placeholder="Mezinárodní prostředí, startup kultura..." />
+          <Field label="Ostatní preference" value={form.extra || ""} onChange={v => set("extra", v)} placeholder="Mezinárodní prostředí, startup kultura..." />
         </div>
       </Section>
 
       <div className="flex gap-3 flex-wrap">
-        <button onClick={handleSave} className="px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity">
+        <button onClick={handleSave} className="px-5 py-2.5 rounded-full bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors">
           {saved ? "✓ Uloženo!" : "💾 Uložit profil"}
         </button>
-        <button onClick={handleReset} className="px-5 py-2.5 rounded-lg bg-red-50 text-red-600 border border-red-200 text-sm font-medium hover:bg-red-100 transition-colors">
+        <button onClick={handleReset} className="px-5 py-2.5 rounded-full bg-red-50 text-red-500 border border-red-200 text-sm font-medium hover:bg-red-100 transition-colors">
           Resetovat vše
         </button>
       </div>
