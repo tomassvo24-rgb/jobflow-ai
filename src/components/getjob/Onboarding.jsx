@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { base44 } from "@/api/base44Client";
 import EmailField from "./EmailField";
 import PhoneField from "./PhoneField";
+import IndustryPicker from "./IndustryPicker";
 
 const POSITION_TYPES = ["Stáž / Internship", "Part-time", "Zkrácený úvazek", "Fulltime junior", "Remote", "Trainee program"];
-const INDUSTRIES = ["Finance & Banking", "Právo & Advokacie", "IT & Tech", "Marketing & PR", "Consulting", "Startup / VC", "E-commerce", "HR & Recruitment", "Design & UX", "Účetnictví & Daně"];
 const LEVELS = ["Střední škola", "Bakalář (1.–3. r.)", "Magistr (1.–2. r.)", "Absolvent VŠ", "Junior (1–3 roky)", "Mid (3–6 let)", "Senior (6+ let)"];
 
 function Chip({ label, selected, onToggle }) {
@@ -195,10 +195,11 @@ export default function Onboarding({ onComplete }) {
             </div>
           </div>
           <div>
-            <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">Odvětví <span className="font-normal normal-case tracking-normal text-muted-foreground">(volitelné)</span></label>
-            <div className="flex flex-wrap gap-2">
-              {INDUSTRIES.map(i => <Chip key={i} label={i} selected={form.industries.includes(i)} onToggle={() => toggleArr("industries", i)} />)}
-            </div>
+            <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+              Odvětví <span className="font-normal normal-case tracking-normal text-muted-foreground">(volitelné)</span>
+              {form.industries.length > 0 && <span className="ml-2 text-blue-600">{form.industries.length} vybráno</span>}
+            </label>
+            <IndustryPicker selected={form.industries} onSubsChange={v => set("industries", v)} />
           </div>
           <Field label="Cokoli dalšího pro AI (volitelné)" value={form.extra} onChange={v => set("extra", v)} placeholder="Mezinárodní prostředí, korporátní právo, Python..." />
         </div>
