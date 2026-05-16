@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { base44 } from "@/api/base44Client";
+import EmailField from "./EmailField";
+import PhoneField from "./PhoneField";
 
 const POSITION_TYPES = ["Stáž / Internship", "Part-time", "Zkrácený úvazek", "Fulltime junior", "Remote", "Trainee program"];
 const INDUSTRIES = ["Finance & Banking", "Právo & Advokacie", "IT & Tech", "Marketing & PR", "Consulting", "Startup / VC", "E-commerce", "HR & Recruitment", "Design & UX", "Účetnictví & Daně"];
@@ -96,8 +98,8 @@ export default function Onboarding({ onComplete }) {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <Field label="Jméno" value={form.name} onChange={v => set("name", v)} placeholder="Jan Novák" />
-            <Field label="Email" value={form.email} onChange={v => set("email", v)} placeholder="jan@email.cz" type="email" />
-            <Field label="Telefon (volitelné)" value={form.phone} onChange={v => set("phone", v)} placeholder="+420 123 456 789" />
+            <EmailField label="Email" value={form.email} onChange={v => set("email", v)} />
+            <PhoneField label="Telefon (volitelné)" value={form.phone} onChange={v => set("phone", v)} />
             <Field label="Město" value={form.city} onChange={v => set("city", v)} placeholder="Praha" />
           </div>
         </div>

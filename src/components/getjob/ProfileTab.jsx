@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import EmailField from "./EmailField";
+import PhoneField from "./PhoneField";
 
 function Field({ label, value, onChange, placeholder, multiline }) {
   return (
@@ -46,8 +48,8 @@ export default function ProfileTab({ profile, onSave, onReset }) {
       <Section title="👤 Základní info">
         <div className="grid grid-cols-2 gap-3">
           <Field label="Jméno" value={form.name || ""} onChange={v => set("name", v)} placeholder="Jan Novák" />
-          <Field label="Email" value={form.email || ""} onChange={v => set("email", v)} placeholder="jan@email.cz" />
-          <Field label="Telefon" value={form.phone || ""} onChange={v => set("phone", v)} placeholder="+420 123 456 789" />
+          <EmailField label="Email" value={form.email || ""} onChange={v => set("email", v)} />
+          <PhoneField label="Telefon" value={form.phone || ""} onChange={v => set("phone", v)} />
           <Field label="Město" value={form.city || ""} onChange={v => set("city", v)} placeholder="Praha" />
         </div>
       </Section>
