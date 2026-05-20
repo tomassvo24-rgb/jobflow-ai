@@ -57,7 +57,7 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
 
       <footer className="bg-navy border-t border-white/10 py-5 mt-5">
         <div className="max-w-[960px] mx-auto px-6 flex items-center justify-between flex-wrap gap-4">
-          <div className="font-poppins text-base font-extrabold text-white">Get<span style={{color:"#2563EB"}}>Job</span><span className="text-white/40 font-semibold text-sm">.cz</span></div>
+          <div className="flex items-center gap-1 font-poppins font-extrabold text-base leading-none"><span className="text-white">get</span><span style={{color:"#14BBA6"}}>job</span><span className="text-white/35 font-semibold text-sm">.cz</span></div>
           <div className="flex gap-4 text-xs text-white/50">
             <span className="hover:text-white cursor-pointer transition-colors">O projektu</span>
             <span className="hover:text-white cursor-pointer transition-colors">Kontakt</span>

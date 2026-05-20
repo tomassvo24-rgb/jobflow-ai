@@ -252,19 +252,25 @@ function Field({ label, value, onChange, placeholder, type = "text" }) {
 
 export function LogoFull({ small }) {
   return (
-    <div className={`flex items-center ${small ? "gap-2" : "gap-3"}`}>
-      {/* GJ icon */}
-      <div className={`relative flex items-center justify-center rounded-xl bg-navy flex-shrink-0 ${small ? "w-7 h-7" : "w-9 h-9"}`}>
-        <span className={`font-poppins font-extrabold text-white leading-none ${small ? "text-[13px]" : "text-[16px]"}`}>GJ</span>
-        {/* smile arc */}
-        <svg className="absolute bottom-1 left-1/2 -translate-x-1/2" width={small ? 12 : 16} height={small ? 5 : 6} viewBox="0 0 16 6" fill="none">
-          <path d="M1 1 Q8 7 15 1" stroke="#14BBA6" strokeWidth="2" strokeLinecap="round" fill="none"/>
-        </svg>
-      </div>
-      {/* wordmark */}
-      <div className={`font-poppins font-extrabold leading-none tracking-tight ${small ? "text-[17px]" : "text-[22px]"}`}>
-        <span style={{ color: "#0D1B2A" }}>Get</span><span style={{ color: "#2563EB" }}>Job</span><span className="text-muted-foreground font-semibold" style={{ fontSize: small ? "12px" : "15px" }}>.cz</span>
-      </div>
+    <div className="flex items-center gap-1">
+      <span
+        className={`font-poppins font-extrabold leading-none tracking-tight ${small ? "text-[18px]" : "text-[24px]"}`}
+        style={{ color: "#ffffff" }}
+      >
+        get
+      </span>
+      <span
+        className={`font-poppins font-extrabold leading-none tracking-tight ${small ? "text-[18px]" : "text-[24px]"}`}
+        style={{ color: "#14BBA6" }}
+      >
+        job
+      </span>
+      <span
+        className={`font-poppins font-semibold leading-none ${small ? "text-[13px]" : "text-[16px]"}`}
+        style={{ color: "rgba(255,255,255,0.35)" }}
+      >
+        .cz
+      </span>
     </div>
   );
 }
