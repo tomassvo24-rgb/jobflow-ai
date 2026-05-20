@@ -8,10 +8,10 @@ function Field({ label, value, onChange, placeholder, multiline }) {
       <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">{label}</label>
       {multiline ? (
         <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={4}
-          className="w-full bg-[#f4f4f0] border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition-colors resize-none leading-relaxed" />
+          className="w-full bg-secondary border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition-colors resize-none leading-relaxed" />
       ) : (
         <input value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-          className="w-full bg-[#f4f4f0] border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition-colors" />
+          className="w-full bg-secondary border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition-colors" />
       )}
     </div>
   );
@@ -20,7 +20,7 @@ function Field({ label, value, onChange, placeholder, multiline }) {
 function Section({ title, children }) {
   return (
     <div className="bg-white border border-border rounded-xl p-5 mb-4 shadow-sm">
-      <h3 className="font-playfair font-bold text-sm mb-4 flex items-center gap-2">{title}</h3>
+      <h3 className="font-poppins font-bold text-sm mb-4 flex items-center gap-2">{title}</h3>
       {children}
     </div>
   );
@@ -43,7 +43,7 @@ export default function ProfileTab({ profile, onSave, onReset }) {
 
   return (
     <div>
-      <h2 className="font-playfair text-[22px] font-bold mb-5">Můj profil 👤</h2>
+      <h2 className="font-poppins text-[22px] font-bold mb-5">Můj profil 👤</h2>
 
       <Section title="👤 Základní info">
         <div className="grid grid-cols-2 gap-3">
@@ -74,7 +74,7 @@ export default function ProfileTab({ profile, onSave, onReset }) {
       </Section>
 
       <div className="flex gap-3 flex-wrap">
-        <button onClick={handleSave} className="px-5 py-2.5 rounded-full bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors">
+        <button onClick={handleSave} className="px-5 py-2.5 rounded-full bg-brand-blue text-white text-sm font-semibold hover:opacity-90 transition-opacity">
           {saved ? "✓ Uloženo!" : "💾 Uložit profil"}
         </button>
         <button onClick={handleReset} className="px-5 py-2.5 rounded-full bg-red-50 text-red-500 border border-red-200 text-sm font-medium hover:bg-red-100 transition-colors">

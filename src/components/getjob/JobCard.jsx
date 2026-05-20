@@ -1,7 +1,7 @@
 import React from "react";
 
 const MATCH_BADGE = {
-  high: { label: "✓ Silný", cls: "bg-blue-50 text-blue-600" },
+  high: { label: "✓ Silný", cls: "bg-accent text-accent-foreground" },
   mid: { label: "~ Dobrý", cls: "bg-amber-50 text-amber-600" },
   low: { label: "⚠ Slabší", cls: "bg-red-50 text-red-500" },
 };
@@ -15,11 +15,11 @@ export default function JobCard({ company: c, inTracker, onOpenGenerator, onAddT
         <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold ${mb.cls}`}>{mb.label}</span>
         {c.src === "custom" && <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-50 text-purple-600">vlastní</span>}
       </div>
-      <div className="font-playfair text-base font-bold text-foreground">{c.name}</div>
+      <div className="font-poppins text-base font-bold text-foreground">{c.name}</div>
       <div className="text-xs text-muted-foreground mt-0.5">{c.type}</div>
       <div className="text-sm font-semibold mt-1.5">{c.position}</div>
       {c.matchReason && (
-        <div className="text-xs text-muted-foreground mt-2 leading-relaxed px-3 py-2 bg-blue-50 rounded-lg border-l-[3px] border-blue-200">
+        <div className="text-xs text-muted-foreground mt-2 leading-relaxed px-3 py-2 bg-accent rounded-lg border-l-[3px] border-brand-teal/40">
           💡 {c.matchReason}
         </div>
       )}
@@ -32,18 +32,18 @@ export default function JobCard({ company: c, inTracker, onOpenGenerator, onAddT
       {c.benefits?.length > 0 && (
         <div className="flex flex-wrap gap-1.5 mt-2">
           {c.benefits.slice(0, 3).map(b => (
-            <span key={b} className="text-[11px] bg-[#f4f4f0] border border-border px-2 py-0.5 rounded-full text-muted-foreground">{b}</span>
+            <span key={b} className="text-[11px] bg-secondary border border-border px-2 py-0.5 rounded-full text-muted-foreground">{b}</span>
           ))}
         </div>
       )}
       <div className="flex gap-1.5 flex-wrap mt-3 pt-3 border-t border-border">
         {c.url && <a href={c.url} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-full border border-border text-xs font-medium text-muted-foreground hover:bg-secondary transition-colors">🔗 Web</a>}
-        <button onClick={() => onOpenGenerator(c, "mail")} className="px-3 py-1.5 rounded-full bg-blue-600 text-white text-xs font-medium hover:bg-blue-700 transition-colors">✉️ Mail</button>
-        <button onClick={() => onOpenGenerator(c, "letter")} className="px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 border border-blue-200 text-xs font-medium hover:bg-blue-100 transition-colors">📄 Dopis</button>
+        <button onClick={() => onOpenGenerator(c, "mail")} className="px-3 py-1.5 rounded-full bg-brand-blue text-white text-xs font-medium hover:opacity-90 transition-opacity">✉️ Mail</button>
+        <button onClick={() => onOpenGenerator(c, "letter")} className="px-3 py-1.5 rounded-full bg-accent text-accent-foreground border border-brand-teal/30 text-xs font-medium hover:bg-accent/80 transition-colors">📄 Dopis</button>
         {!inTracker ? (
           <button onClick={() => onAddToTracker(c)} className="px-3 py-1.5 rounded-full border border-border text-xs font-medium text-muted-foreground hover:bg-secondary transition-colors">+ Tracker</button>
         ) : (
-          <span className="px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 border border-blue-200 text-xs font-medium opacity-50">✓ Tracker</span>
+          <span className="px-3 py-1.5 rounded-full bg-accent text-accent-foreground border border-brand-teal/30 text-xs font-medium opacity-60">✓ Tracker</span>
         )}
         {c.src === "custom" && (
           <button onClick={() => onRemoveCustom(c.id)} className="px-3 py-1.5 rounded-full bg-red-50 text-red-500 text-xs font-medium hover:bg-red-100 transition-colors ml-auto">✕</button>

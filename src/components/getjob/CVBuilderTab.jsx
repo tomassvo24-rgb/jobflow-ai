@@ -8,7 +8,7 @@ function Field({ label, value, onChange, placeholder, type = "text" }) {
     <div>
       <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">{label}</label>
       <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-        className="w-full bg-[#f4f4f0] border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition-colors" />
+        className="w-full bg-secondary border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition-colors" />
     </div>
   );
 }
@@ -47,10 +47,10 @@ export default function CVBuilderTab({ profile }) {
       <div>
         <div className="flex gap-2 mb-4 flex-wrap no-print">
           <button onClick={() => setShowPreview(false)} className="px-4 py-2 rounded-full border border-border text-sm font-medium text-muted-foreground hover:bg-secondary transition-colors">← Zpět na editaci</button>
-          <button onClick={handlePrint} className="px-4 py-2 rounded-full bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors">🖨️ Tisknout / PDF</button>
+          <button onClick={handlePrint} className="px-4 py-2 rounded-full bg-brand-blue text-white text-sm font-medium hover:opacity-90 transition-opacity">🖨️ Tisknout / PDF</button>
         </div>
         <div ref={printRef} className="bg-white border border-border rounded-xl p-8 shadow-md">
-          <div className="font-playfair text-2xl font-extrabold mb-1">{info.name || "Jméno Příjmení"}</div>
+          <div className="font-poppins text-2xl font-extrabold mb-1">{info.name || "Jméno Příjmení"}</div>
           {info.title && <div className="text-sm text-muted-foreground font-medium mb-1">{info.title}</div>}
           <div className="flex flex-wrap gap-3 text-sm text-muted-foreground mb-5">
             {info.email && <span>📧 {info.email}</span>}
@@ -103,10 +103,10 @@ export default function CVBuilderTab({ profile }) {
   return (
     <div>
       <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
-        <h2 className="font-playfair text-[22px] font-bold">CV Builder 📝</h2>
+        <h2 className="font-poppins text-[22px] font-bold">CV Builder 📝</h2>
         <div className="flex gap-2">
           <button onClick={() => setShowPreview(true)} className="px-3 py-1.5 rounded-full border border-border text-xs font-medium text-muted-foreground hover:bg-secondary transition-colors">👁 Náhled</button>
-          <button onClick={handlePrint} className="px-3 py-1.5 rounded-full bg-blue-600 text-white text-xs font-medium hover:bg-blue-700 transition-colors">📄 Stáhnout PDF</button>
+          <button onClick={handlePrint} className="px-3 py-1.5 rounded-full bg-brand-blue text-white text-xs font-medium hover:opacity-90 transition-opacity">📄 Stáhnout PDF</button>
         </div>
       </div>
 
@@ -122,20 +122,20 @@ export default function CVBuilderTab({ profile }) {
         <div className="mt-3">
           <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Profesní profil / o mně</label>
           <textarea value={info.summary} onChange={e => set("summary", e.target.value)} rows={3} placeholder="Krátký odstavec o sobě, svých cílech a hodnotách..."
-            className="w-full bg-[#f4f4f0] border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition-colors resize-none" />
+            className="w-full bg-secondary border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition-colors resize-none" />
         </div>
       </CVSection>
 
-      <CVSection title="🎓 Vzdělání" action={<button onClick={addEdu} className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200 text-xs font-semibold hover:bg-blue-100 transition-colors">+ Přidat</button>}>
+      <CVSection title="🎓 Vzdělání" action={<button onClick={addEdu} className="px-3 py-1 rounded-full bg-accent text-accent-foreground border border-brand-teal/30 text-xs font-semibold hover:bg-accent/80 transition-colors">+ Přidat</button>}>
         {edu.map((e, i) => (
-          <div key={i} className="bg-[#f4f4f0] border border-border rounded-lg p-4 mb-3 relative">
+          <div key={i} className="bg-secondary border border-border rounded-lg p-4 mb-3 relative">
             <button onClick={() => removeEdu(i)} className="absolute top-2.5 right-2.5 text-muted-foreground hover:text-red-500 text-base transition-colors">×</button>
             <div className="grid grid-cols-2 gap-3 mb-3">
               <Field label="Škola / Instituce" value={e.school} onChange={v => setEduField(i, "school", v)} placeholder="Univerzita Karlova" />
               <Field label="Obor" value={e.field} onChange={v => setEduField(i, "field", v)} placeholder="Právo (PF UK)" />
               <div>
                 <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Stupeň</label>
-                <select value={e.degree} onChange={ev => setEduField(i, "degree", ev.target.value)} className="w-full bg-white border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition-colors">
+                <select value={e.degree} onChange={ev => setEduField(i, "degree", ev.target.value)} className="w-full bg-white border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition-colors">
                   {DEGREES.map(d => <option key={d}>{d}</option>)}
                 </select>
               </div>
@@ -146,16 +146,16 @@ export default function CVBuilderTab({ profile }) {
         ))}
       </CVSection>
 
-      <CVSection title="💼 Pracovní zkušenosti" action={<button onClick={addWork} className="px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200 text-xs font-semibold hover:bg-blue-100 transition-colors">+ Přidat</button>}>
+      <CVSection title="💼 Pracovní zkušenosti" action={<button onClick={addWork} className="px-3 py-1 rounded-full bg-accent text-accent-foreground border border-brand-teal/30 text-xs font-semibold hover:bg-accent/80 transition-colors">+ Přidat</button>}>
         {work.map((w, i) => (
-          <div key={i} className="bg-[#f4f4f0] border border-border rounded-lg p-4 mb-3 relative">
+          <div key={i} className="bg-secondary border border-border rounded-lg p-4 mb-3 relative">
             <button onClick={() => removeWork(i)} className="absolute top-2.5 right-2.5 text-muted-foreground hover:text-red-500 text-base transition-colors">×</button>
             <div className="grid grid-cols-2 gap-3 mb-3">
               <Field label="Firma" value={w.company} onChange={v => setWorkField(i, "company", v)} placeholder="Firma s.r.o." />
               <Field label="Pozice" value={w.role} onChange={v => setWorkField(i, "role", v)} placeholder="Junior Analyst" />
               <div>
                 <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Typ</label>
-                <select value={w.type} onChange={ev => setWorkField(i, "type", ev.target.value)} className="w-full bg-white border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition-colors">
+                <select value={w.type} onChange={ev => setWorkField(i, "type", ev.target.value)} className="w-full bg-white border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition-colors">
                   {WORK_TYPES.map(t => <option key={t}>{t}</option>)}
                 </select>
               </div>
@@ -164,7 +164,7 @@ export default function CVBuilderTab({ profile }) {
             <div>
               <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Popis práce</label>
               <textarea value={w.desc} onChange={e => setWorkField(i, "desc", e.target.value)} rows={2} placeholder="Co jsi dělal/a, jaké byly tvé výsledky..."
-                className="w-full bg-white border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 transition-colors resize-none" />
+                className="w-full bg-white border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition-colors resize-none" />
             </div>
           </div>
         ))}
@@ -187,8 +187,8 @@ export default function CVBuilderTab({ profile }) {
       </CVSection>
 
       <div className="flex gap-3 flex-wrap">
-        <button onClick={() => setShowPreview(true)} className="px-5 py-2.5 rounded-full bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors">👁 Zobrazit náhled</button>
-        <button onClick={handlePrint} className="px-5 py-2.5 rounded-full bg-blue-700 text-white text-sm font-semibold hover:bg-blue-800 transition-colors">📄 Stáhnout jako PDF</button>
+        <button onClick={() => setShowPreview(true)} className="px-5 py-2.5 rounded-full bg-brand-blue text-white text-sm font-semibold hover:opacity-90 transition-opacity">👁 Zobrazit náhled</button>
+        <button onClick={handlePrint} className="px-5 py-2.5 rounded-full bg-brand-teal text-white text-sm font-semibold hover:opacity-90 transition-opacity">📄 Stáhnout jako PDF</button>
       </div>
     </div>
   );
@@ -198,7 +198,7 @@ function CVSection({ title, children, action }) {
   return (
     <div className="bg-white border border-border rounded-xl p-5 mb-4 shadow-sm">
       <div className="flex items-center justify-between mb-4">
-        <div className="font-playfair font-bold text-sm">{title}</div>
+        <div className="font-poppins font-bold text-sm">{title}</div>
         {action}
       </div>
       {children}
@@ -209,7 +209,7 @@ function CVSection({ title, children, action }) {
 function Section({ title, children }) {
   return (
     <div className="mb-5">
-      <div className="text-[11px] font-bold uppercase tracking-widest text-blue-600 font-mono mb-2 pb-1.5 border-b-2 border-blue-50">{title}</div>
+      <div className="text-[11px] font-bold uppercase tracking-widest text-brand-teal font-mono mb-2 pb-1.5 border-b-2 border-accent">{title}</div>
       {children}
     </div>
   );
