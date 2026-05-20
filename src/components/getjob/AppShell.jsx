@@ -26,10 +26,10 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
   };
 
   return (
-    <div className="min-h-screen bg-brand-light flex flex-col">
-      <header className="bg-navy border-b border-navy sticky top-0 z-20 h-14 flex items-center px-6">
+    <div className="min-h-screen bg-white flex flex-col">
+      <header className="bg-brand-blue border-b border-blue-700 sticky top-0 z-20 h-14 flex items-center px-6">
         <div className="pr-4 border-r border-white/20 mr-2 shrink-0">
-          <LogoFull small />
+          <LogoFull small dark />
         </div>
         <div className="flex flex-1 overflow-x-auto">
           {TABS.map(t => (
@@ -40,7 +40,7 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
           ))}
         </div>
         <div className="ml-auto pl-4 shrink-0">
-          <div className="w-8 h-8 rounded-full bg-brand-blue text-white font-poppins text-sm font-bold flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-white text-brand-blue font-poppins text-sm font-bold flex items-center justify-center">
             {profile.name?.[0]?.toUpperCase() || "?"}
           </div>
         </div>
@@ -55,9 +55,9 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
         {tab === "profile" && <ProfileTab profile={profile} onSave={onProfileSave} onReset={onReset} />}
       </main>
 
-      <footer className="bg-navy border-t border-white/10 py-5 mt-5">
+      <footer className="bg-brand-blue border-t border-blue-700 py-5 mt-5">
         <div className="max-w-[960px] mx-auto px-6 flex items-center justify-between flex-wrap gap-4">
-          <div className="flex items-center gap-1 font-poppins font-extrabold text-base leading-none"><span className="text-white">get</span><span style={{color:"#14BBA6"}}>job</span><span className="text-white/35 font-semibold text-sm">.cz</span></div>
+          <LogoFull small dark />
           <div className="flex gap-4 text-xs text-white/50">
             <span className="hover:text-white cursor-pointer transition-colors">O projektu</span>
             <span className="hover:text-white cursor-pointer transition-colors">Kontakt</span>

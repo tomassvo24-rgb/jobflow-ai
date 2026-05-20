@@ -208,9 +208,9 @@ export default function Onboarding({ onComplete }) {
   ];
 
   return (
-    <div className="min-h-screen bg-brand-light flex flex-col">
-      <nav className="bg-navy border-b border-navy px-7 h-14 flex items-center">
-        <LogoFull />
+    <div className="min-h-screen bg-white flex flex-col">
+      <nav className="bg-brand-blue border-b border-blue-700 px-7 h-14 flex items-center">
+        <LogoFull dark />
       </nav>
       <div className="flex-1 flex flex-col items-center px-5 pt-9 pb-16">
         <div className="w-full max-w-[600px] flex gap-1.5 mb-7">
@@ -250,27 +250,33 @@ function Field({ label, value, onChange, placeholder, type = "text" }) {
   );
 }
 
-export function LogoFull({ small }) {
+export function LogoFull({ small, dark }) {
+  const size = small ? "text-[17px]" : "text-[22px]";
+  const dotSize = small ? "text-[11px]" : "text-[14px]";
+  const iconSize = small ? 18 : 22;
+
   return (
-    <div className="flex items-center gap-1">
-      <span
-        className={`font-poppins font-extrabold leading-none tracking-tight ${small ? "text-[18px]" : "text-[24px]"}`}
-        style={{ color: "#ffffff" }}
+    <div className="flex items-center gap-2">
+      {/* Lupa ikona */}
+      <div
+        className="rounded-lg flex items-center justify-center shrink-0"
+        style={{
+          width: iconSize + 8,
+          height: iconSize + 8,
+          background: dark ? "rgba(255,255,255,0.12)" : "#2563EB",
+        }}
       >
-        get
-      </span>
-      <span
-        className={`font-poppins font-extrabold leading-none tracking-tight ${small ? "text-[18px]" : "text-[24px]"}`}
-        style={{ color: "#14BBA6" }}
-      >
-        job
-      </span>
-      <span
-        className={`font-poppins font-semibold leading-none ${small ? "text-[13px]" : "text-[16px]"}`}
-        style={{ color: "rgba(255,255,255,0.35)" }}
-      >
-        .cz
-      </span>
+        <svg width={iconSize - 2} height={iconSize - 2} viewBox="0 0 20 20" fill="none">
+          <circle cx="8.5" cy="8.5" r="5" stroke="white" strokeWidth="2" />
+          <line x1="12.5" y1="12.5" x2="17" y2="17" stroke="#14BBA6" strokeWidth="2.2" strokeLinecap="round" />
+        </svg>
+      </div>
+      {/* Wordmark */}
+      <div className="flex items-baseline gap-0">
+        <span className={`font-poppins font-extrabold leading-none tracking-tight ${size}`} style={{ color: dark ? "#ffffff" : "#1d4ed8" }}>get</span>
+        <span className={`font-poppins font-extrabold leading-none tracking-tight ${size}`} style={{ color: "#14BBA6" }}>job</span>
+        <span className={`font-poppins font-semibold leading-none ${dotSize}`} style={{ color: dark ? "rgba(255,255,255,0.35)" : "#93c5fd" }}>.cz</span>
+      </div>
     </div>
   );
 }
