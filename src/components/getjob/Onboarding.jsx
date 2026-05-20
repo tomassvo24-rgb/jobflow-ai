@@ -208,29 +208,29 @@ export default function Onboarding({ onComplete }) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#f4f4f0] flex flex-col">
-      <nav className="bg-white border-b border-border px-7 h-14 flex items-center">
+    <div className="min-h-screen bg-brand-light flex flex-col">
+      <nav className="bg-navy border-b border-navy px-7 h-14 flex items-center">
         <LogoFull />
       </nav>
       <div className="flex-1 flex flex-col items-center px-5 pt-9 pb-16">
         <div className="w-full max-w-[600px] flex gap-1.5 mb-7">
           {steps.map((_, i) => (
-            <div key={i} className={`h-[3px] flex-1 rounded-full transition-all duration-300 ${i < step ? "bg-blue-400" : i === step ? "bg-blue-500" : "bg-border"}`} />
+            <div key={i} className={`h-[3px] flex-1 rounded-full transition-all duration-300 ${i < step ? "bg-brand-teal" : i === step ? "bg-brand-blue" : "bg-border"}`} />
           ))}
         </div>
         <AnimatePresence mode="wait">
           <motion.div key={step} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.2 }}
             className="bg-white border border-border rounded-2xl p-9 w-full max-w-[600px] shadow-xl">
-            <h2 className="font-playfair text-2xl font-bold mb-2">{steps[step].title}</h2>
+            <h2 className="font-poppins text-2xl font-bold mb-2">{steps[step].title}</h2>
             <p className="text-sm text-muted-foreground mb-6 leading-relaxed">{steps[step].sub}</p>
             {steps[step].content}
             {error && <p className="text-sm text-destructive mt-4 font-medium">{error}</p>}
             <div className="flex gap-2.5 justify-end mt-7">
               {step > 0 && <button onClick={back} className="px-4 py-2 rounded-full border border-border bg-secondary text-secondary-foreground text-sm font-medium hover:bg-border transition-colors">← Zpět</button>}
               {step < steps.length - 1 ? (
-                <button onClick={next} className="px-6 py-2.5 rounded-full bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors">Pokračovat →</button>
+                <button onClick={next} className="px-6 py-2.5 rounded-full bg-brand-blue text-white text-sm font-semibold hover:opacity-90 transition-opacity">Pokračovat →</button>
               ) : (
-                <button onClick={finish} className="px-6 py-2.5 rounded-full bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors">🚀 Spustit getjob.cz</button>
+                <button onClick={finish} className="px-6 py-2.5 rounded-full bg-brand-blue text-white text-sm font-semibold hover:opacity-90 transition-opacity">🚀 Spustit getjob.cz</button>
               )}
             </div>
           </motion.div>
@@ -252,15 +252,18 @@ function Field({ label, value, onChange, placeholder, type = "text" }) {
 
 export function LogoFull({ small }) {
   return (
-    <div className={`flex items-center gap-2.5 ${small ? "gap-2" : ""}`}>
-      <div className={`rounded-full bg-gradient-to-br from-blue-500 to-blue-700 text-white font-playfair font-extrabold flex items-center justify-center shadow-md ${small ? "w-7 h-7 text-sm" : "w-9 h-9 text-base"}`}>G</div>
-      <div className="flex flex-col gap-0">
-        <div className={`font-playfair font-extrabold leading-none tracking-tight flex items-baseline gap-1 ${small ? "text-[17px]" : "text-[22px]"}`}>
-          <span className="text-foreground">Get</span>
-          <span className="text-blue-600">Job</span>
-          <span className="text-muted-foreground font-bold" style={{ fontSize: small ? "11px" : "14px" }}>.cz</span>
-        </div>
-        <div className="text-[7.5px] tracking-[0.18em] text-muted-foreground font-semibold uppercase font-mono mt-0.5">Powered by Artificial Intelligence</div>
+    <div className={`flex items-center ${small ? "gap-2" : "gap-3"}`}>
+      {/* GJ icon */}
+      <div className={`relative flex items-center justify-center rounded-xl bg-navy flex-shrink-0 ${small ? "w-7 h-7" : "w-9 h-9"}`}>
+        <span className={`font-poppins font-extrabold text-white leading-none ${small ? "text-[13px]" : "text-[16px]"}`}>GJ</span>
+        {/* smile arc */}
+        <svg className="absolute bottom-1 left-1/2 -translate-x-1/2" width={small ? 12 : 16} height={small ? 5 : 6} viewBox="0 0 16 6" fill="none">
+          <path d="M1 1 Q8 7 15 1" stroke="#14BBA6" strokeWidth="2" strokeLinecap="round" fill="none"/>
+        </svg>
+      </div>
+      {/* wordmark */}
+      <div className={`font-poppins font-extrabold leading-none tracking-tight ${small ? "text-[17px]" : "text-[22px]"}`}>
+        <span style={{ color: "#0D1B2A" }}>Get</span><span style={{ color: "#2563EB" }}>Job</span><span className="text-muted-foreground font-semibold" style={{ fontSize: small ? "12px" : "15px" }}>.cz</span>
       </div>
     </div>
   );

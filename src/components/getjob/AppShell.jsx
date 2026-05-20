@@ -26,21 +26,21 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
   };
 
   return (
-    <div className="min-h-screen bg-[#f4f4f0] flex flex-col">
-      <header className="bg-white border-b border-border sticky top-0 z-20 h-14 flex items-center px-6">
-        <div className="pr-4 border-r border-border mr-2 shrink-0">
+    <div className="min-h-screen bg-brand-light flex flex-col">
+      <header className="bg-navy border-b border-navy sticky top-0 z-20 h-14 flex items-center px-6">
+        <div className="pr-4 border-r border-white/20 mr-2 shrink-0">
           <LogoFull small />
         </div>
         <div className="flex flex-1 overflow-x-auto">
           {TABS.map(t => (
             <button key={t.id} onClick={() => setTab(t.id)}
-              className={`px-3 h-14 text-[13px] font-medium whitespace-nowrap border-b-[2.5px] transition-all flex items-center gap-1 ${tab === t.id ? "text-blue-600 border-blue-600" : "text-muted-foreground border-transparent hover:text-foreground hover:bg-[#f4f4f0]"}`}>
+              className={`px-3 h-14 text-[13px] font-medium whitespace-nowrap border-b-[2.5px] transition-all flex items-center gap-1 ${tab === t.id ? "text-brand-teal border-brand-teal" : "text-white/60 border-transparent hover:text-white"}`}>
               {t.id === "tracker" && tracker.length > 0 ? `📊 Tracker (${tracker.length})` : t.label}
             </button>
           ))}
         </div>
         <div className="ml-auto pl-4 shrink-0">
-          <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-playfair text-sm font-bold flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-brand-blue text-white font-poppins text-sm font-bold flex items-center justify-center">
             {profile.name?.[0]?.toUpperCase() || "?"}
           </div>
         </div>
@@ -55,15 +55,15 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
         {tab === "profile" && <ProfileTab profile={profile} onSave={onProfileSave} onReset={onReset} />}
       </main>
 
-      <footer className="bg-white border-t border-border py-5 mt-5">
+      <footer className="bg-navy border-t border-white/10 py-5 mt-5">
         <div className="max-w-[960px] mx-auto px-6 flex items-center justify-between flex-wrap gap-4">
-          <div className="font-playfair text-base font-extrabold">Get<span className="text-blue-600">Job</span><span className="text-muted-foreground font-bold text-sm">.cz</span></div>
-          <div className="flex gap-4 text-xs text-muted-foreground">
-            <span className="hover:text-blue-600 cursor-pointer transition-colors">O projektu</span>
-            <span className="hover:text-blue-600 cursor-pointer transition-colors">Kontakt</span>
-            <span className="hover:text-blue-600 cursor-pointer transition-colors">Ochrana dat</span>
+          <div className="font-poppins text-base font-extrabold text-white">Get<span style={{color:"#2563EB"}}>Job</span><span className="text-white/40 font-semibold text-sm">.cz</span></div>
+          <div className="flex gap-4 text-xs text-white/50">
+            <span className="hover:text-white cursor-pointer transition-colors">O projektu</span>
+            <span className="hover:text-white cursor-pointer transition-colors">Kontakt</span>
+            <span className="hover:text-white cursor-pointer transition-colors">Ochrana dat</span>
           </div>
-          <div className="text-xs text-muted-foreground font-mono">© 2026 getjob.cz · Powered by AI</div>
+          <div className="text-xs text-white/40 font-mono">© 2026 getjob.cz · Powered by AI</div>
         </div>
       </footer>
     </div>

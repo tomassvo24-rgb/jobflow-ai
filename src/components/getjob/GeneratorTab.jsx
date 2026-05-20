@@ -83,7 +83,7 @@ Rules: Czech for Czech companies, English for international. First line: SUBJECT
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-5 items-start">
       <div>
-        <h2 className="font-playfair text-[22px] font-bold mb-5">Generátor dokumentů</h2>
+        <h2 className="font-poppins text-[22px] font-bold mb-5">Generátor dokumentů</h2>
 
         <div className="bg-white border border-border rounded-xl p-5 mb-4">
           {/* Type selector */}
@@ -206,7 +206,7 @@ Rules: Czech for Czech companies, English for international. First line: SUBJECT
         <div className="fixed inset-0 bg-black/40 z-50 flex items-end justify-center backdrop-blur-sm" onClick={e => e.target === e.currentTarget && setShowEmailModal(false)}>
           <div className="bg-white rounded-t-2xl w-full max-w-[520px] p-6 pb-10 shadow-2xl">
             <div className="w-9 h-1 bg-border rounded-full mx-auto mb-5" />
-            <div className="font-playfair text-lg font-bold mb-1">Otevřít v emailovém klientu</div>
+            <div className="font-poppins text-lg font-bold mb-1">Otevřít v emailovém klientu</div>
             <p className="text-sm text-muted-foreground mb-5">Vyber svůj emailový klient — mail se otevře předvyplněný.</p>
             <div className="grid grid-cols-2 gap-2 mb-3">
               {[

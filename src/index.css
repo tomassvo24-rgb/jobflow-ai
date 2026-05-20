@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,37 +6,33 @@
 
 @layer base {
   :root {
-    --background: 40 20% 98%;
-    --foreground: 0 0% 10%;
+    --background: 210 33% 98%;
+    --foreground: 215 50% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
+    --card-foreground: 215 50% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
-    --primary: 152 56% 24%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 40 10% 96%;
-    --secondary-foreground: 0 0% 30%;
-    --muted: 40 10% 95%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 152 40% 92%;
-    --accent-foreground: 152 56% 22%;
+    --popover-foreground: 215 50% 10%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 215 30% 30%;
+    --muted: 210 15% 94%;
+    --muted-foreground: 215 15% 45%;
+    --accent: 174 50% 92%;
+    --accent-foreground: 174 60% 28%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 40 10% 91%;
-    --input: 40 10% 91%;
-    --ring: 152 56% 24%;
+    --border: 210 15% 88%;
+    --input: 210 15% 88%;
+    --ring: 221 83% 53%;
     --radius: 0.75rem;
 
-    --gold: 43 80% 37%;
-    --gold-light: 48 90% 96%;
-    --blue: 221 83% 43%;
-    --blue-light: 210 100% 97%;
-    --purple: 263 70% 50%;
-    --purple-light: 270 60% 97%;
-    --green-light: 152 56% 94%;
+    --navy: 214 62% 10%;
+    --brand-blue: 221 83% 53%;
+    --brand-teal: 174 80% 40%;
+    --brand-light: 210 60% 97%;
 
-    --font-syne: 'Syne', sans-serif;
-    --font-inter: 'Inter', sans-serif;
+    --font-poppins: 'Poppins', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
   }
 
@@ -70,12 +66,9 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-inter);
+    font-family: var(--font-poppins);
   }
 
-  .font-syne {
-    font-family: var(--font-syne);
-  }
   .font-mono {
     font-family: var(--font-mono);
   }

@@ -101,7 +101,7 @@ Return jobs array with realistic Czech market data.`,
             className="rounded-2xl p-8 mb-5 text-white relative overflow-hidden"
             style={{ background: "linear-gradient(135deg,#2756F3,#1d46d8)" }}>
             <div className="text-4xl mb-3">🤖</div>
-            <h2 className="font-playfair text-[22px] font-bold mb-1.5 text-white">AI Job Discovery</h2>
+            <h2 className="font-poppins text-[22px] font-bold mb-1.5 text-white">AI Job Discovery</h2>
             <p className="text-sm text-blue-100 mb-5 leading-relaxed max-w-[420px]">Na základě tvého profilu AI navrhne relevantní firmy a pozice pro každý obor a lokaci.</p>
             <button onClick={runDiscover} className="px-6 py-3 rounded-full bg-white text-blue-700 font-bold text-sm hover:bg-blue-50 transition-colors">✨ Najít pozice pro mě</button>
           </motion.div>
@@ -118,7 +118,7 @@ Return jobs array with realistic Czech market data.`,
         {hasStarted && !loading && (
           <div>
             <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
-              <h2 className="font-playfair text-xl font-bold">Nalezené pozice</h2>
+              <h2 className="font-poppins text-xl font-bold">Nalezené pozice</h2>
               <button onClick={runDiscover} className="px-3 py-1.5 rounded-full border border-border text-xs font-medium text-muted-foreground hover:bg-secondary transition-colors">🔄 Obnovit</button>
             </div>
 

@@ -10,8 +10,7 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
       fontFamily: {
-        playfair: ['Playfair Display', 'serif'],
-        inter: ['var(--font-inter)'],
+        poppins: ['var(--font-poppins)'],
         mono: ['var(--font-mono)'],
       },
   		colors: {
@@ -48,13 +47,10 @@ module.exports = {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
-        gold: 'hsl(var(--gold))',
-        'gold-light': 'hsl(var(--gold-light))',
-        'blue-brand': 'hsl(var(--blue))',
-        'blue-light': 'hsl(var(--blue-light))',
-        'purple-brand': 'hsl(var(--purple))',
-        'purple-light': 'hsl(var(--purple-light))',
-        'green-light': 'hsl(var(--green-light))',
+        navy: 'hsl(var(--navy))',
+        'brand-blue': 'hsl(var(--brand-blue))',
+        'brand-teal': 'hsl(var(--brand-teal))',
+        'brand-light': 'hsl(var(--brand-light))',
   			chart: {
   				'1': 'hsl(var(--chart-1))',
   				'2': 'hsl(var(--chart-2))',
