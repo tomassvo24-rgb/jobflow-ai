@@ -27,7 +27,7 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <header className="border-b border-blue-700 sticky top-0 z-20 h-14 flex items-center px-6 text-[hsl(var(--background))]">
+      <header className="border-b border-blue-700 sticky top-0 z-20 h-14 flex items-center px-6 text-[hsl(var(--background))] bg-[hsl(var(--foreground))]">
         <div className="pr-4 border-r border-white/20 mr-2 shrink-0">
           <LogoFull small dark />
         </div>
