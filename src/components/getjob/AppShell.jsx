@@ -8,13 +8,13 @@ import NewsTab from "./NewsTab";
 import { LogoFull } from "./Onboarding";
 
 const TABS = [
-{ id: "discover", label: "🔍 Discover" },
-{ id: "generator", label: "✉️ Generátor" },
-{ id: "cvbuilder", label: "📝 CV Builder" },
-{ id: "news", label: "📰 Novinky" },
-{ id: "tracker", label: "📊 Tracker" },
-{ id: "profile", label: "👤 Profil" }];
-
+  { id: "discover", label: "🔍 Discover" },
+  { id: "generator", label: "✉️ Generátor" },
+  { id: "cvbuilder", label: "📝 CV Builder" },
+  { id: "news", label: "📰 Novinky" },
+  { id: "tracker", label: "📊 Tracker" },
+  { id: "profile", label: "👤 Profil" },
+];
 
 export default function AppShell({ profile, discover, custom, tracker, onProfileSave, onDiscoverSave, onCustomSave, onTrackerSave, onReset }) {
   const [tab, setTab] = useState("discover");
@@ -27,17 +27,17 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <header className="border-b border-blue-700 sticky top-0 z-20 h-14 flex items-center px-6 text-[hsl(var(--background))] bg-[hsl(var(--foreground))]">
+      <header className="bg-brand-blue border-b border-blue-700 sticky top-0 z-20 h-14 flex items-center px-6">
         <div className="pr-4 border-r border-white/20 mr-2 shrink-0">
           <LogoFull small dark />
         </div>
         <div className="flex flex-1 overflow-x-auto">
-          {TABS.map((t) =>
-          <button key={t.id} onClick={() => setTab(t.id)}
-          className={`px-3 h-14 text-[13px] font-medium whitespace-nowrap border-b-[2.5px] transition-all flex items-center gap-1 ${tab === t.id ? "text-brand-teal border-brand-teal" : "text-white/60 border-transparent hover:text-white"}`}>
+          {TABS.map(t => (
+            <button key={t.id} onClick={() => setTab(t.id)}
+              className={`px-3 h-14 text-[13px] font-medium whitespace-nowrap border-b-[2.5px] transition-all flex items-center gap-1 ${tab === t.id ? "text-brand-teal border-brand-teal" : "text-white/60 border-transparent hover:text-white"}`}>
               {t.id === "tracker" && tracker.length > 0 ? `📊 Tracker (${tracker.length})` : t.label}
             </button>
-          )}
+          ))}
         </div>
         <div className="ml-auto pl-4 shrink-0">
           <div className="w-8 h-8 rounded-full bg-white text-brand-blue font-poppins text-sm font-bold flex items-center justify-center">
@@ -66,6 +66,6 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
           <div className="text-xs text-white/40 font-mono">© 2026 getjob.cz · Powered by AI</div>
         </div>
       </footer>
-    </div>);
-
+    </div>
+  );
 }
