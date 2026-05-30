@@ -11,9 +11,9 @@ export default function Logo({ dark = false, small = false, onClick }) {
   const uid = useId().replace(/:/g, "");
 
   const fontSize = small ? "18px" : "22px";
-  const smileW   = small ? "70%"  : "80%";
-  const smileH   = small ? 9      : 11;
-  const sw       = small ? 2.5    : 3;
+  const smileW = small ? "70%" : "80%";
+  const smileH = small ? 9 : 11;
+  const sw = small ? 2.5 : 3;
 
   const Tag = onClick ? "button" : "div";
 
@@ -21,12 +21,12 @@ export default function Logo({ dark = false, small = false, onClick }) {
     <Tag
       onClick={onClick}
       className="inline-flex items-center select-none bg-transparent border-0 p-0"
-      style={{ cursor: onClick ? "pointer" : "default", lineHeight: 1 }}
-    >
+      style={{ cursor: onClick ? "pointer" : "default", lineHeight: 1 }}>
+      
       <span style={{ position: "relative", display: "inline-block", paddingBottom: smileH + 6 }}>
         {/* Wordmark */}
         <span style={{ fontSize, fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1, whiteSpace: "nowrap" }}>
-          <span style={{ color: dark ? "#ffffff" : "#0d1b2a" }}>Get</span>
+          <span style={{ color: dark ? "#ffffff" : "#0d1b2a" }} className="bg-[hsl(var(--card-foreground))]">Get</span>
           <span style={{ color: "#2563eb" }}>Job</span>
           <span style={{ color: "#14b8a6" }}>.cz</span>
         </span>
@@ -42,13 +42,13 @@ export default function Logo({ dark = false, small = false, onClick }) {
             width: smileW,
             height: smileH,
             pointerEvents: "none",
-            display: "block",
+            display: "block"
           }}
-          fill="none"
-        >
+          fill="none">
+          
           <defs>
             <linearGradient id={`sg-${uid}`} x1="0" x2="1">
-              <stop offset="0%"   stopColor="#2563eb" />
+              <stop offset="0%" stopColor="#2563eb" />
               <stop offset="100%" stopColor="#14b8a6" />
             </linearGradient>
           </defs>
@@ -56,10 +56,10 @@ export default function Logo({ dark = false, small = false, onClick }) {
             d="M4 3 Q60 16 116 3"
             stroke={`url(#sg-${uid})`}
             strokeWidth={sw}
-            strokeLinecap="round"
-          />
+            strokeLinecap="round" />
+          
         </svg>
       </span>
-    </Tag>
-  );
+    </Tag>);
+
 }
