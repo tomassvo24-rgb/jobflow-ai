@@ -59,9 +59,13 @@ function FaqItem({ q, a }) {
   );
 }
 
-export default function LandingPage({ onStart }) {
+export default function LandingPage({ onStart, onContinue }) {
   const [email, setEmail] = useState("");
   const [joined, setJoined] = useState(false);
+
+  const savedProfile = (() => {
+    try { return JSON.parse(localStorage.getItem("gj_prof")); } catch { return null; }
+  })();
 
   const handleWaitlist = (e) => {
     e.preventDefault();
@@ -81,16 +85,47 @@ export default function LandingPage({ onStart }) {
             <a href="#faq" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>FAQ</a>
           </nav>
           <div className="flex items-center gap-3">
-            <button
-              onClick={onStart}
-              className="inline-flex items-center gap-2 rounded-full bg-brand-blue text-white px-5 py-2.5 text-sm font-semibold hover:opacity-90 transition"
-              style={{ boxShadow: "0 10px 40px -12px rgba(13,27,42,0.12)" }}
-            >
-              Začít zdarma →
-            </button>
+            {savedProfile ? (
+              <button
+                onClick={onContinue}
+                className="inline-flex items-center gap-2 rounded-full bg-brand-blue text-white px-5 py-2.5 text-sm font-semibold hover:opacity-90 transition"
+                style={{ boxShadow: "0 10px 40px -12px rgba(13,27,42,0.12)" }}
+              >
+                <span className="w-6 h-6 rounded-full bg-white text-brand-blue font-bold text-xs flex items-center justify-center">
+                  {savedProfile.name?.[0]?.toUpperCase() || "?"}
+                </span>
+                Pokračovat →
+              </button>
+            ) : (
+              <button
+                onClick={onStart}
+                className="inline-flex items-center gap-2 rounded-full bg-brand-blue text-white px-5 py-2.5 text-sm font-semibold hover:opacity-90 transition"
+                style={{ boxShadow: "0 10px 40px -12px rgba(13,27,42,0.12)" }}
+              >
+                Začít zdarma →
+              </button>
+            )}
           </div>
         </div>
       </header>
+
+      {/* RETURNING USER BANNER */}
+      {savedProfile && (
+        <div className="border-b py-3 px-6" style={{ background: "#e6f0ff", borderColor: "#bfdbfe" }}>
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 flex-wrap">
+            <p className="text-sm font-medium" style={{ color: "#1e40af" }}>
+              👋 Vítej zpět, <strong>{savedProfile.name}</strong>! Máš uložený profil.
+            </p>
+            <button
+              onClick={onContinue}
+              className="rounded-full px-4 py-1.5 text-xs font-semibold hover:opacity-90 transition"
+              style={{ background: "#2563eb", color: "#fff" }}
+            >
+              Přejít do aplikace →
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* HERO */}
       <section className="relative overflow-hidden">

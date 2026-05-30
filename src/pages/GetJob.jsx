@@ -74,7 +74,7 @@ export default function GetJob() {
   };
 
   if (view === "landing") {
-    return <LandingPage onStart={() => setView("onboarding")} />;
+    return <LandingPage onStart={() => setView("onboarding")} onContinue={() => setView("app")} />;
   }
 
   if (view === "onboarding") {
