@@ -5,7 +5,7 @@ import TrackerTab from "./TrackerTab";
 import ProfileTab from "./ProfileTab";
 import CVBuilderTab from "./CVBuilderTab";
 import NewsTab from "./NewsTab";
-import { LogoFull } from "./Onboarding";
+import Logo from "./Logo";
 
 const TABS = [
   { id: "discover", label: "🔍 Discover" },
@@ -16,7 +16,7 @@ const TABS = [
   { id: "profile", label: "👤 Profil" },
 ];
 
-export default function AppShell({ profile, discover, custom, tracker, onProfileSave, onDiscoverSave, onCustomSave, onTrackerSave, onReset }) {
+export default function AppShell({ profile, discover, custom, tracker, onProfileSave, onDiscoverSave, onCustomSave, onTrackerSave, onReset, onGoHome }) {
   const [tab, setTab] = useState("discover");
   const [generatorPreset, setGeneratorPreset] = useState(null);
 
@@ -29,7 +29,7 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
     <div className="min-h-screen bg-white flex flex-col">
       <header className="bg-brand-blue border-b border-blue-700 sticky top-0 z-20 h-14 flex items-center px-6">
         <div className="pr-4 border-r border-white/20 mr-2 shrink-0">
-          <LogoFull small dark />
+          <Logo small dark onClick={onGoHome} />
         </div>
         <div className="flex flex-1 overflow-x-auto">
           {TABS.map(t => (
@@ -57,7 +57,7 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
 
       <footer className="bg-brand-blue border-t border-blue-700 py-5 mt-5">
         <div className="max-w-[960px] mx-auto px-6 flex items-center justify-between flex-wrap gap-4">
-          <LogoFull small dark />
+          <Logo small dark onClick={onGoHome} />
           <div className="flex gap-4 text-xs text-white/50">
             <span className="hover:text-white cursor-pointer transition-colors">O projektu</span>
             <span className="hover:text-white cursor-pointer transition-colors">Kontakt</span>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { LogoFull } from "./Onboarding";
+import Logo from "./Logo";
 
 const FEATURES = [
   { icon: "📤", title: "Nahrání a analýza CV", desc: "Nahrajte svůj PDF životopis a AI okamžitě extrahuje vaše dovednosti, zkušenosti, jazyky a obor studia." },
@@ -74,7 +74,7 @@ export default function LandingPage({ onStart }) {
       {/* NAV */}
       <header className="sticky top-0 z-50 backdrop-blur-md border-b" style={{ background: "rgba(255,255,255,0.85)", borderColor: "#e3e8f0" }}>
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <LogoFull />
+          <Logo />
           <nav className="hidden md:flex items-center gap-10 text-sm font-semibold">
             <a href="#funkce" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>Funkce</a>
             <a href="#jak-to-funguje" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>Jak to funguje</a>
@@ -159,7 +159,7 @@ export default function LandingPage({ onStart }) {
                     <span>●●●</span>
                   </div>
                   {/* Logo */}
-                  <div className="px-5 pt-2 pb-2"><LogoFull small /></div>
+                  <div className="px-5 pt-2 pb-2"><Logo small /></div>
                   {/* Job card */}
                   <div className="px-4 mt-2">
                     <div className="rounded-2xl border p-4" style={{ borderColor: "#e3e8f0", boxShadow: "0 10px 40px -12px rgba(13,27,42,0.12)" }}>
@@ -346,7 +346,7 @@ export default function LandingPage({ onStart }) {
       <footer className="border-t" style={{ borderColor: "#e3e8f0" }}>
         <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <LogoFull />
+            <Logo />
             <p className="mt-4 text-sm max-w-xs" style={{ color: "#5b6577" }}>AI-powered job hunting platform. Made in Czechia.</p>
           </div>
           <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm" style={{ color: "#5b6577" }}>

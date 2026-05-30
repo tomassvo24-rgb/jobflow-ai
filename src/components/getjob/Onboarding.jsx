@@ -4,6 +4,7 @@ import { base44 } from "@/api/base44Client";
 import EmailField from "./EmailField";
 import PhoneField from "./PhoneField";
 import IndustryPicker from "./IndustryPicker";
+import Logo from "./Logo";
 
 const POSITION_TYPES = ["Stáž / Internship", "Part-time", "Zkrácený úvazek", "Fulltime junior", "Remote", "Trainee program"];
 const LEVELS = ["Střední škola", "Bakalář (1.–3. r.)", "Magistr (1.–2. r.)", "Absolvent VŠ", "Junior (1–3 roky)", "Mid (3–6 let)", "Senior (6+ let)"];
@@ -17,7 +18,7 @@ function Chip({ label, selected, onToggle }) {
   );
 }
 
-export default function Onboarding({ onComplete }) {
+export default function Onboarding({ onComplete, onGoHome }) {
   const [step, setStep] = useState(0);
   const [form, setForm] = useState({ name: "", email: "", phone: "", city: "", field: "", level: "", skills: "", langs: "", types: ["Stáž / Internship"], industries: [], extra: "" });
   const [cvLoading, setCvLoading] = useState(false);
@@ -210,7 +211,7 @@ export default function Onboarding({ onComplete }) {
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <nav className="bg-brand-blue border-b border-blue-700 px-7 h-14 flex items-center">
-        <LogoFull dark />
+        <Logo dark onClick={onGoHome} />
       </nav>
       <div className="flex-1 flex flex-col items-center px-5 pt-9 pb-16">
         <div className="w-full max-w-[600px] flex gap-1.5 mb-7">
@@ -246,37 +247,6 @@ function Field({ label, value, onChange, placeholder, type = "text" }) {
       <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">{label}</label>
       <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         className="w-full bg-white border border-border rounded-lg px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-colors" />
-    </div>
-  );
-}
-
-export function LogoFull({ small, dark }) {
-  const size = small ? "text-[17px]" : "text-[22px]";
-  const dotSize = small ? "text-[11px]" : "text-[14px]";
-  const iconSize = small ? 18 : 22;
-
-  return (
-    <div className="flex items-center gap-2">
-      {/* Lupa ikona */}
-      <div
-        className="rounded-lg flex items-center justify-center shrink-0"
-        style={{
-          width: iconSize + 8,
-          height: iconSize + 8,
-          background: dark ? "rgba(255,255,255,0.12)" : "#2563EB",
-        }}
-      >
-        <svg width={iconSize - 2} height={iconSize - 2} viewBox="0 0 20 20" fill="none">
-          <circle cx="8.5" cy="8.5" r="5" stroke="white" strokeWidth="2" />
-          <line x1="12.5" y1="12.5" x2="17" y2="17" stroke="#14BBA6" strokeWidth="2.2" strokeLinecap="round" />
-        </svg>
-      </div>
-      {/* Wordmark */}
-      <div className="flex items-baseline gap-0">
-        <span className={`font-poppins font-extrabold leading-none tracking-tight ${size}`} style={{ color: dark ? "#ffffff" : "#1d4ed8" }}>get</span>
-        <span className={`font-poppins font-extrabold leading-none tracking-tight ${size}`} style={{ color: "#14BBA6" }}>job</span>
-        <span className={`font-poppins font-semibold leading-none ${dotSize}`} style={{ color: dark ? "rgba(255,255,255,0.35)" : "#93c5fd" }}>.cz</span>
-      </div>
     </div>
   );
 }

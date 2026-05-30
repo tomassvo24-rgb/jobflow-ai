@@ -78,7 +78,7 @@ export default function GetJob() {
   }
 
   if (view === "onboarding") {
-    return <Onboarding onComplete={handleProfileSave} />;
+    return <Onboarding onComplete={handleProfileSave} onGoHome={() => setView("landing")} />;
   }
 
   return (
@@ -92,6 +92,7 @@ export default function GetJob() {
       onCustomSave={handleCustomSave}
       onTrackerSave={handleTrackerSave}
       onReset={handleReset}
+      onGoHome={() => setView("landing")}
     />
   );
 }
