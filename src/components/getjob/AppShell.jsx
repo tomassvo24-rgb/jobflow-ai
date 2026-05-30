@@ -55,7 +55,7 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
         {tab === "profile" && <ProfileTab profile={profile} onSave={onProfileSave} onReset={onReset} />}
       </main>
 
-      <footer className="border-t border-blue-700 py-5 mt-5 bg-[hsl(var(--muted-foreground))]">
+      <footer className="border-t border-blue-700 py-5 mt-5 bg-[hsl(var(--muted))]">
         <div className="max-w-[960px] mx-auto px-6 flex items-center justify-between flex-wrap gap-4">
           <Logo small dark onClick={onGoHome} />
           <div className="flex gap-4 text-xs text-white/50">
