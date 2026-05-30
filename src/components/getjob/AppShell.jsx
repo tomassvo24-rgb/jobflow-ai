@@ -59,9 +59,9 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
         <div className="max-w-[960px] mx-auto px-6 flex items-center justify-between flex-wrap gap-4">
           <Logo small dark onClick={onGoHome} />
           <div className="flex gap-4 text-xs text-white/50">
-            <span className="hover:text-white cursor-pointer transition-colors text-[hsl(var(--foreground))]">O projektu</span>
-            <span className="hover:text-white cursor-pointer transition-colors text-[hsl(var(--foreground))]">Kontakt</span>
-            <span className="hover:text-white cursor-pointer transition-colors text-[hsl(var(--foreground))]">Ochrana dat</span>
+            <span className="hover:text-white/80 cursor-pointer transition-colors">O projektu</span>
+            <span className="hover:text-white/80 cursor-pointer transition-colors">Kontakt</span>
+            <span className="hover:text-white/80 cursor-pointer transition-colors">Ochrana dat</span>
           </div>
           <div className="text-xs font-mono text-[hsl(var(--foreground))]">© 2026 getjob.cz · Powered by AI</div>
         </div>
