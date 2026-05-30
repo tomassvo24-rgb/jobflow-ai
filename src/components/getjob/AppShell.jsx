@@ -55,11 +55,11 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
         {tab === "profile" && <ProfileTab profile={profile} onSave={onProfileSave} onReset={onReset} />}
       </main>
 
-      <footer className="border-t border-blue-700 py-5 mt-5 bg-[hsl(var(--foreground))]">
-        <div className="max-w-[960px] mx-auto px-6 flex items-center justify-between flex-wrap gap-4 bg-[hsl(var(--foreground))]">
+      <footer className="border-t border-blue-700 py-5 mt-5 bg-[hsl(var(--background))]">
+        <div className="max-w-[960px] mx-auto px-6 flex items-center justify-between flex-wrap gap-4">
           <Logo small dark onClick={onGoHome} />
           <div className="flex gap-4 text-xs text-white/50">
-            <span className="hover:text-white cursor-pointer transition-colors bg-[hsl(var(--foreground))]">O projektu</span>
+            <span className="hover:text-white cursor-pointer transition-colors">O projektu</span>
             <span className="hover:text-white cursor-pointer transition-colors">Kontakt</span>
             <span className="hover:text-white cursor-pointer transition-colors">Ochrana dat</span>
           </div>
