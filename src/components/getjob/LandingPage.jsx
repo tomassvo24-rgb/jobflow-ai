@@ -81,12 +81,6 @@ export default function LandingPage({ onStart }) {
             <a href="#faq" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>FAQ</a>
           </nav>
           <div className="flex items-center gap-3">
-            <a
-              href="/getjob-landing.html" download="getjob-landing.html"
-              className="hidden md:inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-xs font-semibold text-muted-foreground hover:bg-secondary transition-colors"
-            >
-              ⬇ Stáhnout HTML
-            </a>
             <button
               onClick={onStart}
               className="inline-flex items-center gap-2 rounded-full bg-brand-blue text-white px-5 py-2.5 text-sm font-semibold hover:opacity-90 transition"
