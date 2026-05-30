@@ -27,14 +27,14 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <header className="bg-brand-blue border-b border-blue-700 sticky top-0 z-20 h-14 flex items-center px-6">
+      <header className="border-b border-blue-700 sticky top-0 z-20 h-14 flex items-center px-6 bg-[hsl(var(--background))]">
         <div className="pr-4 border-r border-white/20 mr-2 shrink-0">
           <Logo small dark onClick={onGoHome} />
         </div>
         <div className="flex flex-1 overflow-x-auto">
           {TABS.map((t) =>
           <button key={t.id} onClick={() => setTab(t.id)}
-          className={`px-3 h-14 text-[13px] font-medium whitespace-nowrap border-b-[2.5px] transition-all flex items-center gap-1 text-[hsl(var(--card))] ${tab === t.id ? "border-brand-teal" : "text-white/60 border-transparent hover:text-white"}`}>
+          className={`px-3 h-14 text-[13px] font-medium whitespace-nowrap border-b-[2.5px] transition-all flex items-center gap-1 text-[hsl(var(--foreground))] ${tab === t.id ? "border-brand-teal" : "text-white/60 border-transparent hover:text-white"}`}>
               {t.id === "tracker" && tracker.length > 0 ? `📊 Tracker (${tracker.length})` : t.label}
             </button>
           )}
