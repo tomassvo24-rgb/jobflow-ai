@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Onboarding from "../components/getjob/Onboarding";
 import AppShell from "../components/getjob/AppShell";
+import LandingPage from "../components/getjob/LandingPage";
 
 const STORAGE_KEYS = {
   profile: "gj_prof",
@@ -29,6 +30,7 @@ export default function GetJob() {
   const [discover, setDiscover] = useState([]);
   const [custom, setCustom] = useState([]);
   const [tracker, setTracker] = useState([]);
+  const [view, setView] = useState("landing"); // "landing" | "onboarding" | "app"
 
   useEffect(() => {
     const prof = loadStorage(STORAGE_KEYS.profile);
@@ -37,12 +39,14 @@ export default function GetJob() {
       setDiscover(loadStorage(STORAGE_KEYS.discover) || []);
       setCustom(loadStorage(STORAGE_KEYS.custom) || []);
       setTracker(loadStorage(STORAGE_KEYS.tracker) || []);
+      setView("app");
     }
   }, []);
 
   const handleProfileSave = (prof) => {
     setProfile(prof);
     saveStorage(STORAGE_KEYS.profile, prof);
+    setView("app");
   };
 
   const handleDiscoverSave = (items) => {
@@ -66,9 +70,14 @@ export default function GetJob() {
     setDiscover([]);
     setCustom([]);
     setTracker([]);
+    setView("landing");
   };
 
-  if (!profile) {
+  if (view === "landing") {
+    return <LandingPage onStart={() => setView("onboarding")} />;
+  }
+
+  if (view === "onboarding") {
     return <Onboarding onComplete={handleProfileSave} />;
   }
 
