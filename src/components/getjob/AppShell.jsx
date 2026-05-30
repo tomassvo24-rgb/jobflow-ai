@@ -63,7 +63,7 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
             <span className="hover:text-white cursor-pointer transition-colors text-[hsl(var(--foreground))]">Kontakt</span>
             <span className="hover:text-white cursor-pointer transition-colors text-[hsl(var(--foreground))]">Ochrana dat</span>
           </div>
-          <div className="text-xs text-white/40 font-mono bg-[hsl(var(--foreground))]">© 2026 getjob.cz · Powered by AI</div>
+          <div className="text-xs font-mono text-[hsl(var(--foreground))]">© 2026 getjob.cz · Powered by AI</div>
         </div>
       </footer>
     </div>);
