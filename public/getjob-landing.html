@@ -48,16 +48,28 @@
     .btn-primary:hover { opacity: .9; }
 
     /* ── LOGO ── */
-    .logo { display: inline-flex; align-items: center; line-height: 1; }
-    .logo-text { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; position: relative; display: inline-block; padding-bottom: 10px; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; line-height: 1; }
+    .logo-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px; border-radius: 10px;
+      background: #2563eb; flex-shrink: 0;
+    }
+    .logo-icon.dark-icon { background: rgba(255,255,255,0.13); }
+    .logo-icon svg { display: block; }
+    .logo-wordmark {
+      position: relative; display: inline-block;
+      font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+      line-height: 1; white-space: nowrap; padding-bottom: 15px;
+    }
     .logo-get { color: #0d1b2a; }
     .logo-job { color: #2563eb; }
-    .logo-cz  { color: #14b8a6; }
+    .logo-cz  { color: #94a3b8; font-weight: 600; }
+    .logo-dark .logo-get { color: #fff; }
+    .logo-dark .logo-cz  { color: rgba(255,255,255,0.45); }
     .logo-smile {
-      position: absolute; bottom: -2px; left: 0;
-      width: 80%; height: 12px; pointer-events: none;
+      position: absolute; bottom: 0; left: 0;
+      width: 86px; height: 11px; pointer-events: none; display: block;
     }
-    .logo-text.dark .logo-get { color: #fff; }
 
     /* ── HERO ── */
     .hero {
@@ -387,16 +399,19 @@
 <nav>
   <div class="container nav-inner">
     <div class="logo">
-      <span class="logo-text">
-        <span class="logo-get">Get</span><span class="logo-job">Job</span><span class="logo-cz">.cz</span>
-        <svg class="logo-smile" viewBox="0 0 120 24" fill="none">
-          <defs>
-            <linearGradient id="sg-nav" x1="0" x2="1">
-              <stop offset="0%" stop-color="#2563eb"/>
-              <stop offset="100%" stop-color="#14b8a6"/>
-            </linearGradient>
-          </defs>
-          <path d="M4 4 Q60 32 116 4" stroke="url(#sg-nav)" stroke-width="4" stroke-linecap="round"/>
+      <div class="logo-icon">
+        <svg width="17" height="17" viewBox="0 0 18 18" fill="none">
+          <circle cx="7.5" cy="7.5" r="5" stroke="white" stroke-width="1.9"/>
+          <line x1="11.5" y1="11.5" x2="16" y2="16" stroke="#14b8a6" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="logo-wordmark">
+        <span class="logo-get">get</span><span class="logo-job">job</span><span class="logo-cz">.cz</span>
+        <svg class="logo-smile" viewBox="0 0 100 14" preserveAspectRatio="none" fill="none">
+          <defs><linearGradient id="sg-nav" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#14b8a6"/>
+          </linearGradient></defs>
+          <path d="M2 2 Q50 14 98 2" stroke="url(#sg-nav)" stroke-width="3.4" stroke-linecap="round"/>
         </svg>
       </span>
     </div>
@@ -446,16 +461,19 @@
                 </div>
                 <div class="phone-logo-wrap">
                   <div class="logo">
-                    <span class="logo-text" style="font-size:17px; padding-bottom:8px;">
-                      <span class="logo-get">Get</span><span class="logo-job">Job</span><span class="logo-cz">.cz</span>
-                      <svg class="logo-smile" viewBox="0 0 120 24" fill="none">
-                        <defs>
-                          <linearGradient id="sg-phone" x1="0" x2="1">
-                            <stop offset="0%" stop-color="#2563eb"/>
-                            <stop offset="100%" stop-color="#14b8a6"/>
-                          </linearGradient>
-                        </defs>
-                        <path d="M4 4 Q60 32 116 4" stroke="url(#sg-phone)" stroke-width="3.5" stroke-linecap="round"/>
+                    <div class="logo-icon" style="width:26px;height:26px;border-radius:8px;">
+                      <svg width="13" height="13" viewBox="0 0 18 18" fill="none">
+                        <circle cx="7.5" cy="7.5" r="5" stroke="white" stroke-width="1.9"/>
+                        <line x1="11.5" y1="11.5" x2="16" y2="16" stroke="#14b8a6" stroke-width="2.2" stroke-linecap="round"/>
+                      </svg>
+                    </div>
+                    <span class="logo-wordmark" style="font-size:17px;padding-bottom:12px;">
+                      <span class="logo-get">get</span><span class="logo-job">job</span><span class="logo-cz">.cz</span>
+                      <svg class="logo-smile" style="width:68px;height:9px;" viewBox="0 0 100 14" preserveAspectRatio="none" fill="none">
+                        <defs><linearGradient id="sg-phone" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#14b8a6"/>
+                        </linearGradient></defs>
+                        <path d="M2 2 Q50 14 98 2" stroke="url(#sg-phone)" stroke-width="2.8" stroke-linecap="round"/>
                       </svg>
                     </span>
                   </div>
@@ -680,16 +698,19 @@
   <div class="container footer-inner">
     <div>
       <div class="logo">
-        <span class="logo-text">
-          <span class="logo-get">Get</span><span class="logo-job">Job</span><span class="logo-cz">.cz</span>
-          <svg class="logo-smile" viewBox="0 0 120 24" fill="none">
-            <defs>
-              <linearGradient id="sg-footer" x1="0" x2="1">
-                <stop offset="0%" stop-color="#2563eb"/>
-                <stop offset="100%" stop-color="#14b8a6"/>
-              </linearGradient>
-            </defs>
-            <path d="M4 4 Q60 32 116 4" stroke="url(#sg-footer)" stroke-width="4" stroke-linecap="round"/>
+        <div class="logo-icon">
+          <svg width="17" height="17" viewBox="0 0 18 18" fill="none">
+            <circle cx="7.5" cy="7.5" r="5" stroke="white" stroke-width="1.9"/>
+            <line x1="11.5" y1="11.5" x2="16" y2="16" stroke="#14b8a6" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="logo-wordmark">
+          <span class="logo-get">get</span><span class="logo-job">job</span><span class="logo-cz">.cz</span>
+          <svg class="logo-smile" viewBox="0 0 100 14" preserveAspectRatio="none" fill="none">
+            <defs><linearGradient id="sg-footer" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#14b8a6"/>
+            </linearGradient></defs>
+            <path d="M2 2 Q50 14 98 2" stroke="url(#sg-footer)" stroke-width="3.4" stroke-linecap="round"/>
           </svg>
         </span>
       </div>
