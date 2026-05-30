@@ -54,7 +54,7 @@ export default function Logo({ dark = false, small = false, onClick }) {
       {/* ── Wordmark ── */}
       <span style={{ position: "relative", display: "inline-block", paddingBottom: lineH + 4 }}>
         <span style={{ fontSize: size, fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1, whiteSpace: "nowrap" }}>
-          <span style={{ color: dark ? "#ffffff" : "#0d1b2a" }} className="text-[hsl(var(--foreground))]">get</span>
+          <span style={{ color: dark ? "#ffffff" : "#0d1b2a" }} className="bg-[hsl(var(--card-foreground))] text-[hsl(var(--background))]">get</span>
           <span style={{ color: "#2563eb" }}>job</span>
           <span style={{ color: dark ? "rgba(255,255,255,0.45)" : "#94a3b8", fontWeight: 600 }}>.cz</span>
         </span>
