@@ -7,7 +7,7 @@ import JobDetailModal from "./discovery/JobDetailModal";
 import FiltersPanel from "./discovery/FiltersPanel";
 import {
   IconAgent, IconSearch, IconSparkle, IconRefresh, IconLoader,
-  IconSliders, IconCheck, IconGlobe, IconTarget, IconWarning
+  IconCheck, IconGlobe, IconTarget, IconWarning
 } from "./Icons";
 
 const LOADING_MESSAGES = [
@@ -28,7 +28,6 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
   const [error, setError] = useState(null);
   const [runMeta, setRunMeta] = useState(null);
   const [selectedJob, setSelectedJob] = useState(null);
-  const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({ minScore: 0, sources: [], location: "", maxAge: "" });
   const [search, setSearch] = useState("");
 
@@ -194,7 +193,7 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
         {/* ── Job board ── */}
         {hasJobs && !loading && (
           <div>
-            {/* Search + filter toggle */}
+            {/* Search bar */}
             <div className="flex gap-2 mb-3">
               <div className="flex-1 relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: "#9ca3af" }}>
@@ -208,23 +207,12 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
                   style={{ borderColor: "#e3e8f0", background: "white" }}
                 />
               </div>
-              <button
-                onClick={() => setShowFilters(v => !v)}
-                className="inline-flex items-center gap-1.5 px-3 py-2.5 rounded-xl border text-xs font-semibold transition-colors"
-                style={showFilters
-                  ? { borderColor: "#2563eb", background: "#eff6ff", color: "#2563eb" }
-                  : { borderColor: "#e3e8f0", background: "white", color: "#5b6577" }}
-              >
-                <IconSliders cls="w-3.5 h-3.5" /> Filtry
-              </button>
             </div>
 
-            {/* Collapsible FiltersPanel */}
-            {showFilters && (
-              <div className="mb-4">
-                <FiltersPanel filters={filters} onChange={setFilters} />
-              </div>
-            )}
+            {/* Filters always visible */}
+            <div className="mb-4">
+              <FiltersPanel filters={filters} onChange={setFilters} />
+            </div>
 
             <div className="flex items-center justify-between mb-3">
               <p className="text-xs font-medium" style={{ color: "#6b7280" }}>
