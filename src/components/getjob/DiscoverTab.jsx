@@ -4,11 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import Sidebar from "./Sidebar";
 import DiscoveryJobCard from "./discovery/DiscoveryJobCard";
 import JobDetailModal from "./discovery/JobDetailModal";
-import FiltersPanel from "./discovery/FiltersPanel";
 import {
   IconAgent, IconSearch, IconSparkle, IconRefresh, IconLoader,
   IconCheck, IconGlobe, IconTarget, IconWarning
 } from "./Icons";
+
+const BENEFITS = ["Home office", "Flexibilní pracovní doba", "5 týdnů dovolené", "Stravenky", "Firemní laptop", "Jazykové kurzy", "MultiSport karta"];
 
 const LOADING_MESSAGES = [
   "Agent prohledává jobs.cz…",
@@ -28,8 +29,13 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
   const [error, setError] = useState(null);
   const [runMeta, setRunMeta] = useState(null);
   const [selectedJob, setSelectedJob] = useState(null);
-  const [filters, setFilters] = useState({ minScore: 0, sources: [], location: "", maxAge: "" });
   const [search, setSearch] = useState("");
+  const [minScore, setMinScore] = useState(0);
+  const [locFilter, setLocFilter] = useState("");
+  const [salFilter, setSalFilter] = useState("");
+  const [durFilter, setDurFilter] = useState("");
+  const [benFilters, setBenFilters] = useState([]);
+  const toggleBen = (b) => setBenFilters(f => f.includes(b) ? f.filter(x => x !== b) : [...f, b]);
 
   // Rotating loading message
   useEffect(() => {
@@ -78,19 +84,23 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
   };
 
   const filtered = useMemo(() => jobs.filter(job => {
-    if (search && !(job.title + job.company + job.location).toLowerCase().includes(search.toLowerCase())) return false;
-    if (job.match_score < (filters.minScore || 0)) return false;
-    if (filters.sources?.length > 0 && !filters.sources.includes(job.source?.toLowerCase())) return false;
-    if (filters.location && !job.location?.toLowerCase().includes(filters.location.toLowerCase())) return false;
-    if (filters.maxAge) {
-      const posted = job.posted_date ? new Date(job.posted_date) : null;
-      if (posted) {
-        const diffDays = (Date.now() - posted) / (1000 * 60 * 60 * 24);
-        if (diffDays > Number(filters.maxAge)) return false;
-      }
+    if (search && !(job.title + job.company + (job.location || "")).toLowerCase().includes(search.toLowerCase())) return false;
+    if (job.match_score < minScore) return false;
+    if (locFilter && !job.location?.toLowerCase().includes(locFilter.toLowerCase())) return false;
+    if (salFilter) {
+      const s = (job.salary || "").toLowerCase();
+      if (salFilter === "dohodou" && !s.includes("dohod")) return false;
+      if (salFilter === "20-30k" && !s.includes("20") && !s.includes("25")) return false;
+      if (salFilter === "30-50k" && !["30","35","40","45"].some(x => s.includes(x))) return false;
+      if (salFilter === "50k+" && !["50","60","70","80","90","100"].some(x => s.includes(x))) return false;
+    }
+    if (durFilter && job.hours && !job.hours.toLowerCase().includes(durFilter.toLowerCase())) return false;
+    if (benFilters.length > 0) {
+      const jb = (job.tags || []).map(b => b.toLowerCase());
+      if (!benFilters.some(b => jb.some(jt => jt.includes(b.toLowerCase())))) return false;
     }
     return true;
-  }), [jobs, filters, search]);
+  }), [jobs, search, minScore, locFilter, salFilter, durFilter, benFilters]);
 
   const hasJobs = jobs.length > 0;
 
@@ -209,9 +219,63 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
               </div>
             </div>
 
-            {/* Filters always visible */}
-            <div className="mb-4">
-              <FiltersPanel filters={filters} onChange={setFilters} />
+            {/* Filters */}
+            <div className="bg-white border border-border rounded-xl p-4 mb-4 shadow-sm space-y-3">
+              <div className="flex gap-2 flex-wrap">
+                <select value={locFilter} onChange={e => setLocFilter(e.target.value)}
+                  className="bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors">
+                  <option value="">Lokalita – vše</option>
+                  <option value="Praha">Praha</option>
+                  <option value="Brno">Brno</option>
+                  <option value="Ostrava">Ostrava</option>
+                  <option value="Remote">Remote</option>
+                </select>
+                <select value={salFilter} onChange={e => setSalFilter(e.target.value)}
+                  className="bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors">
+                  <option value="">Jakýkoliv plat</option>
+                  <option value="dohodou">Dle dohody</option>
+                  <option value="20-30k">20 000–30 000 Kč</option>
+                  <option value="30-50k">30 000–50 000 Kč</option>
+                  <option value="50k+">50 000 Kč+</option>
+                </select>
+                <select value={durFilter} onChange={e => setDurFilter(e.target.value)}
+                  className="bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors">
+                  <option value="">Jakýkoliv úvazek</option>
+                  <option value="Stáž">Stáž</option>
+                  <option value="Part-time">Part-time</option>
+                  <option value="Fulltime">Fulltime</option>
+                  <option value="Trainee">Trainee</option>
+                </select>
+              </div>
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <p className="text-[10px] font-bold text-brand-teal uppercase tracking-wider font-mono">
+                    Min. shoda: <span className="text-foreground">{minScore}%</span>
+                  </p>
+                </div>
+                <input type="range" min={0} max={100} step={5} value={minScore}
+                  onChange={e => setMinScore(Number(e.target.value))}
+                  className="w-full accent-blue-600" />
+              </div>
+              <div>
+                <p className="text-[10px] font-bold text-brand-teal uppercase tracking-wider font-mono mb-2">Benefity</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {BENEFITS.map(b => (
+                    <button key={b} onClick={() => toggleBen(b)}
+                      className={`px-2.5 py-1 rounded-full border text-xs font-medium transition-all ${benFilters.includes(b) ? "bg-accent border-brand-teal text-accent-foreground font-semibold" : "bg-secondary border-border text-muted-foreground hover:border-brand-teal/60"}`}>
+                      {b}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              {(locFilter || salFilter || durFilter || minScore > 0 || benFilters.length > 0) && (
+                <button
+                  onClick={() => { setLocFilter(""); setSalFilter(""); setDurFilter(""); setMinScore(0); setBenFilters([]); }}
+                  className="text-xs text-muted-foreground hover:text-foreground underline"
+                >
+                  Resetovat filtry
+                </button>
+              )}
             </div>
 
             <div className="flex items-center justify-between mb-3">
