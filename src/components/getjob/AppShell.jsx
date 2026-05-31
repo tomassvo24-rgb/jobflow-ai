@@ -6,8 +6,10 @@ import ProfileTab from "./ProfileTab";
 import CVBuilderTab from "./CVBuilderTab";
 import NewsTab from "./NewsTab";
 import Logo from "./Logo";
+import AgentDiscoveryTab from "./discovery/AgentDiscoveryTab";
 
 const TABS = [
+{ id: "agent", label: "🤖 AI Agent" },
 { id: "discover", label: "🔍 Discover" },
 { id: "generator", label: "✉️ Generátor" },
 { id: "cvbuilder", label: "📝 CV Builder" },
@@ -17,10 +19,10 @@ const TABS = [
 
 
 const MOBILE_TABS = [
+{ id: "agent", label: "AI Agent", icon: "🤖" },
 { id: "discover", label: "Discover", icon: "🔍" },
 { id: "generator", label: "Generátor", icon: "✉️" },
 { id: "cvbuilder", label: "CV", icon: "📝" },
-{ id: "news", label: "Novinky", icon: "📰" },
 { id: "tracker", label: "Tracker", icon: "📊" },
 { id: "profile", label: "Profil", icon: "👤" }];
 
@@ -61,6 +63,7 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
       </header>
 
       <main className="flex-1 w-full max-w-[960px] mx-auto px-5 py-6 pb-24 md:pb-6">
+        {tab === "agent" && <AgentDiscoveryTab profile={profile} onOpenGenerator={openGenerator} />}
         {tab === "discover" && <DiscoverTab profile={profile} discover={discover} custom={custom} tracker={tracker} onDiscoverSave={onDiscoverSave} onCustomSave={onCustomSave} onTrackerSave={onTrackerSave} onOpenGenerator={openGenerator} />}
         {tab === "generator" && <GeneratorTab profile={profile} allCompanies={[...discover, ...custom]} tracker={tracker} onTrackerSave={onTrackerSave} preset={generatorPreset} onPresetConsumed={() => setGeneratorPreset(null)} />}
         {tab === "cvbuilder" && <CVBuilderTab profile={profile} />}
