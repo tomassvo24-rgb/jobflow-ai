@@ -34,7 +34,7 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
         <div className="flex flex-1 overflow-x-auto">
           {TABS.map((t) =>
           <button key={t.id} onClick={() => setTab(t.id)}
-          className={`px-3 h-14 text-[13px] font-medium whitespace-nowrap border-b-[2.5px] transition-all flex items-center gap-1 text-[hsl(var(--foreground))] ${tab === t.id ? "border-brand-teal" : "text-white/60 border-transparent hover:text-white"}`}>
+          className={`px-3 h-14 text-[13px] font-medium whitespace-nowrap border-b-[2.5px] transition-all flex items-center gap-1 text-[hsl(var(--foreground))] ${tab === t.id ? "border-brand-teal" : "border-transparent hover:text-white"}`}>
               {t.id === "tracker" && tracker.length > 0 ? `📊 Tracker (${tracker.length})` : t.label}
             </button>
           )}
