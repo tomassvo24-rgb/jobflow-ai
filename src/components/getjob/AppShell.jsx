@@ -9,8 +9,7 @@ import Logo from "./Logo";
 import AgentDiscoveryTab from "./discovery/AgentDiscoveryTab";
 
 const TABS = [
-  { id: "agent",     label: "AI Agent",   },
-  { id: "discover",  label: "Discover",   },
+  { id: "discover",  label: "Job Board",  },
   { id: "generator", label: "Generátor",  },
   { id: "cvbuilder", label: "CV Builder", },
   { id: "news",      label: "Novinky",    },
@@ -20,7 +19,6 @@ const TABS = [
 
 // Simple SVG icons — no emoji
 const ICONS = {
-  agent:     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-4 h-4"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M12 3a3 3 0 0 1 3 3v5H9V6a3 3 0 0 1 3-3z"/><circle cx="9" cy="16" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="16" r="1" fill="currentColor" stroke="none"/></svg>,
   discover:  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-4 h-4"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>,
   generator: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-4 h-4"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>,
   cvbuilder: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-4 h-4"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/></svg>,
@@ -30,7 +28,7 @@ const ICONS = {
 };
 
 export default function AppShell({ profile, discover, custom, tracker, onProfileSave, onDiscoverSave, onCustomSave, onTrackerSave, onReset, onGoHome }) {
-  const [tab, setTab] = useState("agent");
+  const [tab, setTab] = useState("discover");
   const [generatorPreset, setGeneratorPreset] = useState(null);
 
   const openGenerator = (company, type = "mail") => {
@@ -120,8 +118,7 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
 
         {/* Main content */}
         <main className="flex-1 px-4 md:px-8 py-7 pb-28 md:pb-10 max-w-[900px] w-full mx-auto">
-          {tab === "agent"     && <AgentDiscoveryTab profile={profile} onOpenGenerator={openGenerator} />}
-          {tab === "discover"  && <DiscoverTab profile={profile} discover={discover} custom={custom} tracker={tracker} onDiscoverSave={onDiscoverSave} onCustomSave={onCustomSave} onTrackerSave={onTrackerSave} onOpenGenerator={openGenerator} />}
+          {tab === "discover"  && <DiscoverTab profile={profile} tracker={tracker} onTrackerSave={onTrackerSave} onOpenGenerator={openGenerator} />}
           {tab === "generator" && <GeneratorTab profile={profile} allCompanies={[...discover, ...custom]} tracker={tracker} onTrackerSave={onTrackerSave} preset={generatorPreset} onPresetConsumed={() => setGeneratorPreset(null)} />}
           {tab === "cvbuilder" && <CVBuilderTab profile={profile} />}
           {tab === "news"      && <NewsTab />}
