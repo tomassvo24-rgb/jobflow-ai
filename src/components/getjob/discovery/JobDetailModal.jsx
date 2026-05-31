@@ -1,4 +1,5 @@
 import React from "react";
+import { IconMail, IconExtLink, IconClose, IconCheck } from "../Icons";
 
 function ScoreBar({ label, pts = 0, max }) {
   const pct = Math.round((pts / max) * 100);
@@ -47,29 +48,22 @@ export default function JobDetailModal({ job, onClose, onGenerateEmail }) {
             <p className="text-sm mt-0.5" style={{ color: "rgba(255,255,255,0.60)" }}>{job.company} · {job.location}</p>
           </div>
           <div className="flex items-center gap-3 shrink-0">
-            <span
-              className="px-3 py-1 rounded-full text-sm font-extrabold"
-              style={{ background: scoreBg, color: scoreColor }}
-            >
+            <span className="px-3 py-1 rounded-full text-sm font-extrabold" style={{ background: scoreBg, color: scoreColor }}>
               {score}%
             </span>
             <button
               onClick={onClose}
-              className="w-8 h-8 rounded-full flex items-center justify-center text-white/60 hover:text-white transition-colors"
-              style={{ background: "rgba(255,255,255,0.10)" }}
+              className="w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+              style={{ background: "rgba(255,255,255,0.10)", color: "rgba(255,255,255,0.6)" }}
             >
-              ✕
+              <IconClose cls="w-4 h-4" />
             </button>
           </div>
         </div>
 
         {/* Scrollable body */}
         <div className="overflow-y-auto flex-1 px-6 py-5 space-y-5">
-          {/* Score breakdown */}
-          <div
-            className="rounded-2xl p-5"
-            style={{ background: "#f6f8fb", border: "1px solid #e8edf4" }}
-          >
+          <div className="rounded-2xl p-5" style={{ background: "#f6f8fb", border: "1px solid #e8edf4" }}>
             <p className="text-xs font-bold uppercase tracking-wider mb-4" style={{ color: "#9ca3af" }}>Analýza shody</p>
             <div className="space-y-3">
               <ScoreBar label="Obor & dovednosti" pts={bd.field}    max={40} />
@@ -80,19 +74,14 @@ export default function JobDetailModal({ job, onClose, onGenerateEmail }) {
             {job.match_reasons?.length > 0 && (
               <div className="flex flex-wrap gap-1.5 mt-4">
                 {job.match_reasons.map((r, i) => (
-                  <span
-                    key={i}
-                    className="px-2.5 py-0.5 rounded-full text-xs font-semibold"
-                    style={{ background: "#ecfdf5", color: "#059669" }}
-                  >
-                    ✓ {r}
+                  <span key={i} className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold" style={{ background: "#ecfdf5", color: "#059669" }}>
+                    <IconCheck cls="w-3 h-3" /> {r}
                   </span>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Details */}
           <div className="space-y-3 text-sm">
             {job.snippet && (
               <div>
@@ -119,19 +108,19 @@ export default function JobDetailModal({ job, onClose, onGenerateEmail }) {
         <div className="px-6 py-4 flex gap-3 shrink-0" style={{ borderTop: "1px solid #e8edf4" }}>
           <button
             onClick={() => onGenerateEmail(job)}
-            className="flex-1 py-3 rounded-2xl text-sm font-bold text-white transition-opacity hover:opacity-90"
+            className="flex-1 inline-flex items-center justify-center gap-2 py-3 rounded-2xl text-sm font-bold text-white transition-opacity hover:opacity-90"
             style={{ background: "linear-gradient(90deg,#2563eb,#14b8a6)", boxShadow: "0 8px 24px -8px rgba(37,99,235,0.40)" }}
           >
-            ✉️ Generovat přihlášku
+            <IconMail cls="w-4 h-4" /> Generovat přihlášku
           </button>
           <a
             href={job.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 py-3 rounded-2xl border text-sm font-bold text-center transition-colors"
+            className="flex-1 inline-flex items-center justify-center gap-2 py-3 rounded-2xl border text-sm font-bold text-center transition-colors"
             style={{ borderColor: "#e3e8f0", color: "#0d1b2a" }}
           >
-            ↗ Otevřít inzerát
+            <IconExtLink cls="w-4 h-4" /> Otevřít inzerát
           </a>
         </div>
       </div>
