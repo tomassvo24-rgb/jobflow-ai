@@ -50,9 +50,9 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
           )}
         </div>
         {/* Mobile: current tab name */}
-        <div className="md:hidden flex-1 text-center text-sm font-semibold text-foreground hidden">
-          {MOBILE_TABS.find((t) => t.id === tab)?.icon} {MOBILE_TABS.find((t) => t.id === tab)?.label}
-        </div>
+        
+
+        
         <div className="ml-auto pl-4 shrink-0">
           <div className="w-8 h-8 rounded-full bg-white text-brand-blue font-poppins text-sm font-bold flex items-center justify-center">
             {profile.name?.[0]?.toUpperCase() || "?"}
