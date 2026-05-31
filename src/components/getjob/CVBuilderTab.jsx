@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
+import { IconFile, IconEye, IconPrint, IconUser, IconGrad, IconBriefcase, IconTool, IconTrophy, IconMail, IconPhone, IconPin, IconLinkedin } from "./Icons";
 
-const DEGREES = ["Bakalář (Bc.)", "Magistr (Mgr.)", "Doktor (PhD.)", "Maturita"];
+const DEGREES   = ["Bakalář (Bc.)", "Magistr (Mgr.)", "Doktor (PhD.)", "Maturita"];
 const WORK_TYPES = ["Part-time", "Full-time", "Stáž", "Brigáda", "Freelance"];
 
 function Field({ label, value, onChange, placeholder, type = "text" }) {
@@ -19,44 +20,43 @@ export default function CVBuilderTab({ profile }) {
     name: profile?.name || "", title: "", email: profile?.email || "",
     phone: profile?.phone || "", linkedin: "", city: profile?.city || "", summary: "",
   });
-  const [edu, setEdu] = useState([{ school: "", field: "", degree: "Bakalář (Bc.)", years: "", note: "" }]);
-  const [work, setWork] = useState([{ company: "", role: "", type: "Part-time", period: "", desc: "" }]);
-  const [skills, setSkills] = useState({ tech: "", soft: profile?.skills || "", langs: profile?.langs || "", certs: "" });
+  const [edu,   setEdu]   = useState([{ school: "", field: "", degree: "Bakalář (Bc.)", years: "", note: "" }]);
+  const [work,  setWork]  = useState([{ company: "", role: "", type: "Part-time", period: "", desc: "" }]);
+  const [skills,setSkills]= useState({ tech: "", soft: profile?.skills || "", langs: profile?.langs || "", certs: "" });
   const [extra, setExtra] = useState({ awards: "", hobbies: "" });
   const printRef = useRef(null);
 
-  const set = (k, v) => setInfo(f => ({ ...f, [k]: v }));
-  const setSkill = (k, v) => setSkills(f => ({ ...f, [k]: v }));
-  const setExtraField = (k, v) => setExtra(f => ({ ...f, [k]: v }));
+  const set         = (k, v) => setInfo(f => ({ ...f, [k]: v }));
+  const setSkill    = (k, v) => setSkills(f => ({ ...f, [k]: v }));
+  const setExtraField=(k,v) => setExtra(f => ({ ...f, [k]: v }));
 
-  const addEdu = () => setEdu(e => [...e, { school: "", field: "", degree: "Bakalář (Bc.)", years: "", note: "" }]);
+  const addEdu    = () => setEdu(e => [...e, { school: "", field: "", degree: "Bakalář (Bc.)", years: "", note: "" }]);
   const removeEdu = (i) => edu.length > 1 && setEdu(e => e.filter((_, j) => j !== i));
   const setEduField = (i, k, v) => setEdu(e => e.map((x, j) => j === i ? { ...x, [k]: v } : x));
 
-  const addWork = () => setWork(e => [...e, { company: "", role: "", type: "Part-time", period: "", desc: "" }]);
+  const addWork    = () => setWork(e => [...e, { company: "", role: "", type: "Part-time", period: "", desc: "" }]);
   const removeWork = (i) => work.length > 1 && setWork(e => e.filter((_, j) => j !== i));
   const setWorkField = (i, k, v) => setWork(e => e.map((x, j) => j === i ? { ...x, [k]: v } : x));
 
-  const handlePrint = () => {
-    setShowPreview(true);
-    setTimeout(() => window.print(), 300);
-  };
+  const handlePrint = () => { setShowPreview(true); setTimeout(() => window.print(), 300); };
 
   if (showPreview) {
     return (
       <div>
         <div className="flex gap-2 mb-4 flex-wrap no-print">
           <button onClick={() => setShowPreview(false)} className="px-4 py-2 rounded-full border border-border text-sm font-medium text-muted-foreground hover:bg-secondary transition-colors">← Zpět na editaci</button>
-          <button onClick={handlePrint} className="px-4 py-2 rounded-full bg-brand-blue text-white text-sm font-medium hover:opacity-90 transition-opacity">🖨️ Tisknout / PDF</button>
+          <button onClick={handlePrint} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue text-white text-sm font-medium hover:opacity-90 transition-opacity">
+            <IconPrint cls="w-4 h-4" /> Tisknout / PDF
+          </button>
         </div>
         <div ref={printRef} className="bg-white border border-border rounded-xl p-8 shadow-md">
           <div className="font-poppins text-2xl font-extrabold mb-1">{info.name || "Jméno Příjmení"}</div>
           {info.title && <div className="text-sm text-muted-foreground font-medium mb-1">{info.title}</div>}
           <div className="flex flex-wrap gap-3 text-sm text-muted-foreground mb-5">
-            {info.email && <span>📧 {info.email}</span>}
-            {info.phone && <span>📱 {info.phone}</span>}
-            {info.city && <span>📍 {info.city}</span>}
-            {info.linkedin && <span>🔗 {info.linkedin}</span>}
+            {info.email    && <span className="inline-flex items-center gap-1"><IconMail cls="w-3.5 h-3.5" /> {info.email}</span>}
+            {info.phone    && <span className="inline-flex items-center gap-1"><IconPhone cls="w-3.5 h-3.5" /> {info.phone}</span>}
+            {info.city     && <span className="inline-flex items-center gap-1"><IconPin cls="w-3.5 h-3.5" /> {info.city}</span>}
+            {info.linkedin && <span className="inline-flex items-center gap-1"><IconLinkedin cls="w-3.5 h-3.5" /> {info.linkedin}</span>}
           </div>
           {info.summary && <Section title="O mně"><p className="text-sm text-foreground leading-relaxed">{info.summary}</p></Section>}
           {edu.some(e => e.school || e.field) && (
@@ -83,16 +83,16 @@ export default function CVBuilderTab({ profile }) {
           )}
           {(skills.tech || skills.soft || skills.langs || skills.certs) && (
             <Section title="Dovednosti & Jazyky">
-              {skills.tech && <SkillRow label="Technické" value={skills.tech} />}
-              {skills.soft && <SkillRow label="Soft skills" value={skills.soft} />}
-              {skills.langs && <SkillRow label="Jazyky" value={skills.langs} />}
+              {skills.tech  && <SkillRow label="Technické"   value={skills.tech} />}
+              {skills.soft  && <SkillRow label="Soft skills" value={skills.soft} />}
+              {skills.langs && <SkillRow label="Jazyky"      value={skills.langs} />}
               {skills.certs && <SkillRow label="Certifikáty" value={skills.certs} />}
             </Section>
           )}
           {(extra.awards || extra.hobbies) && (
             <Section title="Úspěchy & Zájmy">
-              {extra.awards && <SkillRow label="Úspěchy" value={extra.awards} />}
-              {extra.hobbies && <SkillRow label="Zájmy" value={extra.hobbies} />}
+              {extra.awards  && <SkillRow label="Úspěchy" value={extra.awards} />}
+              {extra.hobbies && <SkillRow label="Zájmy"   value={extra.hobbies} />}
             </Section>
           )}
         </div>
@@ -103,21 +103,28 @@ export default function CVBuilderTab({ profile }) {
   return (
     <div>
       <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
-        <h2 className="font-poppins text-[22px] font-bold">CV Builder 📝</h2>
+        <div className="flex items-center gap-3">
+          <IconFile cls="w-5 h-5 text-brand-blue" />
+          <h2 className="font-poppins text-[22px] font-bold">CV Builder</h2>
+        </div>
         <div className="flex gap-2">
-          <button onClick={() => setShowPreview(true)} className="px-3 py-1.5 rounded-full border border-border text-xs font-medium text-muted-foreground hover:bg-secondary transition-colors">👁 Náhled</button>
-          <button onClick={handlePrint} className="px-3 py-1.5 rounded-full bg-brand-blue text-white text-xs font-medium hover:opacity-90 transition-opacity">📄 Stáhnout PDF</button>
+          <button onClick={() => setShowPreview(true)} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border text-xs font-medium text-muted-foreground hover:bg-secondary transition-colors">
+            <IconEye cls="w-3.5 h-3.5" /> Náhled
+          </button>
+          <button onClick={handlePrint} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-blue text-white text-xs font-medium hover:opacity-90 transition-opacity">
+            <IconFile cls="w-3.5 h-3.5" /> Stáhnout PDF
+          </button>
         </div>
       </div>
 
-      <CVSection title="👤 Osobní informace">
+      <CVSection icon={<IconUser cls="w-4 h-4" />} title="Osobní informace">
         <div className="grid grid-cols-2 gap-3">
-          <Field label="Jméno a příjmení" value={info.name} onChange={v => set("name", v)} placeholder="Jan Novák" />
-          <Field label="Pozice / titul" value={info.title} onChange={v => set("title", v)} placeholder="Student práv · Junior Analyst" />
-          <Field label="Email" value={info.email} onChange={v => set("email", v)} placeholder="jan@email.cz" type="email" />
-          <Field label="Telefon" value={info.phone} onChange={v => set("phone", v)} placeholder="+420 123 456 789" />
-          <Field label="LinkedIn (volitelné)" value={info.linkedin} onChange={v => set("linkedin", v)} placeholder="linkedin.com/in/jan-novak" />
-          <Field label="Město" value={info.city} onChange={v => set("city", v)} placeholder="Praha, Česká republika" />
+          <Field label="Jméno a příjmení" value={info.name}     onChange={v => set("name", v)}     placeholder="Jan Novák" />
+          <Field label="Pozice / titul"   value={info.title}    onChange={v => set("title", v)}    placeholder="Student práv · Junior Analyst" />
+          <Field label="Email"            value={info.email}    onChange={v => set("email", v)}    placeholder="jan@email.cz" type="email" />
+          <Field label="Telefon"          value={info.phone}    onChange={v => set("phone", v)}    placeholder="+420 123 456 789" />
+          <Field label="LinkedIn"         value={info.linkedin} onChange={v => set("linkedin", v)} placeholder="linkedin.com/in/jan-novak" />
+          <Field label="Město"            value={info.city}     onChange={v => set("city", v)}     placeholder="Praha, Česká republika" />
         </div>
         <div className="mt-3">
           <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Profesní profil / o mně</label>
@@ -126,13 +133,13 @@ export default function CVBuilderTab({ profile }) {
         </div>
       </CVSection>
 
-      <CVSection title="🎓 Vzdělání" action={<button onClick={addEdu} className="px-3 py-1 rounded-full bg-accent text-accent-foreground border border-brand-teal/30 text-xs font-semibold hover:bg-accent/80 transition-colors">+ Přidat</button>}>
+      <CVSection icon={<IconGrad cls="w-4 h-4" />} title="Vzdělání" action={<button onClick={addEdu} className="px-3 py-1 rounded-full bg-accent text-accent-foreground border border-brand-teal/30 text-xs font-semibold hover:bg-accent/80 transition-colors">+ Přidat</button>}>
         {edu.map((e, i) => (
           <div key={i} className="bg-secondary border border-border rounded-lg p-4 mb-3 relative">
             <button onClick={() => removeEdu(i)} className="absolute top-2.5 right-2.5 text-muted-foreground hover:text-red-500 text-base transition-colors">×</button>
             <div className="grid grid-cols-2 gap-3 mb-3">
               <Field label="Škola / Instituce" value={e.school} onChange={v => setEduField(i, "school", v)} placeholder="Univerzita Karlova" />
-              <Field label="Obor" value={e.field} onChange={v => setEduField(i, "field", v)} placeholder="Právo (PF UK)" />
+              <Field label="Obor"               value={e.field}  onChange={v => setEduField(i, "field", v)}  placeholder="Právo (PF UK)" />
               <div>
                 <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Stupeň</label>
                 <select value={e.degree} onChange={ev => setEduField(i, "degree", ev.target.value)} className="w-full bg-white border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition-colors">
@@ -146,13 +153,13 @@ export default function CVBuilderTab({ profile }) {
         ))}
       </CVSection>
 
-      <CVSection title="💼 Pracovní zkušenosti" action={<button onClick={addWork} className="px-3 py-1 rounded-full bg-accent text-accent-foreground border border-brand-teal/30 text-xs font-semibold hover:bg-accent/80 transition-colors">+ Přidat</button>}>
+      <CVSection icon={<IconBriefcase cls="w-4 h-4" />} title="Pracovní zkušenosti" action={<button onClick={addWork} className="px-3 py-1 rounded-full bg-accent text-accent-foreground border border-brand-teal/30 text-xs font-semibold hover:bg-accent/80 transition-colors">+ Přidat</button>}>
         {work.map((w, i) => (
           <div key={i} className="bg-secondary border border-border rounded-lg p-4 mb-3 relative">
             <button onClick={() => removeWork(i)} className="absolute top-2.5 right-2.5 text-muted-foreground hover:text-red-500 text-base transition-colors">×</button>
             <div className="grid grid-cols-2 gap-3 mb-3">
-              <Field label="Firma" value={w.company} onChange={v => setWorkField(i, "company", v)} placeholder="Firma s.r.o." />
-              <Field label="Pozice" value={w.role} onChange={v => setWorkField(i, "role", v)} placeholder="Junior Analyst" />
+              <Field label="Firma"   value={w.company} onChange={v => setWorkField(i, "company", v)} placeholder="Firma s.r.o." />
+              <Field label="Pozice"  value={w.role}    onChange={v => setWorkField(i, "role", v)}    placeholder="Junior Analyst" />
               <div>
                 <label className="block text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">Typ</label>
                 <select value={w.type} onChange={ev => setWorkField(i, "type", ev.target.value)} className="w-full bg-white border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition-colors">
@@ -170,35 +177,41 @@ export default function CVBuilderTab({ profile }) {
         ))}
       </CVSection>
 
-      <CVSection title="🛠 Dovednosti">
+      <CVSection icon={<IconTool cls="w-4 h-4" />} title="Dovednosti">
         <div className="space-y-3">
-          <Field label="Technické dovednosti" value={skills.tech} onChange={v => setSkill("tech", v)} placeholder="Python, Excel, Photoshop, SQL..." />
-          <Field label="Měkké dovednosti" value={skills.soft} onChange={v => setSkill("soft", v)} placeholder="Komunikace, týmová práce..." />
-          <Field label="Jazyky" value={skills.langs} onChange={v => setSkill("langs", v)} placeholder="Čeština (rodilý), Angličtina (B2-C1)..." />
-          <Field label="Certifikáty (volitelné)" value={skills.certs} onChange={v => setSkill("certs", v)} placeholder="ECDL, Cambridge B2, Google Analytics..." />
+          <Field label="Technické dovednosti" value={skills.tech}  onChange={v => setSkill("tech", v)}  placeholder="Python, Excel, Photoshop, SQL..." />
+          <Field label="Měkké dovednosti"     value={skills.soft}  onChange={v => setSkill("soft", v)}  placeholder="Komunikace, týmová práce..." />
+          <Field label="Jazyky"               value={skills.langs} onChange={v => setSkill("langs", v)} placeholder="Čeština (rodilý), Angličtina (B2-C1)..." />
+          <Field label="Certifikáty"          value={skills.certs} onChange={v => setSkill("certs", v)} placeholder="ECDL, Cambridge B2, Google Analytics..." />
         </div>
       </CVSection>
 
-      <CVSection title="🏆 Úspěchy a zájmy (volitelné)">
+      <CVSection icon={<IconTrophy cls="w-4 h-4" />} title="Úspěchy a zájmy (volitelné)">
         <div className="space-y-3">
-          <Field label="Úspěchy" value={extra.awards} onChange={v => setExtraField("awards", v)} placeholder="Matematická olympiáda, soutěže, ocenění..." />
+          <Field label="Úspěchy"       value={extra.awards}  onChange={v => setExtraField("awards", v)}  placeholder="Matematická olympiáda, soutěže, ocenění..." />
           <Field label="Zájmy a koníčky" value={extra.hobbies} onChange={v => setExtraField("hobbies", v)} placeholder="Fotografie, sport, programování..." />
         </div>
       </CVSection>
 
       <div className="flex gap-3 flex-wrap">
-        <button onClick={() => setShowPreview(true)} className="px-5 py-2.5 rounded-full bg-brand-blue text-white text-sm font-semibold hover:opacity-90 transition-opacity">👁 Zobrazit náhled</button>
-        <button onClick={handlePrint} className="px-5 py-2.5 rounded-full bg-brand-teal text-white text-sm font-semibold hover:opacity-90 transition-opacity">📄 Stáhnout jako PDF</button>
+        <button onClick={() => setShowPreview(true)} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-blue text-white text-sm font-semibold hover:opacity-90 transition-opacity">
+          <IconEye cls="w-4 h-4" /> Zobrazit náhled
+        </button>
+        <button onClick={handlePrint} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-teal text-white text-sm font-semibold hover:opacity-90 transition-opacity">
+          <IconFile cls="w-4 h-4" /> Stáhnout jako PDF
+        </button>
       </div>
     </div>
   );
 }
 
-function CVSection({ title, children, action }) {
+function CVSection({ icon, title, children, action }) {
   return (
     <div className="bg-white border border-border rounded-xl p-5 mb-4 shadow-sm">
       <div className="flex items-center justify-between mb-4">
-        <div className="font-poppins font-bold text-sm">{title}</div>
+        <div className="font-poppins font-bold text-sm flex items-center gap-2">
+          <span className="text-brand-blue">{icon}</span> {title}
+        </div>
         {action}
       </div>
       {children}

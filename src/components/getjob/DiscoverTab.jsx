@@ -3,6 +3,7 @@ import { base44 } from "@/api/base44Client";
 import { motion, AnimatePresence } from "framer-motion";
 import JobCard from "./JobCard";
 import Sidebar from "./Sidebar";
+import { IconAgent, IconSearch, IconSparkle, IconRefresh, IconPin, IconMoney, IconClock, IconLoader } from "./Icons";
 
 const BENEFITS = ["Home office", "Flexibilní pracovní doba", "5 týdnů dovolené", "Stravenky", "Firemní laptop", "Jazykové kurzy", "MultiSport karta"];
 
@@ -90,7 +91,6 @@ Return jobs array with realistic Czech market data.`,
   };
 
   const hasStarted = discover.length > 0;
-
   const toggleBen = (b) => setBenFilters(f => f.includes(b) ? f.filter(x => x !== b) : [...f, b]);
 
   return (
@@ -100,16 +100,18 @@ Return jobs array with realistic Czech market data.`,
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
             className="rounded-2xl p-8 mb-5 text-white relative overflow-hidden"
             style={{ background: "linear-gradient(135deg,#0D1B2A,#1a3050)" }}>
-            <div className="text-4xl mb-3">🤖</div>
+            <div className="mb-3"><IconAgent cls="w-10 h-10 opacity-80" /></div>
             <h2 className="font-poppins text-[22px] font-bold mb-1.5 text-white">AI Job Discovery</h2>
             <p className="text-sm text-blue-100 mb-5 leading-relaxed max-w-[420px]">Na základě tvého profilu AI navrhne relevantní firmy a pozice pro každý obor a lokaci.</p>
-            <button onClick={runDiscover} className="px-6 py-3 rounded-full bg-brand-teal text-white font-bold text-sm hover:opacity-90 transition-opacity">✨ Najít pozice pro mě</button>
+            <button onClick={runDiscover} className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-teal text-white font-bold text-sm hover:opacity-90 transition-opacity">
+              <IconSparkle cls="w-4 h-4" /> Najít pozice pro mě
+            </button>
           </motion.div>
         )}
 
         {loading && (
           <div className="text-center py-16">
-            <div className="text-5xl mb-4 animate-bounce">🤖</div>
+            <div className="flex justify-center mb-4"><IconLoader cls="w-12 h-12 text-brand-blue" /></div>
             <p className="font-semibold text-foreground mb-1">AI hledá pozice...</p>
             <p className="text-sm text-muted-foreground">Analyzuji profil a hledám příležitosti</p>
           </div>
@@ -119,26 +121,31 @@ Return jobs array with realistic Czech market data.`,
           <div>
             <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
               <h2 className="font-poppins text-xl font-bold">Nalezené pozice</h2>
-              <button onClick={runDiscover} className="px-3 py-1.5 rounded-full border border-border text-xs font-medium text-muted-foreground hover:bg-secondary transition-colors">🔄 Obnovit</button>
+              <button onClick={runDiscover} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border text-xs font-medium text-muted-foreground hover:bg-secondary transition-colors">
+                <IconRefresh cls="w-3.5 h-3.5" /> Obnovit
+              </button>
             </div>
 
             {/* Filter bar */}
             <div className="bg-white border border-border rounded-xl p-4 mb-4 shadow-sm">
               <div className="flex gap-2 flex-wrap mb-2">
-                <input value={search} onChange={e => setSearch(e.target.value)} placeholder="🔍 Hledat firmu nebo pozici..."
-                  className="flex-1 min-w-32 bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors" />
+                <div className="flex-1 min-w-32 relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-muted-foreground"><IconSearch cls="w-3.5 h-3.5" /></span>
+                  <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Hledat firmu nebo pozici..."
+                    className="w-full pl-8 bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors" />
+                </div>
                 <select value={matchFilter} onChange={e => setMatchFilter(e.target.value)}
                   className="bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors">
                   <option value="all">Všechny shody</option>
-                  <option value="high">✓ Silný match</option>
-                  <option value="mid">~ Dobrý match</option>
-                  <option value="low">⚠ Slabší match</option>
+                  <option value="high">Silný match</option>
+                  <option value="mid">Dobrý match</option>
+                  <option value="low">Slabší match</option>
                 </select>
               </div>
               <div className="flex gap-2 flex-wrap mb-3">
                 <select value={locFilter} onChange={e => setLocFilter(e.target.value)}
                   className="bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors">
-                  <option value="all">📍 Vše</option>
+                  <option value="all">Lokalita – vše</option>
                   <option value="Praha">Praha</option>
                   <option value="Brno">Brno</option>
                   <option value="Ostrava">Ostrava</option>
@@ -146,7 +153,7 @@ Return jobs array with realistic Czech market data.`,
                 </select>
                 <select value={salFilter} onChange={e => setSalFilter(e.target.value)}
                   className="bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors">
-                  <option value="all">💰 Jakýkoliv plat</option>
+                  <option value="all">Jakýkoliv plat</option>
                   <option value="dohodou">Dle dohody</option>
                   <option value="20-30k">20 000–30 000 Kč</option>
                   <option value="30-50k">30 000–50 000 Kč</option>
@@ -154,7 +161,7 @@ Return jobs array with realistic Czech market data.`,
                 </select>
                 <select value={durFilter} onChange={e => setDurFilter(e.target.value)}
                   className="bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors">
-                  <option value="all">⏱ Jakákoliv doba</option>
+                  <option value="all">Jakákoliv doba</option>
                   <option value="Stáž">Stáž</option>
                   <option value="Part-time">Part-time</option>
                   <option value="Fulltime">Fulltime</option>
@@ -162,7 +169,7 @@ Return jobs array with realistic Czech market data.`,
                 </select>
               </div>
               <div>
-                <p className="text-[11px] font-bold text-brand-teal uppercase tracking-wider mb-2 font-mono">🎁 Benefity</p>
+                <p className="text-[11px] font-bold text-brand-teal uppercase tracking-wider mb-2 font-mono">Benefity</p>
                 <div className="flex flex-wrap gap-1.5">
                   {BENEFITS.map(b => (
                     <button key={b} onClick={() => toggleBen(b)}
@@ -179,7 +186,7 @@ Return jobs array with realistic Czech market data.`,
             <AnimatePresence>
               {filtered.length === 0 ? (
                 <div className="text-center py-14 text-muted-foreground">
-                  <div className="text-3xl mb-3 opacity-40">🔍</div>
+                  <div className="flex justify-center mb-3 opacity-40"><IconSearch cls="w-10 h-10" /></div>
                   <p className="font-poppins font-bold text-foreground/60 mb-1">Žádné výsledky</p>
                   <p className="text-sm">Zkus upravit filtry</p>
                 </div>
@@ -194,10 +201,10 @@ Return jobs array with realistic Czech market data.`,
               <p className="text-[11px] font-bold text-brand-teal uppercase tracking-wider font-mono mb-3">Přidat vlastní firmu</p>
               <div className="bg-white border border-border rounded-xl p-4">
                 <div className="grid grid-cols-2 gap-3 mb-3">
-                  <input value={customForm.name} onChange={e => setCustomForm(f => ({ ...f, name: e.target.value }))} placeholder="Firma" className="bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors" />
-                  <input value={customForm.position} onChange={e => setCustomForm(f => ({ ...f, position: e.target.value }))} placeholder="Pozice" className="bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors" />
-                  <input value={customForm.url} onChange={e => setCustomForm(f => ({ ...f, url: e.target.value }))} placeholder="https://firma.cz" className="bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors" />
-                  <input value={customForm.email} onChange={e => setCustomForm(f => ({ ...f, email: e.target.value }))} placeholder="hr@firma.cz" className="bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors" />
+                  <input value={customForm.name}     onChange={e => setCustomForm(f => ({ ...f, name: e.target.value }))}     placeholder="Firma"         className="bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors" />
+                  <input value={customForm.position} onChange={e => setCustomForm(f => ({ ...f, position: e.target.value }))} placeholder="Pozice"        className="bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors" />
+                  <input value={customForm.url}      onChange={e => setCustomForm(f => ({ ...f, url: e.target.value }))}      placeholder="https://..."   className="bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors" />
+                  <input value={customForm.email}    onChange={e => setCustomForm(f => ({ ...f, email: e.target.value }))}    placeholder="hr@firma.cz"   className="bg-secondary border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-teal transition-colors" />
                 </div>
                 <button onClick={addCustom} className="px-4 py-1.5 rounded-full border border-border text-sm font-medium text-muted-foreground hover:bg-secondary transition-colors">+ Přidat firmu</button>
               </div>

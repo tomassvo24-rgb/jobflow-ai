@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import EmailField from "./EmailField";
 import PhoneField from "./PhoneField";
+import { IconUser, IconGrad, IconTarget, IconSave, IconCheck } from "./Icons";
 
 function Field({ label, value, onChange, placeholder, multiline }) {
   return (
@@ -17,10 +18,12 @@ function Field({ label, value, onChange, placeholder, multiline }) {
   );
 }
 
-function Section({ title, children }) {
+function Section({ icon, title, children }) {
   return (
     <div className="bg-white border border-border rounded-xl p-5 mb-4 shadow-sm">
-      <h3 className="font-poppins font-bold text-sm mb-4 flex items-center gap-2">{title}</h3>
+      <h3 className="font-poppins font-bold text-sm mb-4 flex items-center gap-2">
+        <span className="text-brand-blue">{icon}</span> {title}
+      </h3>
       {children}
     </div>
   );
@@ -43,9 +46,12 @@ export default function ProfileTab({ profile, onSave, onReset }) {
 
   return (
     <div>
-      <h2 className="font-poppins text-[22px] font-bold mb-5">Můj profil 👤</h2>
+      <div className="flex items-center gap-3 mb-5">
+        <IconUser cls="w-5 h-5 text-brand-blue" />
+        <h2 className="font-poppins text-[22px] font-bold">Můj profil</h2>
+      </div>
 
-      <Section title="👤 Základní info">
+      <Section icon={<IconUser cls="w-4 h-4" />} title="Základní info">
         <div className="grid grid-cols-2 gap-3">
           <Field label="Jméno" value={form.name || ""} onChange={v => set("name", v)} placeholder="Jan Novák" />
           <EmailField label="Email" value={form.email || ""} onChange={v => set("email", v)} />
@@ -54,7 +60,7 @@ export default function ProfileTab({ profile, onSave, onReset }) {
         </div>
       </Section>
 
-      <Section title="🎓 Vzdělání & zkušenosti">
+      <Section icon={<IconGrad cls="w-4 h-4" />} title="Vzdělání & zkušenosti">
         <div className="grid grid-cols-2 gap-3 mb-3">
           <Field label="Obor" value={form.field || ""} onChange={v => set("field", v)} placeholder="Právo, IT, Marketing..." />
           <Field label="Úroveň" value={form.level || ""} onChange={v => set("level", v)} placeholder="Junior, Senior..." />
@@ -65,7 +71,7 @@ export default function ProfileTab({ profile, onSave, onReset }) {
         </div>
       </Section>
 
-      <Section title="🎯 Co hledám">
+      <Section icon={<IconTarget cls="w-4 h-4" />} title="Co hledám">
         <div className="space-y-3">
           <Field label="Typ pozice" value={form.ttype || ""} onChange={v => set("ttype", v)} placeholder="Stáž, Part-time, Fulltime..." />
           <Field label="Odvětví" value={form.tind || ""} onChange={v => set("tind", v)} placeholder="Finance, IT, Marketing..." />
@@ -74,8 +80,9 @@ export default function ProfileTab({ profile, onSave, onReset }) {
       </Section>
 
       <div className="flex gap-3 flex-wrap">
-        <button onClick={handleSave} className="px-5 py-2.5 rounded-full bg-brand-blue text-white text-sm font-semibold hover:opacity-90 transition-opacity">
-          {saved ? "✓ Uloženo!" : "💾 Uložit profil"}
+        <button onClick={handleSave} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-blue text-white text-sm font-semibold hover:opacity-90 transition-opacity">
+          {saved ? <IconCheck cls="w-4 h-4" /> : <IconSave cls="w-4 h-4" />}
+          {saved ? "Uloženo!" : "Uložit profil"}
         </button>
         <button onClick={handleReset} className="px-5 py-2.5 rounded-full bg-red-50 text-red-500 border border-red-200 text-sm font-medium hover:bg-red-100 transition-colors">
           Resetovat vše
