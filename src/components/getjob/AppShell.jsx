@@ -16,6 +16,15 @@ const TABS = [
 { id: "profile", label: "👤 Profil" }];
 
 
+const MOBILE_TABS = [
+  { id: "discover", label: "Discover", icon: "🔍" },
+  { id: "generator", label: "Generátor", icon: "✉️" },
+  { id: "cvbuilder", label: "CV", icon: "📝" },
+  { id: "news", label: "Novinky", icon: "📰" },
+  { id: "tracker", label: "Tracker", icon: "📊" },
+  { id: "profile", label: "Profil", icon: "👤" },
+];
+
 export default function AppShell({ profile, discover, custom, tracker, onProfileSave, onDiscoverSave, onCustomSave, onTrackerSave, onReset, onGoHome }) {
   const [tab, setTab] = useState("discover");
   const [generatorPreset, setGeneratorPreset] = useState(null);
@@ -31,13 +40,18 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
         <div className="pr-4 border-r border-white/20 mr-2 shrink-0">
           <Logo small dark onClick={onGoHome} />
         </div>
-        <div className="flex flex-1 overflow-x-auto">
+        {/* Desktop tabs */}
+        <div className="hidden md:flex flex-1 overflow-x-auto">
           {TABS.map((t) =>
           <button key={t.id} onClick={() => setTab(t.id)}
           className={`px-3 h-14 text-[13px] font-medium whitespace-nowrap border-b-[2.5px] transition-all flex items-center gap-1 text-[hsl(var(--foreground))] ${tab === t.id ? "border-brand-teal" : "border-transparent hover:text-white"}`}>
               {t.id === "tracker" && tracker.length > 0 ? `📊 Tracker (${tracker.length})` : t.label}
             </button>
           )}
+        </div>
+        {/* Mobile: current tab name */}
+        <div className="md:hidden flex-1 text-center text-sm font-semibold text-foreground">
+          {MOBILE_TABS.find(t => t.id === tab)?.icon} {MOBILE_TABS.find(t => t.id === tab)?.label}
         </div>
         <div className="ml-auto pl-4 shrink-0">
           <div className="w-8 h-8 rounded-full bg-white text-brand-blue font-poppins text-sm font-bold flex items-center justify-center">
@@ -46,7 +60,7 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
         </div>
       </header>
 
-      <main className="flex-1 w-full max-w-[960px] mx-auto px-5 py-6">
+      <main className="flex-1 w-full max-w-[960px] mx-auto px-5 py-6 pb-24 md:pb-6">
         {tab === "discover" && <DiscoverTab profile={profile} discover={discover} custom={custom} tracker={tracker} onDiscoverSave={onDiscoverSave} onCustomSave={onCustomSave} onTrackerSave={onTrackerSave} onOpenGenerator={openGenerator} />}
         {tab === "generator" && <GeneratorTab profile={profile} allCompanies={[...discover, ...custom]} tracker={tracker} onTrackerSave={onTrackerSave} preset={generatorPreset} onPresetConsumed={() => setGeneratorPreset(null)} />}
         {tab === "cvbuilder" && <CVBuilderTab profile={profile} />}
@@ -55,7 +69,23 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
         {tab === "profile" && <ProfileTab profile={profile} onSave={onProfileSave} onReset={onReset} />}
       </main>
 
-      <footer className="border-t border-blue-700 py-5 mt-5 bg-[hsl(var(--muted))]">
+      {/* Mobile bottom navigation */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-border flex">
+        {MOBILE_TABS.map((t) => (
+          <button
+            key={t.id}
+            onClick={() => setTab(t.id)}
+            className={`flex-1 flex flex-col items-center justify-center py-2 gap-0.5 transition-all ${tab === t.id ? "text-brand-blue" : "text-muted-foreground"}`}
+          >
+            <span className="text-lg leading-none">{t.icon}</span>
+            <span className="text-[10px] font-medium leading-none">
+              {t.id === "tracker" && tracker.length > 0 ? `Tracker (${tracker.length})` : t.label}
+            </span>
+          </button>
+        ))}
+      </nav>
+
+      <footer className="hidden md:block border-t border-blue-700 py-5 mt-5 bg-[hsl(var(--muted))]">
         <div className="max-w-[960px] mx-auto px-6 flex items-center justify-between flex-wrap gap-4">
           <Logo small dark onClick={onGoHome} />
           <div className="flex gap-4 text-xs text-white/50">
