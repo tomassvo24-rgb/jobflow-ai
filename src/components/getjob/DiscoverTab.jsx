@@ -127,6 +127,8 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
   }), [jobs, search, minScore, locFilter, salFilter, durFilter, benFilters]);
 
   const hasJobs = jobs.length > 0;
+  // Show jobs only when user has picked a city OR typed a search term
+  const canShowJobs = locFilter.length > 0 || search.trim().length > 0;
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5 items-start">
@@ -308,8 +310,22 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
           </div>
         </div>
 
+        {/* ── Prompt to pick city/position ── */}
+        {hasJobs && !loading && !canShowJobs && (
+          <div className="text-center py-12 rounded-2xl border" style={{ background: "white", borderColor: "#e8edf4" }}>
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
+              style={{ background: "linear-gradient(135deg,#eff6ff,#e0f2fe)" }}>
+              <IconSearch cls="w-7 h-7 text-blue-400" />
+            </div>
+            <p className="font-bold text-base" style={{ color: "#0d1b2a" }}>Zvolte město nebo zadejte pozici</p>
+            <p className="mt-1.5 text-sm max-w-xs mx-auto" style={{ color: "#6b7280" }}>
+              Vyberte město ze seznamu nebo napište název pozice/firmy do vyhledávacího pole výše.
+            </p>
+          </div>
+        )}
+
         {/* ── Job list ── */}
-        {hasJobs && !loading && (
+        {hasJobs && !loading && canShowJobs && (
           <div>
             <div className="flex items-center justify-between mb-3">
               <p className="text-xs font-medium" style={{ color: "#6b7280" }}>
