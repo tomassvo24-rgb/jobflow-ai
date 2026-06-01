@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Logo from "./Logo";
 
 const FEATURES = [
@@ -83,8 +84,8 @@ export default function LandingPage({ onStart, onContinue }) {
             <a href="#funkce" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>Funkce</a>
             <a href="#jak-to-funguje" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>Jak to funguje</a>
             <a href="#faq" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>FAQ</a>
-            <a href="#o-nas" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>O nás</a>
-            <a href="#kontakt" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>Kontakt</a>
+            <Link to="/o-nas" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>O nás</Link>
+            <Link to="/kontakt" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>Kontakt</Link>
           </nav>
           <div className="flex items-center gap-3">
             {savedProfile ? (
