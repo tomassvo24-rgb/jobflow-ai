@@ -350,7 +350,7 @@ export default function LandingPage({ onStart, onContinue }) {
             <a href="#jak-to-funguje" className="hover:text-foreground transition-colors">Jak to funguje</a>
             <a href="#faq" className="hover:text-foreground transition-colors">FAQ</a>
             <span className="hover:text-foreground cursor-pointer transition-colors">Ochrana údajů</span>
-            <span className="hover:text-foreground cursor-pointer transition-colors">Kontakt</span>
+            <Link to="/kontakt" className="hover:text-foreground transition-colors">Kontakt</Link>
           </div>
           <div className="text-xs" style={{ color: "#5b6577" }}>© 2026 GetJob.cz</div>
         </div>
