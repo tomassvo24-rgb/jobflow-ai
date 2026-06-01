@@ -338,7 +338,7 @@ export default function LandingPage({ onStart, onContinue }) {
       <footer className="border-t border-border">
         <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 bg-card">
           <div>
-            <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/9adf27e99_image.png" alt="GetJob.cz" className="h-16 w-auto object-contain" />
+            <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/9adf27e99_image.png" alt="GetJob.cz" className="h-24 w-auto object-contain" />
             <p className="mt-4 text-sm max-w-xs" style={{ color: "#5b6577" }}>Chytřejší hledání práce s pomocí AI.</p>
           </div>
           <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm" style={{ color: "#5b6577" }}>
