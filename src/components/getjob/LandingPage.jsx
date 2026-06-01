@@ -53,7 +53,8 @@ function FaqItem({ q, a }) {
         {q}
         <span
           className="w-7 h-7 rounded-full flex items-center justify-center text-brand-blue shrink-0 transition-transform text-lg font-bold"
-          style={{ background: "#e6f0ff", transform: open ? "rotate(45deg)" : "none" }}>
+          className="w-7 h-7 rounded-full flex items-center justify-center text-primary shrink-0 transition-transform text-lg font-bold bg-primary/10"
+          style={{ transform: open ? "rotate(45deg)" : "none" }}>
           +</span>
       </div>
       {open && <p className="mt-4 text-muted-foreground leading-relaxed text-sm">{a}</p>}
@@ -132,14 +133,14 @@ export default function LandingPage({ onStart, onContinue }) {
 
       {/* HERO */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10" style={{ background: "linear-gradient(180deg,#f6f9ff 0%,#e6f0ff 100%)", opacity: 0.6 }} />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-primary/5 to-primary/10 opacity-60" />
         <div className="absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full blur-3xl -z-10" style={{ background: "rgba(37,99,235,0.10)" }} />
         <div className="absolute top-60 -left-20 w-[300px] h-[300px] rounded-full blur-3xl -z-10" style={{ background: "rgba(20,184,166,0.10)" }} />
 
         <div className="max-w-7xl mx-auto px-6 pt-16 pb-24 grid lg:grid-cols-12 gap-12 items-center relative">
           {/* Left */}
           <div className="lg:col-span-7">
-            <div className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold mb-7" style={{ background: "#e6f0ff", borderColor: "rgba(37,99,235,0.15)", color: "#2563eb" }}>
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold mb-7 text-primary">
               ✨ Chytřejší způsob hledání práce
             </div>
             <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.02] tracking-tight">
@@ -148,7 +149,7 @@ export default function LandingPage({ onStart, onContinue }) {
                 více pohovorů
               </span>
             </h1>
-            <p className="mt-6 text-lg leading-relaxed max-w-xl" style={{ color: "#5b6577" }}>
+            <p className="mt-6 text-lg leading-relaxed max-w-xl text-muted-foreground">
               GetJob.cz spojuje sílu umělé inteligence s vaším potenciálem. Najděte práci, která vám skutečně sedne, nechte si napsat motivační dopis na míru a připravte se na pohovor jako profesionál.
             </p>
 
@@ -166,7 +167,7 @@ export default function LandingPage({ onStart, onContinue }) {
               </button>
             </form>
             {joined && <p className="mt-5 text-sm font-semibold" style={{ color: "#14b8a6" }}>✓ Přihlášení proběhlo úspěšně! Dáme vám vědět.</p>}
-            <p className="mt-3 text-sm flex items-center gap-2" style={{ color: "#5b6577" }}>
+            <p className="mt-3 text-sm flex items-center gap-2 text-muted-foreground">
               🎓 Přístup pro prvních 100 uživatelů zdarma
             </p>
 
@@ -245,7 +246,7 @@ export default function LandingPage({ onStart, onContinue }) {
       <section id="funkce" className="py-24 relative bg-background">
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="max-w-2xl">
-            <div className="text-sm font-semibold uppercase tracking-wider" style={{ color: "#2563eb" }}>Funkce</div>
+            <div className="text-sm font-semibold uppercase tracking-wider text-primary">Funkce</div>
             <h2 className="mt-3 text-4xl md:text-5xl font-extrabold tracking-tight">
               Vše, co potřebujete<br />k{" "}
               <span style={{ background: "linear-gradient(90deg,#2563eb,#14b8a6)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
@@ -260,11 +261,11 @@ export default function LandingPage({ onStart, onContinue }) {
               whileHover={{ y: -4 }}
               className="rounded-3xl bg-card border border-border p-7 transition-all cursor-default hover:border-primary">
               
-                <div className="w-12 h-12 rounded-2xl grid place-items-center text-2xl" style={{ background: "#e6f0ff" }}>
+                <div className="w-12 h-12 rounded-2xl grid place-items-center text-2xl bg-primary/10">
                   {f.icon}
                 </div>
                 <h3 className="mt-5 font-bold text-lg">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: "#5b6577" }}>{f.desc}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
               </motion.div>
             )}
           </div>
@@ -275,9 +276,9 @@ export default function LandingPage({ onStart, onContinue }) {
       <section id="jak-to-funguje" className="max-w-7xl mx-auto px-6 py-24">
         <div className="grid lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4">
-            <div className="text-sm font-semibold uppercase tracking-wider" style={{ color: "#2563eb" }}>Jak to funguje</div>
+            <div className="text-sm font-semibold uppercase tracking-wider text-primary">Jak to funguje</div>
             <h2 className="mt-3 text-4xl md:text-5xl font-extrabold tracking-tight">Tři kroky k nové práci.</h2>
-            <p className="mt-5" style={{ color: "#5b6577" }}>Žádné dlouhé formuláře. Žádné placené tarify. Nahrajte CV, nechte AI najít nabídky a aplikujte jedním klikem.</p>
+            <p className="mt-5 text-muted-foreground">Žádné dlouhé formuláře. Žádné placené tarify. Nahrajte CV, nechte AI najít nabídky a aplikujte jedním klikem.</p>
             <button onClick={onStart} className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand-blue text-white px-6 py-3 text-sm font-semibold hover:opacity-90 transition">
               Začít zdarma →
             </button>
@@ -294,7 +295,7 @@ export default function LandingPage({ onStart, onContinue }) {
                 </div>
                 <div>
                   <h3 className="font-bold text-xl">{s.title}</h3>
-                  <p className="mt-1.5" style={{ color: "#5b6577" }}>{s.desc}</p>
+                  <p className="mt-1.5 text-muted-foreground">{s.desc}</p>
                 </div>
               </motion.div>
             )}
@@ -307,7 +308,7 @@ export default function LandingPage({ onStart, onContinue }) {
       {/* FAQ */}
       <section id="faq" className="max-w-4xl mx-auto px-6 py-24">
         <div className="text-center max-w-2xl mx-auto">
-          <div className="text-sm font-semibold uppercase tracking-wider" style={{ color: "#2563eb" }}>FAQ</div>
+          <div className="text-sm font-semibold uppercase tracking-wider text-primary">FAQ</div>
           <h2 className="mt-3 text-4xl md:text-5xl font-extrabold tracking-tight">Časté otázky</h2>
         </div>
         <div className="mt-12 space-y-3">
@@ -339,16 +340,16 @@ export default function LandingPage({ onStart, onContinue }) {
         <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 bg-card">
           <div>
             <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/9adf27e99_image.png" alt="GetJob.cz" className="h-10 w-auto object-contain" />
-            <p className="mt-4 text-sm max-w-xs" style={{ color: "#5b6577" }}>AI-powered job hunting platform. Made in Czechia.</p>
+            <p className="mt-4 text-sm max-w-xs text-muted-foreground">AI-powered job hunting platform. Made in Czechia.</p>
           </div>
-          <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm" style={{ color: "#5b6577" }}>
+          <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm text-muted-foreground">
             <a href="#funkce" className="hover:text-foreground transition-colors">Funkce</a>
             <a href="#jak-to-funguje" className="hover:text-foreground transition-colors">Jak to funguje</a>
             <a href="#faq" className="hover:text-foreground transition-colors">FAQ</a>
             <span className="hover:text-foreground cursor-pointer transition-colors">Ochrana údajů</span>
             <Link to="/kontakt" className="hover:text-foreground transition-colors">Kontakt</Link>
           </div>
-          <div className="text-xs" style={{ color: "#5b6577" }}>© 2026 GetJob.cz</div>
+          <div className="text-xs text-muted-foreground">© 2026 GetJob.cz</div>
         </div>
       </footer>
     </div>);
