@@ -37,15 +37,15 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
   };
 
   return (
-    <div className="min-h-screen flex font-poppins" style={{ background: "#f6f8fb" }}>
+    <div className="min-h-screen flex font-poppins bg-background">
 
       {/* ── Left Sidebar (desktop) ── */}
       <aside
-        className="hidden md:flex flex-col w-52 shrink-0 fixed top-0 left-0 h-screen z-20"
-        style={{ background: "white", borderRight: "1px solid #e3e8f0", boxShadow: "2px 0 16px 0 rgba(13,27,42,0.04)" }}
+        className="hidden md:flex flex-col w-52 shrink-0 fixed top-0 left-0 h-screen z-20 bg-card border-r border-border"
+        style={{ boxShadow: "2px 0 16px 0 rgba(13,27,42,0.04)" }}
       >
         {/* Logo */}
-        <div className="px-5 py-5 border-b" style={{ borderColor: "#e3e8f0" }}>
+        <div className="px-5 py-5 border-b border-border">
           <Logo small onClick={onGoHome} />
         </div>
 
@@ -60,13 +60,13 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
                 onClick={() => setTab(t.id)}
                 className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all text-left"
                 style={{
-                  background: isActive ? "#eff6ff" : "transparent",
-                  color: isActive ? "#2563eb" : "#5b6577",
+                  background: isActive ? "hsl(var(--accent))" : "transparent",
+                  color: isActive ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))",
                 }}
-                onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = "#f6f8fb"; }}
+                onMouseEnter={e => { if (!isActive) e.currentTarget.style.background = "hsl(var(--muted))"; }}
                 onMouseLeave={e => { if (!isActive) e.currentTarget.style.background = "transparent"; }}
               >
-                <span style={{ color: isActive ? "#2563eb" : "#9ca3af" }}>{ICONS[t.id]}</span>
+                <span style={{ color: isActive ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))" }}>{ICONS[t.id]}</span>
                 {label}
                 {isActive && (
                   <span
@@ -80,7 +80,7 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
         </nav>
 
         {/* Bottom: avatar + name */}
-        <div className="px-4 py-4 border-t" style={{ borderColor: "#e3e8f0" }}>
+        <div className="px-4 py-4 border-t border-border">
           <div className="flex items-center gap-3">
             <div
               className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0"
@@ -89,8 +89,8 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
               {profile.name?.[0]?.toUpperCase() || "?"}
             </div>
             <div className="min-w-0">
-              <p className="text-xs font-semibold truncate" style={{ color: "#0d1b2a" }}>{profile.name || "Uživatel"}</p>
-              <p className="text-[10px] truncate" style={{ color: "#9ca3af" }}>{profile.field || "Profil"}</p>
+              <p className="text-xs font-semibold truncate text-foreground">{profile.name || "Uživatel"}</p>
+              <p className="text-[10px] truncate text-muted-foreground">{profile.field || "Profil"}</p>
             </div>
           </div>
         </div>
@@ -101,11 +101,11 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
 
         {/* Mobile top bar */}
         <header
-          className="md:hidden sticky top-0 z-30 h-14 flex items-center justify-between px-5 border-b"
-          style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(12px)", borderColor: "#e3e8f0" }}
+          className="md:hidden sticky top-0 z-30 h-14 flex items-center justify-between px-5 border-b border-border bg-card/90"
+          style={{ backdropFilter: "blur(12px)" }}
         >
           <Logo small onClick={onGoHome} />
-          <span className="text-sm font-semibold" style={{ color: "#0d1b2a" }}>
+          <span className="text-sm font-semibold text-foreground">
             {TABS.find(t => t.id === tab)?.label}
           </span>
           <div
@@ -129,8 +129,8 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
 
       {/* ── Mobile bottom nav ── */}
       <nav
-        className="md:hidden fixed bottom-0 left-0 right-0 z-30 flex border-t"
-        style={{ background: "rgba(255,255,255,0.96)", backdropFilter: "blur(12px)", borderColor: "#e3e8f0" }}
+        className="md:hidden fixed bottom-0 left-0 right-0 z-30 flex border-t border-border bg-card/95"
+        style={{ backdropFilter: "blur(12px)" }}
       >
         {TABS.map((t) => {
           const isActive = tab === t.id;
@@ -139,7 +139,7 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
               key={t.id}
               onClick={() => setTab(t.id)}
               className="flex-1 flex flex-col items-center justify-center py-2.5 gap-1 transition-all"
-              style={{ color: isActive ? "#2563eb" : "#9ca3af" }}
+              style={{ color: isActive ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))" }}
             >
               {ICONS[t.id]}
               <span className="text-[9px] font-semibold leading-none">{t.label}</span>

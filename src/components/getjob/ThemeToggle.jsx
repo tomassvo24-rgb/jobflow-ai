@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Sun, Moon } from "lucide-react";
 
+// Apply theme immediately on module load (before first render)
+(function initTheme() {
+  try {
+    const saved = localStorage.getItem("gj_theme");
+    if (saved === "dark") document.documentElement.classList.add("dark");
+    else document.documentElement.classList.remove("dark");
+  } catch {}
+})();
+
 export default function ThemeToggle() {
   const [dark, setDark] = useState(() => {
     try {

@@ -46,10 +46,10 @@ function FaqItem({ q, a }) {
   const [open, setOpen] = useState(false);
   return (
     <div
-      className={`rounded-2xl border bg-white p-6 transition-all cursor-pointer ${open ? "shadow-lg border-blue-200" : "border-border"}`}
+      className={`rounded-2xl border bg-card p-6 transition-all cursor-pointer ${open ? "shadow-lg border-primary/50" : "border-border"}`}
       onClick={() => setOpen((v) => !v)}>
       
-      <div className="flex items-center justify-between gap-4 font-semibold text-foreground">
+      <div className="flex items-center justify-between gap-4 font-semibold text-foreground text-sm">
         {q}
         <span
           className="w-7 h-7 rounded-full flex items-center justify-center text-brand-blue shrink-0 transition-transform text-lg font-bold"
@@ -75,18 +75,18 @@ export default function LandingPage({ onStart, onContinue }) {
   };
 
   return (
-    <div className="min-h-screen font-poppins" style={{ background: "#f6f8fb", color: "#0d1b2a" }}>
+    <div className="min-h-screen font-poppins bg-background text-foreground">
 
       {/* NAV */}
-      <header className="sticky top-0 z-50 backdrop-blur-md border-b" style={{ background: "rgba(255,255,255,0.85)", borderColor: "#e3e8f0" }}>
+      <header className="sticky top-0 z-50 backdrop-blur-md border-b bg-card/85 border-border">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/a4e34759e_getjob_logo_white-removebg-preview.png" alt="GetJob.cz" className="h-10 w-auto object-contain" />
           <nav className="hidden md:flex items-center gap-10 text-sm font-semibold">
-            <a href="#funkce" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>Funkce</a>
-            <a href="#jak-to-funguje" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>Jak to funguje</a>
-            <a href="#faq" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>FAQ</a>
-            <Link to="/o-nas" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>O nás</Link>
-            <Link to="/kontakt" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>Kontakt</Link>
+            <a href="#funkce" className="text-foreground hover:text-brand-blue transition-colors">Funkce</a>
+            <a href="#jak-to-funguje" className="text-foreground hover:text-brand-blue transition-colors">Jak to funguje</a>
+            <a href="#faq" className="text-foreground hover:text-brand-blue transition-colors">FAQ</a>
+            <Link to="/o-nas" className="text-foreground hover:text-brand-blue transition-colors">O nás</Link>
+            <Link to="/kontakt" className="text-foreground hover:text-brand-blue transition-colors">Kontakt</Link>
           </nav>
           <div className="flex items-center gap-3">
             <ThemeToggle />
@@ -114,9 +114,9 @@ export default function LandingPage({ onStart, onContinue }) {
 
       {/* RETURNING USER BANNER */}
       {savedProfile &&
-      <div className="border-b py-3 px-6" style={{ background: "#e6f0ff", borderColor: "#bfdbfe" }}>
+      <div className="border-b border-border py-3 px-6 bg-accent">
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 flex-wrap">
-            <p className="text-sm font-medium" style={{ color: "#1e40af" }}>
+            <p className="text-sm font-medium text-accent-foreground">
               👋 Vítej zpět, <strong>{savedProfile.name}</strong>! Máš uložený profil.
             </p>
             <button
@@ -191,10 +191,8 @@ export default function LandingPage({ onStart, onContinue }) {
               <div className="absolute inset-0 rounded-[3rem] blur-3xl opacity-20" style={{ background: "linear-gradient(135deg,#2563eb,#14b8a6)" }} />
               <div className="relative h-full rounded-[2.6rem] p-2.5" style={{ background: "#0d1b2a", boxShadow: "0 20px 60px -20px rgba(37,99,235,0.25)" }}>
                 <div className="h-full rounded-[2.2rem] bg-white overflow-hidden flex flex-col">
-                  <div className="relative px-6 pt-3 pb-2 flex justify-between items-center text-[10px] font-semibold text-foreground">
-                    <span>9:41</span>
-                    <span className="absolute left-1/2 -translate-x-1/2 top-2 w-24 h-5 rounded-full" style={{ background: "#0d1b2a" }} />
-                    <span>●●●</span>
+                  <div className="relative px-6 pt-3 pb-2 flex justify-center items-center">
+                    <span className="w-24 h-5 rounded-full" style={{ background: "#0d1b2a" }} />
                   </div>
                   <div className="px-5 pt-2 pb-2"><Logo small /></div>
                   <div className="px-4 mt-2">
@@ -244,7 +242,7 @@ export default function LandingPage({ onStart, onContinue }) {
 
 
       {/* FEATURES */}
-      <section id="funkce" className="py-24 relative">
+      <section id="funkce" className="py-24 relative bg-background">
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="max-w-2xl">
             <div className="text-sm font-semibold uppercase tracking-wider" style={{ color: "#2563eb" }}>Funkce</div>
@@ -259,9 +257,8 @@ export default function LandingPage({ onStart, onContinue }) {
             {FEATURES.map((f, i) =>
             <motion.div
               key={i}
-              whileHover={{ y: -4, borderColor: "#2563eb" }}
-              className="rounded-3xl bg-white border p-7 transition-all cursor-default"
-              style={{ borderColor: "#e3e8f0" }}>
+              whileHover={{ y: -4 }}
+              className="rounded-3xl bg-card border border-border p-7 transition-all cursor-default hover:border-primary">
               
                 <div className="w-12 h-12 rounded-2xl grid place-items-center text-2xl" style={{ background: "#e6f0ff" }}>
                   {f.icon}
@@ -289,9 +286,8 @@ export default function LandingPage({ onStart, onContinue }) {
             {STEPS.map((s, i) =>
             <motion.div
               key={i}
-              whileHover={{ borderColor: "#2563eb" }}
-              className="rounded-3xl border bg-white p-7 flex gap-6 items-start transition-all"
-              style={{ borderColor: "#e3e8f0", marginLeft: i * 28 }}>
+              className="rounded-3xl border border-border bg-card p-7 flex gap-6 items-start transition-all hover:border-primary"
+              style={{ marginLeft: i * 28 }}>
               
                 <div className="text-5xl font-extrabold leading-none w-20 shrink-0" style={{ background: "linear-gradient(90deg,#2563eb,#14b8a6)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
                   {s.n}
@@ -339,8 +335,8 @@ export default function LandingPage({ onStart, onContinue }) {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t" style={{ borderColor: "#e3e8f0" }}>
-        <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 bg-[hsl(var(--card))]">
+      <footer className="border-t border-border">
+        <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 bg-card">
           <div>
             <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/9adf27e99_image.png" alt="GetJob.cz" className="h-10 w-auto object-contain" />
             <p className="mt-4 text-sm max-w-xs" style={{ color: "#5b6577" }}>AI-powered job hunting platform. Made in Czechia.</p>

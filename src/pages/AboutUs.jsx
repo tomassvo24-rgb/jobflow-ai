@@ -16,18 +16,18 @@ const TEAM = [
 
 export default function AboutUs() {
   return (
-    <div className="min-h-screen font-poppins" style={{ background: "#f6f8fb", color: "#0d1b2a" }}>
+    <div className="min-h-screen font-poppins bg-background text-foreground">
 
       {/* NAV */}
-      <header className="sticky top-0 z-50 backdrop-blur-md border-b" style={{ background: "rgba(255,255,255,0.85)", borderColor: "#e3e8f0" }}>
+      <header className="sticky top-0 z-50 backdrop-blur-md border-b bg-card/85 border-border">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link to="/?home=1">
             <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/a4e34759e_getjob_logo_white-removebg-preview.png" alt="GetJob.cz" className="h-10 w-auto object-contain" />
           </Link>
           <nav className="hidden md:flex items-center gap-10 text-sm font-semibold">
-            <Link to="/" className="hover:text-blue-600 transition-colors" style={{ color: "#0d1b2a" }}>Domů</Link>
-            <Link to="/o-nas" className="text-blue-600 font-bold">O nás</Link>
-            <Link to="/kontakt" className="hover:text-blue-600 transition-colors" style={{ color: "#0d1b2a" }}>Kontakt</Link>
+            <Link to="/" className="text-foreground hover:text-primary transition-colors">Domů</Link>
+            <Link to="/o-nas" className="text-primary font-bold">O nás</Link>
+            <Link to="/kontakt" className="text-foreground hover:text-primary transition-colors">Kontakt</Link>
           </nav>
           <ThemeToggle />
         </div>
@@ -79,7 +79,7 @@ export default function AboutUs() {
       </section>
 
       {/* VALUES */}
-      <section className="py-20" style={{ background: "white" }}>
+      <section className="py-20 bg-card">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-14">
             <div className="text-sm font-semibold uppercase tracking-wider mb-3" style={{ color: "#2563eb" }}>Co nás řídí</div>
@@ -87,7 +87,7 @@ export default function AboutUs() {
           </div>
           <div className="grid md:grid-cols-4 gap-6">
             {VALUES.map((v, i) => (
-              <div key={i} className="rounded-3xl border p-7 text-center hover:shadow-lg transition-all" style={{ borderColor: "#e3e8f0" }}>
+              <div key={i} className="rounded-3xl border border-border p-7 text-center hover:shadow-lg transition-all">
                 <div className="w-14 h-14 rounded-2xl grid place-items-center text-3xl mx-auto mb-5" style={{ background: "#e6f0ff" }}>{v.icon}</div>
                 <h3 className="font-bold text-lg mb-2">{v.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: "#5b6577" }}>{v.desc}</p>
@@ -105,7 +105,7 @@ export default function AboutUs() {
         </div>
         <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
           {TEAM.map((m, i) => (
-            <div key={i} className="rounded-3xl border bg-white p-8 flex gap-5 items-start hover:shadow-lg transition-all" style={{ borderColor: "#e3e8f0" }}>
+            <div key={i} className="rounded-3xl border border-border bg-card p-8 flex gap-5 items-start hover:shadow-lg transition-all">
               <div className="w-14 h-14 rounded-2xl grid place-items-center text-2xl shrink-0" style={{ background: "linear-gradient(135deg,#e6f0ff,#d1fae5)" }}>👤</div>
               <div>
                 <div className="font-bold text-lg">{m.name}</div>
@@ -133,7 +133,7 @@ export default function AboutUs() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t py-8 text-center text-sm" style={{ borderColor: "#e3e8f0", color: "#5b6577" }}>
+      <footer className="border-t border-border py-8 text-center text-sm text-muted-foreground">
         © 2026 GetJob.cz — Made in Czechia
       </footer>
     </div>

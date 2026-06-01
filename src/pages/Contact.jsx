@@ -28,18 +28,18 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen font-poppins" style={{ background: "#f6f8fb", color: "#0d1b2a" }}>
+    <div className="min-h-screen font-poppins bg-background text-foreground">
 
       {/* NAV */}
-      <header className="sticky top-0 z-50 backdrop-blur-md border-b" style={{ background: "rgba(255,255,255,0.85)", borderColor: "#e3e8f0" }}>
+      <header className="sticky top-0 z-50 backdrop-blur-md border-b bg-card/85 border-border">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link to="/?home=1">
             <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/a4e34759e_getjob_logo_white-removebg-preview.png" alt="GetJob.cz" className="h-10 w-auto object-contain" />
           </Link>
           <nav className="hidden md:flex items-center gap-10 text-sm font-semibold">
-            <Link to="/" className="hover:text-blue-600 transition-colors" style={{ color: "#0d1b2a" }}>Domů</Link>
-            <Link to="/o-nas" className="hover:text-blue-600 transition-colors" style={{ color: "#0d1b2a" }}>O nás</Link>
-            <Link to="/kontakt" className="text-blue-600 font-bold">Kontakt</Link>
+            <Link to="/" className="text-foreground hover:text-primary transition-colors">Domů</Link>
+            <Link to="/o-nas" className="text-foreground hover:text-primary transition-colors">O nás</Link>
+            <Link to="/kontakt" className="text-primary font-bold">Kontakt</Link>
           </nav>
           <ThemeToggle />
         </div>
@@ -139,18 +139,17 @@ export default function Contact() {
 
         {/* CONTACT INFO */}
         <div className="space-y-6">
-          <div className="rounded-3xl bg-white border p-8 shadow-sm" style={{ borderColor: "#e3e8f0" }}>
+          <div className="rounded-3xl bg-card border border-border p-8 shadow-sm">
             <h2 className="text-2xl font-extrabold mb-6">Spojte se s námi</h2>
             <div className="space-y-4">
               {SOCIAL.map((s, i) => (
                 <a
                   key={i}
                   href={s.href}
-                  className="flex items-center gap-4 p-4 rounded-2xl border hover:border-blue-300 hover:shadow-sm transition-all"
-                  style={{ borderColor: "#e3e8f0" }}
+                  className="flex items-center gap-4 p-4 rounded-2xl border border-border hover:border-primary hover:shadow-sm transition-all"
                 >
                   <span className="text-2xl w-10 text-center">{s.icon}</span>
-                  <span className="text-sm font-semibold" style={{ color: "#0d1b2a" }}>{s.label}</span>
+                  <span className="text-sm font-semibold text-foreground">{s.label}</span>
                 </a>
               ))}
             </div>
@@ -171,7 +170,7 @@ export default function Contact() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t py-8 text-center text-sm" style={{ borderColor: "#e3e8f0", color: "#5b6577" }}>
+      <footer className="border-t border-border py-8 text-center text-sm text-muted-foreground">
         © 2026 GetJob.cz — Made in Czechia
       </footer>
     </div>
