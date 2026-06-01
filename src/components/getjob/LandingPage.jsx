@@ -81,7 +81,7 @@ export default function LandingPage({ onStart, onContinue }) {
       <header className="sticky top-0 z-50 backdrop-blur-md border-b bg-card/85 border-border">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/a4e34759e_getjob_logo_white-removebg-preview.png" alt="GetJob.cz" className="h-10 w-auto object-contain dark:hidden" />
-          <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/61c16d602_e9868ad2-36e2-46c9-921c-b693ef439451.png" alt="GetJob.cz" className="h-16 w-auto object-contain hidden dark:block" />
+          <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/61c16d602_e9868ad2-36e2-46c9-921c-b693ef439451.png" alt="GetJob.cz" className="h-20 w-auto object-contain hidden dark:block" />
           <nav className="hidden md:flex items-center gap-10 text-sm font-semibold">
             <a href="#funkce" className="text-foreground hover:text-brand-blue transition-colors">Funkce</a>
             <a href="#jak-to-funguje" className="text-foreground hover:text-brand-blue transition-colors">Jak to funguje</a>
@@ -340,7 +340,7 @@ export default function LandingPage({ onStart, onContinue }) {
         <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 bg-card">
           <div>
             <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/9adf27e99_image.png" alt="GetJob.cz" className="h-10 w-auto object-contain dark:hidden" />
-            <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/61c16d602_e9868ad2-36e2-46c9-921c-b693ef439451.png" alt="GetJob.cz" className="h-16 w-auto object-contain hidden dark:block" />
+            <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/61c16d602_e9868ad2-36e2-46c9-921c-b693ef439451.png" alt="GetJob.cz" className="h-20 w-auto object-contain hidden dark:block" />
             <p className="mt-4 text-sm max-w-xs" style={{ color: "#5b6577" }}>AI-powered job hunting platform. Made in Czechia.</p>
           </div>
           <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm" style={{ color: "#5b6577" }}>
