@@ -78,7 +78,7 @@ export default function LandingPage({ onStart, onContinue }) {
       {/* NAV */}
       <header className="sticky top-0 z-50 backdrop-blur-md border-b" style={{ background: "rgba(255,255,255,0.85)", borderColor: "#e3e8f0" }}>
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Logo />
+          <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/9adf27e99_image.png" alt="GetJob.cz" className="h-10 w-auto object-contain" />
           <nav className="hidden md:flex items-center gap-10 text-sm font-semibold">
             <a href="#funkce" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>Funkce</a>
             <a href="#jak-to-funguje" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>Jak to funguje</a>
@@ -377,7 +377,7 @@ export default function LandingPage({ onStart, onContinue }) {
       <footer className="border-t" style={{ borderColor: "#e3e8f0" }}>
         <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <Logo />
+            <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/9adf27e99_image.png" alt="GetJob.cz" className="h-10 w-auto object-contain" />
             <p className="mt-4 text-sm max-w-xs" style={{ color: "#5b6577" }}>AI-powered job hunting platform. Made in Czechia.</p>
           </div>
           <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm" style={{ color: "#5b6577" }}>
