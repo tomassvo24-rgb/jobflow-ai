@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "../components/getjob/ThemeToggle";
+import { base44 } from "@/api/base44Client";
 
 const SOCIAL = [
   { label: "getjob@gmail.com", icon: "✉️", href: "mailto:getjob@gmail.com" },
@@ -12,9 +13,17 @@ const SOCIAL = [
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSending(true);
+    await base44.functions.invoke('sendContactEmail', {
+      name: form.name,
+      email: form.email,
+      message: form.message,
+    });
+    setSending(false);
     setSent(true);
   };
 
@@ -118,10 +127,11 @@ export default function Contact() {
               </div>
               <button
                 type="submit"
-                className="w-full rounded-full text-white py-3.5 text-sm font-bold hover:opacity-90 transition"
+                className="w-full rounded-full text-white py-3.5 text-sm font-bold hover:opacity-90 transition disabled:opacity-60"
                 style={{ background: "linear-gradient(90deg,#2563eb,#14b8a6)" }}
+                disabled={sending}
               >
-                Odeslat zprávu →
+                {sending ? "Odesílám…" : "Odeslat zprávu →"}
               </button>
             </form>
           )}
