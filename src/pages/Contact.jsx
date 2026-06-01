@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ThemeToggle from "../components/getjob/ThemeToggle";
 
 const SOCIAL = [
   { label: "getjob@gmail.com", icon: "✉️", href: "mailto:getjob@gmail.com" },
@@ -31,6 +32,7 @@ export default function Contact() {
             <Link to="/o-nas" className="hover:text-blue-600 transition-colors" style={{ color: "#0d1b2a" }}>O nás</Link>
             <Link to="/kontakt" className="text-blue-600 font-bold">Kontakt</Link>
           </nav>
+          <ThemeToggle />
         </div>
       </header>
 

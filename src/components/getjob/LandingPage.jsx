@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
+import ThemeToggle from "./ThemeToggle";
 
 const FEATURES = [
 { icon: "📤", title: "Nahrání a analýza CV", desc: "Nahrajte svůj PDF životopis a AI okamžitě extrahuje vaše dovednosti, zkušenosti, jazyky a obor studia." },
@@ -88,6 +89,7 @@ export default function LandingPage({ onStart, onContinue }) {
             <Link to="/kontakt" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>Kontakt</Link>
           </nav>
           <div className="flex items-center gap-3">
+            <ThemeToggle />
             {savedProfile ?
             <button
               onClick={onContinue}

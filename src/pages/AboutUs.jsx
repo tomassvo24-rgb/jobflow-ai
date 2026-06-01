@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ThemeToggle from "../components/getjob/ThemeToggle";
 
 const VALUES = [
   { icon: "🎯", title: "Relevance", desc: "Nabízíme jen to, co skutečně odpovídá vašemu profilu. Žádné generické nabídky." },
@@ -28,6 +29,7 @@ export default function AboutUs() {
             <Link to="/o-nas" className="text-blue-600 font-bold">O nás</Link>
             <Link to="/kontakt" className="hover:text-blue-600 transition-colors" style={{ color: "#0d1b2a" }}>Kontakt</Link>
           </nav>
+          <ThemeToggle />
         </div>
       </header>
 
