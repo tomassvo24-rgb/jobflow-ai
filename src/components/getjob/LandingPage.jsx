@@ -91,13 +91,11 @@ export default function LandingPage({ onStart, onContinue }) {
             {savedProfile ? (
               <button
                 onClick={onContinue}
-                className="inline-flex items-center gap-2 rounded-full bg-brand-blue text-white px-5 py-2.5 text-sm font-semibold hover:opacity-90 transition"
-                style={{ boxShadow: "0 10px 40px -12px rgba(13,27,42,0.12)" }}
+                className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm hover:opacity-90 transition"
+                style={{ background: "linear-gradient(135deg,#2563eb,#14b8a6)", boxShadow: "0 4px 16px -4px rgba(37,99,235,0.40)" }}
+                title={savedProfile.name}
               >
-                <span className="w-6 h-6 rounded-full bg-white text-brand-blue font-bold text-xs flex items-center justify-center">
-                  {savedProfile.name?.[0]?.toUpperCase() || "?"}
-                </span>
-                Pokračovat →
+                {savedProfile.name?.[0]?.toUpperCase() || "?"}
               </button>
             ) : (
               <button
