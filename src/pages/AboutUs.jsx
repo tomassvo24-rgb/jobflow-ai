@@ -11,7 +11,7 @@ const VALUES = [
 
 const TEAM = [
   { name: "Tomáš Becher", role: "CEO & Co-founder", phone: "+420 666 577 407", desc: "CEO & mezi sociálními věcmi a technologiemi se cítí jako doma." },
-  { name: "Tomáš Svoboda", role: "CTO & Co-founder", phone: "+420 666 577 407", desc: "Vznikli jsme v Praze a myslíme lokálně." },
+  { name: "Tomáš Svoboda", role: "CEO & Co-founder", phone: "+420 666 577 407", desc: "Vznikli jsme v Praze a myslíme lokálně." },
 ];
 
 export default function AboutUs() {
