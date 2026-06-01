@@ -29,7 +29,7 @@
 
     --navy: 221 83% 53%;
     --brand-blue: 221 83% 53%;
-    --brand-teal: 174 80% 40%;
+    --brand-teal: 199 89% 48%;
     --brand-light: 214 60% 97%;
 
     --font-poppins: 'Poppins', sans-serif;
@@ -38,24 +38,24 @@
 
   .dark {
     --background: 221 39% 8%;
-    --foreground: 40 10% 95%;
-    --card: 152 15% 11%;
-    --card-foreground: 40 10% 95%;
-    --popover: 152 15% 11%;
-    --popover-foreground: 40 10% 95%;
-    --primary: 152 50% 45%;
-    --primary-foreground: 0 0% 5%;
-    --secondary: 152 10% 18%;
-    --secondary-foreground: 40 10% 80%;
-    --muted: 152 10% 16%;
-    --muted-foreground: 40 5% 55%;
-    --accent: 152 30% 18%;
-    --accent-foreground: 152 50% 60%;
+    --foreground: 214 30% 95%;
+    --card: 221 35% 11%;
+    --card-foreground: 214 30% 95%;
+    --popover: 221 35% 11%;
+    --popover-foreground: 214 30% 95%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 221 25% 18%;
+    --secondary-foreground: 214 20% 80%;
+    --muted: 221 25% 16%;
+    --muted-foreground: 214 15% 55%;
+    --accent: 221 30% 18%;
+    --accent-foreground: 221 83% 70%;
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 152 10% 20%;
-    --input: 152 10% 20%;
-    --ring: 152 50% 45%;
+    --border: 221 25% 20%;
+    --input: 221 25% 20%;
+    --ring: 221 83% 53%;
   }
 }
 

@@ -42,7 +42,7 @@ export default function AboutUs() {
           </div>
           <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-tight max-w-3xl">
             Hledání práce<br />
-            <span style={{ background: "linear-gradient(90deg,#2563eb,#14b8a6)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+            <span style={{ background: "linear-gradient(90deg,#2563eb,#0ea5e9)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
               nemu být frustrující.
             </span>
           </h1>
@@ -69,7 +69,7 @@ export default function AboutUs() {
             </p>
           </div>
         </div>
-        <div className="rounded-3xl p-10 text-white relative overflow-hidden" style={{ background: "linear-gradient(135deg,#2563eb 0%,#14b8a6 100%)" }}>
+        <div className="rounded-3xl p-10 text-white relative overflow-hidden" style={{ background: "linear-gradient(135deg,#2563eb 0%,#0ea5e9 100%)" }}>
           <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full blur-3xl opacity-20" style={{ background: "#fff" }} />
           <div className="relative text-5xl font-extrabold leading-tight mb-4">
             "Každý si zaslouží práci, která ho baví."
@@ -106,7 +106,7 @@ export default function AboutUs() {
         <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
           {TEAM.map((m, i) => (
             <div key={i} className="rounded-3xl border border-border bg-card p-8 flex gap-5 items-start hover:shadow-lg transition-all">
-              <div className="w-14 h-14 rounded-2xl grid place-items-center text-2xl shrink-0" style={{ background: "linear-gradient(135deg,#e6f0ff,#d1fae5)" }}>👤</div>
+              <div className="w-14 h-14 rounded-2xl grid place-items-center text-2xl shrink-0" style={{ background: "linear-gradient(135deg,#e6f0ff,#dbeafe)" }}>👤</div>
               <div>
                 <div className="font-bold text-lg">{m.name}</div>
                 <div className="text-sm font-semibold mb-1" style={{ color: "#2563eb" }}>{m.role}</div>
@@ -120,7 +120,7 @@ export default function AboutUs() {
 
       {/* CTA */}
       <section className="max-w-7xl mx-auto px-6 pb-24">
-        <div className="relative overflow-hidden rounded-[2.5rem] p-12 md:p-20 text-white" style={{ background: "linear-gradient(135deg,#2563eb 0%,#14b8a6 100%)" }}>
+        <div className="relative overflow-hidden rounded-[2.5rem] p-12 md:p-20 text-white" style={{ background: "linear-gradient(135deg,#2563eb 0%,#0ea5e9 100%)" }}>
           <div className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full blur-3xl" style={{ background: "rgba(255,255,255,0.10)" }} />
           <div className="relative max-w-2xl">
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">Připojte se k nám</h2>

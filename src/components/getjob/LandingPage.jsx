@@ -134,7 +134,7 @@ export default function LandingPage({ onStart, onContinue }) {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10" style={{ background: "linear-gradient(180deg,#f6f9ff 0%,#e6f0ff 100%)", opacity: 0.6 }} />
         <div className="absolute -top-32 -right-32 w-[420px] h-[420px] rounded-full blur-3xl -z-10" style={{ background: "rgba(37,99,235,0.10)" }} />
-        <div className="absolute top-60 -left-20 w-[300px] h-[300px] rounded-full blur-3xl -z-10" style={{ background: "rgba(20,184,166,0.10)" }} />
+        <div className="absolute top-60 -left-20 w-[300px] h-[300px] rounded-full blur-3xl -z-10" style={{ background: "rgba(14,165,233,0.10)" }} />
 
         <div className="max-w-7xl mx-auto px-6 pt-16 pb-24 grid lg:grid-cols-12 gap-12 items-center relative">
           {/* Left */}
@@ -144,7 +144,7 @@ export default function LandingPage({ onStart, onContinue }) {
             </div>
             <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.02] tracking-tight">
               Méně hledání,<br />
-              <span style={{ background: "linear-gradient(90deg,#2563eb,#14b8a6)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+              <span style={{ background: "linear-gradient(90deg,#2563eb,#0ea5e9)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
                 více pohovorů
               </span>
             </h1>
@@ -165,7 +165,7 @@ export default function LandingPage({ onStart, onContinue }) {
                 Přidat se do waitlistu →
               </button>
             </form>
-            {joined && <p className="mt-5 text-sm font-semibold" style={{ color: "#14b8a6" }}>✓ Přihlášení proběhlo úspěšně! Dáme vám vědět.</p>}
+            {joined && <p className="mt-5 text-sm font-semibold" style={{ color: "#0ea5e9" }}>✓ Přihlášení proběhlo úspěšně! Dáme vám vědět.</p>}
             <p className="mt-3 text-sm flex items-center gap-2" style={{ color: "#5b6577" }}>
               🎓 Přístup pro prvních 100 uživatelů zdarma
             </p>
@@ -188,7 +188,7 @@ export default function LandingPage({ onStart, onContinue }) {
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               className="relative w-[280px] h-[560px]">
               
-              <div className="absolute inset-0 rounded-[3rem] blur-3xl opacity-20" style={{ background: "linear-gradient(135deg,#2563eb,#14b8a6)" }} />
+              <div className="absolute inset-0 rounded-[3rem] blur-3xl opacity-20" style={{ background: "linear-gradient(135deg,#2563eb,#0ea5e9)" }} />
               <div className="relative h-full rounded-[2.6rem] p-2.5" style={{ background: "#0d1b2a", boxShadow: "0 20px 60px -20px rgba(37,99,235,0.25)" }}>
                 <div className="h-full rounded-[2.2rem] bg-white overflow-hidden flex flex-col">
                   <div className="relative px-6 pt-3 pb-2 flex justify-center items-center">
@@ -205,7 +205,7 @@ export default function LandingPage({ onStart, onContinue }) {
                             <div className="text-[11px]" style={{ color: "#5b6577" }}>TechStart Praha</div>
                           </div>
                         </div>
-                        <div className="rounded-full px-2 py-1 text-[10px] font-bold" style={{ background: "rgba(20,184,166,0.15)", color: "#14b8a6" }}>94%</div>
+                        <div className="rounded-full px-2 py-1 text-[10px] font-bold" style={{ background: "rgba(14,165,233,0.15)", color: "#0ea5e9" }}>94%</div>
                       </div>
                       <div className="mt-3 space-y-1 text-[11px]" style={{ color: "#5b6577" }}>
                         <div>✅ Figma & Prototyping</div>
@@ -223,7 +223,7 @@ export default function LandingPage({ onStart, onContinue }) {
                       <div className="w-8 h-8 rounded-full grid place-items-center text-base" style={{ background: "#e6f0ff" }}>✉️</div>
                       <div className="flex-1">
                         <div className="text-[12px] font-bold">Motivační dopis</div>
-                        <div className="text-[10px] font-semibold" style={{ color: "#14b8a6" }}>Vygenerováno ✓</div>
+                        <div className="text-[10px] font-semibold" style={{ color: "#0ea5e9" }}>Vygenerováno ✓</div>
                       </div>
                     </div>
                   </div>
@@ -248,7 +248,7 @@ export default function LandingPage({ onStart, onContinue }) {
             <div className="text-sm font-semibold uppercase tracking-wider" style={{ color: "#2563eb" }}>Funkce</div>
             <h2 className="mt-3 text-4xl md:text-5xl font-extrabold tracking-tight">
               Vše, co potřebujete<br />k{" "}
-              <span style={{ background: "linear-gradient(90deg,#2563eb,#14b8a6)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+              <span style={{ background: "linear-gradient(90deg,#2563eb,#0ea5e9)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
                 získání práce
               </span>.
             </h2>
@@ -289,7 +289,7 @@ export default function LandingPage({ onStart, onContinue }) {
               className="rounded-3xl border border-border bg-card p-7 flex gap-6 items-start transition-all hover:border-primary"
               style={{ marginLeft: i * 28 }}>
               
-                <div className="text-5xl font-extrabold leading-none w-20 shrink-0" style={{ background: "linear-gradient(90deg,#2563eb,#14b8a6)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+                <div className="text-5xl font-extrabold leading-none w-20 shrink-0" style={{ background: "linear-gradient(90deg,#2563eb,#0ea5e9)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
                   {s.n}
                 </div>
                 <div>
@@ -317,9 +317,9 @@ export default function LandingPage({ onStart, onContinue }) {
 
       {/* CTA */}
       <section className="max-w-7xl mx-auto px-6 pb-24">
-        <div className="relative overflow-hidden rounded-[2.5rem] p-12 md:p-20 text-white" style={{ background: "linear-gradient(135deg,#2563eb 0%,#14b8a6 100%)", boxShadow: "0 20px 60px -20px rgba(37,99,235,0.25)" }}>
+        <div className="relative overflow-hidden rounded-[2.5rem] p-12 md:p-20 text-white" style={{ background: "linear-gradient(135deg,#2563eb 0%,#0ea5e9 100%)", boxShadow: "0 20px 60px -20px rgba(37,99,235,0.25)" }}>
           <div className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full blur-3xl" style={{ background: "rgba(255,255,255,0.10)" }} />
-          <div className="absolute bottom-0 left-1/3 w-[300px] h-[300px] rounded-full blur-3xl" style={{ background: "rgba(20,184,166,0.40)" }} />
+          <div className="absolute bottom-0 left-1/3 w-[300px] h-[300px] rounded-full blur-3xl" style={{ background: "rgba(14,165,233,0.40)" }} />
           <div className="relative max-w-2xl">
             <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.05]">Buďte mezi prvními,<br />kdo najde práci s AI.</h2>
             <p className="mt-6 text-lg" style={{ color: "rgba(255,255,255,0.85)" }}>Přidejte se na waitlist. Prvních 100 uživatelů získá plný přístup zdarma.</p>
