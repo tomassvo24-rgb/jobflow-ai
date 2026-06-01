@@ -25,7 +25,7 @@ export default function AboutUs() {
             <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/a4e34759e_getjob_logo_white-removebg-preview.png" alt="GetJob.cz" className="h-10 w-auto object-contain" />
           </Link>
           <nav className="hidden md:flex items-center gap-10 text-sm font-semibold">
-            <Link to="/" className="text-foreground hover:text-primary transition-colors">Domů</Link>
+            <Link to="/?home=1" className="text-foreground hover:text-primary transition-colors">Domů</Link>
             <Link to="/o-nas" className="text-primary font-bold">O nás</Link>
             <Link to="/kontakt" className="text-foreground hover:text-primary transition-colors">Kontakt</Link>
           </nav>
