@@ -144,7 +144,7 @@ export default function LandingPage({ onStart, onContinue }) {
             </div>
             <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.02] tracking-tight">
               Méně hledání,<br />
-              <span style={{ background: "linear-gradient(90deg,#2563eb,#14b8a6)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+              <span className="bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
                 více pohovorů
               </span>
             </h1>
