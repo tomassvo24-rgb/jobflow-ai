@@ -33,6 +33,11 @@ export default function GetJob() {
   const [view, setView] = useState("landing"); // "landing" | "onboarding" | "app"
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("home") === "1") {
+      setView("landing");
+      return;
+    }
     const prof = loadStorage(STORAGE_KEYS.profile);
     if (prof) {
       setProfile(prof);
