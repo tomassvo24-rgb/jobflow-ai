@@ -92,19 +92,7 @@ export default function Contact() {
                   />
                 </div>
               </div>
-              <div>
-                <label className="text-xs font-semibold uppercase tracking-wider block mb-1.5" style={{ color: "#5b6577" }}>Předmět</label>
-                <input
-                  required
-                  value={form.subject}
-                  onChange={e => setForm({ ...form, subject: e.target.value })}
-                  placeholder="Spolupráce, dotaz, feedback…"
-                  className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition"
-                  style={{ borderColor: "#e3e8f0" }}
-                  onFocus={e => e.target.style.borderColor = "#2563eb"}
-                  onBlur={e => e.target.style.borderColor = "#e3e8f0"}
-                />
-              </div>
+
               <div>
                 <label className="text-xs font-semibold uppercase tracking-wider block mb-1.5" style={{ color: "#5b6577" }}>Zpráva</label>
                 <textarea
