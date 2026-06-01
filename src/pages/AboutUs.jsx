@@ -22,8 +22,7 @@ export default function AboutUs() {
       <header className="sticky top-0 z-50 backdrop-blur-md border-b bg-card/85 border-border">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link to="/?home=1">
-            <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/a4e34759e_getjob_logo_white-removebg-preview.png" alt="GetJob.cz" className="h-10 w-auto object-contain dark:hidden" />
-            <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/61c16d602_e9868ad2-36e2-46c9-921c-b693ef439451.png" alt="GetJob.cz" className="h-16 w-auto object-contain hidden dark:block" />
+            <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/a4e34759e_getjob_logo_white-removebg-preview.png" alt="GetJob.cz" className="h-10 w-auto object-contain" />
           </Link>
           <nav className="hidden md:flex items-center gap-10 text-sm font-semibold">
             <Link to="/" className="text-foreground hover:text-primary transition-colors">Domů</Link>
