@@ -248,7 +248,7 @@ export default function LandingPage({ onStart, onContinue }) {
             <div className="text-sm font-semibold uppercase tracking-wider" style={{ color: "#2563eb" }}>Funkce</div>
             <h2 className="mt-3 text-4xl md:text-5xl font-extrabold tracking-tight">
               Vše, co potřebujete<br />k{" "}
-              <span style={{ background: "linear-gradient(90deg,#2563eb,#14b8a6)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+              <span className="bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
                 získání práce
               </span>.
             </h2>
@@ -289,7 +289,7 @@ export default function LandingPage({ onStart, onContinue }) {
               className="rounded-3xl border border-border bg-card p-7 flex gap-6 items-start transition-all hover:border-primary"
               style={{ marginLeft: i * 28 }}>
               
-                <div className="text-5xl font-extrabold leading-none w-20 shrink-0" style={{ background: "linear-gradient(90deg,#2563eb,#14b8a6)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
+                <div className="text-5xl font-extrabold leading-none w-20 shrink-0 bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
                   {s.n}
                 </div>
                 <div>
