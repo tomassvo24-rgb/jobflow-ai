@@ -61,6 +61,13 @@ export default function Contact() {
               <div className="w-16 h-16 rounded-full grid place-items-center text-3xl" style={{ background: "#d1fae5" }}>✓</div>
               <p className="text-xl font-bold">Zpráva odeslána!</p>
               <p className="text-sm" style={{ color: "#5b6577" }}>Ozveme se vám do 24 hodin.</p>
+              <button
+                onClick={() => { setSent(false); setForm({ name: "", email: "", subject: "", message: "" }); }}
+                className="mt-2 rounded-full border px-6 py-2.5 text-sm font-semibold hover:border-blue-400 hover:text-blue-600 transition"
+                style={{ borderColor: "#e3e8f0", color: "#5b6577" }}
+              >
+                Odeslat další zprávu
+              </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
