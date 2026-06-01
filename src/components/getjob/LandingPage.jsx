@@ -239,17 +239,7 @@ export default function LandingPage({ onStart, onContinue }) {
         </div>
       </section>
 
-      {/* TRUSTED */}
-      <section className="border-y bg-white/50" style={{ borderColor: "#e3e8f0" }}>
-        <div className="max-w-7xl mx-auto px-6 py-10">
-          <p className="text-center text-xs uppercase tracking-[0.2em] mb-6" style={{ color: "#5b6577" }}>Důvěřují nám lidé z firem jako</p>
-          <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-4">
-            {TRUSTED.map(n => (
-              <span key={n} className="text-xl font-bold tracking-tight" style={{ color: "rgba(13,27,42,0.4)" }}>{n}</span>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* FEATURES */}
       <section id="funkce" className="py-24 relative">
@@ -314,35 +304,7 @@ export default function LandingPage({ onStart, onContinue }) {
         </div>
       </section>
 
-      {/* TESTIMONIALS + STATS */}
-      <section className="py-24 text-white" style={{ background: "#0d1b2a" }}>
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-2xl">
-            <div className="text-sm font-semibold uppercase tracking-wider" style={{ color: "#14b8a6" }}>Reference</div>
-            <h2 className="mt-3 text-4xl md:text-5xl font-extrabold tracking-tight">Lidé, kteří už našli<br />práci díky AI.</h2>
-          </div>
-          <div className="mt-14 grid md:grid-cols-3 gap-5">
-            {TESTIMONIALS.map((t, i) => (
-              <div key={i} className="rounded-3xl p-7 backdrop-blur" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.10)" }}>
-                <div className="flex gap-1" style={{ color: "#14b8a6" }}>{"★★★★★"}</div>
-                <p className="mt-5 text-lg leading-relaxed" style={{ color: "rgba(255,255,255,0.90)" }}>"{t.quote}"</p>
-                <div className="mt-6 pt-5" style={{ borderTop: "1px solid rgba(255,255,255,0.10)" }}>
-                  <div className="font-semibold">{t.name}</div>
-                  <div className="text-sm" style={{ color: "rgba(255,255,255,0.60)" }}>{t.role}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
-            {STATS.map((s, i) => (
-              <div key={i}>
-                <div className="text-4xl md:text-5xl font-extrabold" style={{ background: "linear-gradient(90deg,#2563eb,#14b8a6)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>{s.v}</div>
-                <div className="mt-2 text-sm" style={{ color: "rgba(255,255,255,0.60)" }}>{s.l}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* FAQ */}
       <section id="faq" className="max-w-4xl mx-auto px-6 py-24">
