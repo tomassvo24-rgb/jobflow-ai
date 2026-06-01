@@ -4,40 +4,40 @@ import { Link } from "react-router-dom";
 import Logo from "./Logo";
 
 const FEATURES = [
-  { icon: "📤", title: "Nahrání a analýza CV", desc: "Nahrajte svůj PDF životopis a AI okamžitě extrahuje vaše dovednosti, zkušenosti, jazyky a obor studia." },
-  { icon: "✨", title: "AI objevování pracovních míst", desc: "Na základě vašeho profilu AI navrhne 12 relevantních pracovních příležitostí s filtry na plat, lokalitu, úvazek a benefity." },
-  { icon: "✉️", title: "Generátor e-mailů a motivačních dopisů", desc: "AI napíše personalizovaný přihlašovací e-mail nebo motivační dopis pro každou konkrétní firmu — odeslat lze přímo z appky." },
-  { icon: "📋", title: "Tracker přihlášek", desc: "Sledujte stav každé přihlášky od Odesláno přes Odpověď, Pohovor až po Přijato — s poznámkami a přímými odkazy." },
-  { icon: "📝", title: "CV Builder", desc: "Vytvořte profesionální životopis přímo v prohlížeči a stáhněte si ho jako PDF během pár minut." },
-  { icon: "📰", title: "Novinky a inspirace", desc: "Aktuality z trhu práce, statistiky platů a kariérní tipy, které vám pomohou růst." },
-];
+{ icon: "📤", title: "Nahrání a analýza CV", desc: "Nahrajte svůj PDF životopis a AI okamžitě extrahuje vaše dovednosti, zkušenosti, jazyky a obor studia." },
+{ icon: "✨", title: "AI objevování pracovních míst", desc: "Na základě vašeho profilu AI navrhne 12 relevantních pracovních příležitostí s filtry na plat, lokalitu, úvazek a benefity." },
+{ icon: "✉️", title: "Generátor e-mailů a motivačních dopisů", desc: "AI napíše personalizovaný přihlašovací e-mail nebo motivační dopis pro každou konkrétní firmu — odeslat lze přímo z appky." },
+{ icon: "📋", title: "Tracker přihlášek", desc: "Sledujte stav každé přihlášky od Odesláno přes Odpověď, Pohovor až po Přijato — s poznámkami a přímými odkazy." },
+{ icon: "📝", title: "CV Builder", desc: "Vytvořte profesionální životopis přímo v prohlížeči a stáhněte si ho jako PDF během pár minut." },
+{ icon: "📰", title: "Novinky a inspirace", desc: "Aktuality z trhu práce, statistiky platů a kariérní tipy, které vám pomohou růst." }];
+
 
 const STEPS = [
-  { n: "01", title: "Nahrajte své CV", desc: "AI okamžitě extrahuje vaše dovednosti, zkušenosti a preferovaný obor. Žádné ruční vyplňování profilu." },
-  { n: "02", title: "Objevte 12 šitých na míru", desc: "AI vyhledá pracovní nabídky přesně podle vašeho profilu, lokality a preferencí. Filtrovat můžete podle platu, úvazku i benefitů." },
-  { n: "03", title: "Aplikujte a sledujte", desc: "Vygenerujte personalizovaný e-mail nebo motivační dopis, odešlete ho jedním klikem a sledujte stav v trackeru." },
-];
+{ n: "01", title: "Nahrajte své CV", desc: "AI okamžitě extrahuje vaše dovednosti, zkušenosti a preferovaný obor. Žádné ruční vyplňování profilu." },
+{ n: "02", title: "Objevte 12 šitých na míru", desc: "AI vyhledá pracovní nabídky přesně podle vašeho profilu, lokality a preferencí. Filtrovat můžete podle platu, úvazku i benefitů." },
+{ n: "03", title: "Aplikujte a sledujte", desc: "Vygenerujte personalizovaný e-mail nebo motivační dopis, odešlete ho jedním klikem a sledujte stav v trackeru." }];
+
 
 const TESTIMONIALS = [
-  { name: "Jana K.", role: "Produktová manažerka", quote: "AI mi našla práci, o které jsem ani nevěděla, že existuje. Za týden jsem měla tři pohovory." },
-  { name: "Tomáš N.", role: "Frontend developer", quote: "Generátor e-mailů šetří hodiny času. Tracker je gamechanger — vím, kde stojím u každé firmy." },
-  { name: "Petra S.", role: "Marketingová specialistka", quote: "Doporučení sedí přesně. Žádné scrollování přes stovky irelevantních nabídek." },
-];
+{ name: "Jana K.", role: "Produktová manažerka", quote: "AI mi našla práci, o které jsem ani nevěděla, že existuje. Za týden jsem měla tři pohovory." },
+{ name: "Tomáš N.", role: "Frontend developer", quote: "Generátor e-mailů šetří hodiny času. Tracker je gamechanger — vím, kde stojím u každé firmy." },
+{ name: "Petra S.", role: "Marketingová specialistka", quote: "Doporučení sedí přesně. Žádné scrollování přes stovky irelevantních nabídek." }];
+
 
 const STATS = [
-  { v: "10 000+", l: "Aktivních nabídek" },
-  { v: "850+", l: "Ověřených firem" },
-  { v: "94%", l: "Spokojenost uživatelů" },
-  { v: "3 kroky", l: "Od CV k přihlášce" },
-];
+{ v: "10 000+", l: "Aktivních nabídek" },
+{ v: "850+", l: "Ověřených firem" },
+{ v: "94%", l: "Spokojenost uživatelů" },
+{ v: "3 kroky", l: "Od CV k přihlášce" }];
+
 
 const FAQS = [
-  { q: "Je GetJob.cz zdarma?", a: "Ano. Prvních 500 studentů má plný přístup zdarma. Žádná karta, žádný háček." },
-  { q: "Co se stane s mým CV?", a: "CV zpracovává AI lokálně pro extrakci dovedností. Neukládáme ho a nesdílíme s třetími stranami." },
-  { q: "Jak AI najde relevantní nabídky?", a: "Na základě vašich dovedností, zkušeností, oboru studia a preferencí vám AI navrhne 12 nejlépe odpovídajících pozic." },
-  { q: "Můžu odpovídat přímo z aplikace?", a: "Ano. Motivační dopis i e-mail vygenerovaný AI pošlete jedním klikem přes Gmail, Outlook nebo Seznam." },
-  { q: "Mám už životopis. Můžu si ho jen upravit?", a: "Jasně. V CV Builderu si životopis přepíšete nebo postavíte nový a stáhnete jako PDF." },
-];
+{ q: "Je GetJob.cz zdarma?", a: "Ano. Prvních 500 studentů má plný přístup zdarma. Žádná karta, žádný háček." },
+{ q: "Co se stane s mým CV?", a: "CV zpracovává AI lokálně pro extrakci dovedností. Neukládáme ho a nesdílíme s třetími stranami." },
+{ q: "Jak AI najde relevantní nabídky?", a: "Na základě vašich dovedností, zkušeností, oboru studia a preferencí vám AI navrhne 12 nejlépe odpovídajících pozic." },
+{ q: "Můžu odpovídat přímo z aplikace?", a: "Ano. Motivační dopis i e-mail vygenerovaný AI pošlete jedním klikem přes Gmail, Outlook nebo Seznam." },
+{ q: "Mám už životopis. Můžu si ho jen upravit?", a: "Jasně. V CV Builderu si životopis přepíšete nebo postavíte nový a stáhnete jako PDF." }];
+
 
 const TRUSTED = ["Productboard", "Rohlik", "Mall.cz", "Avast", "Kiwi.com", "Notino"];
 
@@ -46,18 +46,18 @@ function FaqItem({ q, a }) {
   return (
     <div
       className={`rounded-2xl border bg-white p-6 transition-all cursor-pointer ${open ? "shadow-lg border-blue-200" : "border-border"}`}
-      onClick={() => setOpen(v => !v)}
-    >
+      onClick={() => setOpen((v) => !v)}>
+      
       <div className="flex items-center justify-between gap-4 font-semibold text-foreground">
         {q}
         <span
           className="w-7 h-7 rounded-full flex items-center justify-center text-brand-blue shrink-0 transition-transform text-lg font-bold"
-          style={{ background: "#e6f0ff", transform: open ? "rotate(45deg)" : "none" }}
-        >+</span>
+          style={{ background: "#e6f0ff", transform: open ? "rotate(45deg)" : "none" }}>
+          +</span>
       </div>
       {open && <p className="mt-4 text-muted-foreground leading-relaxed text-sm">{a}</p>}
-    </div>
-  );
+    </div>);
+
 }
 
 export default function LandingPage({ onStart, onContinue }) {
@@ -65,7 +65,7 @@ export default function LandingPage({ onStart, onContinue }) {
   const [joined, setJoined] = useState(false);
 
   const savedProfile = (() => {
-    try { return JSON.parse(localStorage.getItem("gj_prof")); } catch { return null; }
+    try {return JSON.parse(localStorage.getItem("gj_prof"));} catch {return null;}
   })();
 
   const handleWaitlist = (e) => {
@@ -88,45 +88,45 @@ export default function LandingPage({ onStart, onContinue }) {
             <Link to="/kontakt" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>Kontakt</Link>
           </nav>
           <div className="flex items-center gap-3">
-            {savedProfile ? (
-              <button
-                onClick={onContinue}
-                className="w-11 h-11 rounded-full flex items-center justify-center text-white hover:opacity-90 transition"
-                style={{ background: "#2563eb", boxShadow: "0 10px 40px -12px rgba(13,27,42,0.12)", fontSize: "1.1rem", fontFamily: "var(--font-poppins)", fontWeight: 800 }}
-                title={savedProfile.name}
-              >
+            {savedProfile ?
+            <button
+              onClick={onContinue}
+              className="w-11 h-11 rounded-full flex items-center justify-center text-white hover:opacity-90 transition"
+              style={{ background: "#2563eb", boxShadow: "0 10px 40px -12px rgba(13,27,42,0.12)", fontSize: "1.1rem", fontFamily: "var(--font-poppins)", fontWeight: 800 }}
+              title={savedProfile.name}>
+              
                 {savedProfile.name?.[0]?.toUpperCase() || "?"}
-              </button>
-            ) : (
-              <button
-                onClick={onStart}
-                className="inline-flex items-center gap-2 rounded-full bg-brand-blue text-white px-5 py-2.5 text-sm font-semibold hover:opacity-90 transition"
-                style={{ boxShadow: "0 10px 40px -12px rgba(13,27,42,0.12)" }}
-              >
+              </button> :
+
+            <button
+              onClick={onStart}
+              className="inline-flex items-center gap-2 rounded-full bg-brand-blue text-white px-5 py-2.5 text-sm font-semibold hover:opacity-90 transition"
+              style={{ boxShadow: "0 10px 40px -12px rgba(13,27,42,0.12)" }}>
+              
                 Začít zdarma →
               </button>
-            )}
+            }
           </div>
         </div>
       </header>
 
       {/* RETURNING USER BANNER */}
-      {savedProfile && (
-        <div className="border-b py-3 px-6" style={{ background: "#e6f0ff", borderColor: "#bfdbfe" }}>
+      {savedProfile &&
+      <div className="border-b py-3 px-6" style={{ background: "#e6f0ff", borderColor: "#bfdbfe" }}>
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 flex-wrap">
             <p className="text-sm font-medium" style={{ color: "#1e40af" }}>
               👋 Vítej zpět, <strong>{savedProfile.name}</strong>! Máš uložený profil.
             </p>
             <button
-              onClick={onContinue}
-              className="rounded-full px-4 py-1.5 text-xs font-semibold hover:opacity-90 transition"
-              style={{ background: "#2563eb", color: "#fff" }}
-            >
+            onClick={onContinue}
+            className="rounded-full px-4 py-1.5 text-xs font-semibold hover:opacity-90 transition"
+            style={{ background: "#2563eb", color: "#fff" }}>
+            
               Přejít do aplikace →
             </button>
           </div>
         </div>
-      )}
+      }
 
       {/* HERO */}
       <section className="relative overflow-hidden">
@@ -152,13 +152,13 @@ export default function LandingPage({ onStart, onContinue }) {
 
             <form onSubmit={handleWaitlist} className="mt-8 flex flex-col sm:flex-row gap-3 max-w-lg">
               <input
-                type="email" required value={email} onChange={e => setEmail(e.target.value)}
+                type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
                 placeholder="vas@email.cz"
                 className="flex-1 rounded-full bg-white border px-5 py-3.5 text-sm outline-none transition"
                 style={{ borderColor: "#e3e8f0" }}
-                onFocus={e => e.target.style.borderColor = "#2563eb"}
-                onBlur={e => e.target.style.borderColor = "#e3e8f0"}
-              />
+                onFocus={(e) => e.target.style.borderColor = "#2563eb"}
+                onBlur={(e) => e.target.style.borderColor = "#e3e8f0"} />
+              
               <button type="submit" className="rounded-full bg-brand-blue text-white px-6 py-3.5 text-sm font-semibold hover:opacity-90 transition inline-flex items-center justify-center gap-2" style={{ boxShadow: "0 10px 40px -12px rgba(13,27,42,0.12)" }}>
                 Přidat se do waitlistu →
               </button>
@@ -172,8 +172,8 @@ export default function LandingPage({ onStart, onContinue }) {
               <button
                 onClick={onStart}
                 className="px-8 py-4 rounded-full text-white font-bold text-base hover:opacity-90 transition"
-                style={{ background: "linear-gradient(135deg,#2563eb 0%,#14b8a6 100%)", boxShadow: "0 20px 60px -20px rgba(37,99,235,0.35)" }}
-              >
+                style={{ background: "linear-gradient(135deg,#2563eb 0%,#14b8a6 100%)", boxShadow: "0 20px 60px -20px rgba(37,99,235,0.35)" }}>
+                
                 🚀 Vyzkoušet platformu zdarma
               </button>
             </div>
@@ -184,8 +184,8 @@ export default function LandingPage({ onStart, onContinue }) {
             <motion.div
               animate={{ y: [0, -12, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative w-[280px] h-[560px]"
-            >
+              className="relative w-[280px] h-[560px]">
+              
               <div className="absolute inset-0 rounded-[3rem] blur-3xl opacity-20" style={{ background: "linear-gradient(135deg,#2563eb,#14b8a6)" }} />
               <div className="relative h-full rounded-[2.6rem] p-2.5" style={{ background: "#0d1b2a", boxShadow: "0 20px 60px -20px rgba(37,99,235,0.25)" }}>
                 <div className="h-full rounded-[2.2rem] bg-white overflow-hidden flex flex-col">
@@ -254,20 +254,20 @@ export default function LandingPage({ onStart, onContinue }) {
             </h2>
           </div>
           <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {FEATURES.map((f, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -4, borderColor: "#2563eb" }}
-                className="rounded-3xl bg-white border p-7 transition-all cursor-default"
-                style={{ borderColor: "#e3e8f0" }}
-              >
+            {FEATURES.map((f, i) =>
+            <motion.div
+              key={i}
+              whileHover={{ y: -4, borderColor: "#2563eb" }}
+              className="rounded-3xl bg-white border p-7 transition-all cursor-default"
+              style={{ borderColor: "#e3e8f0" }}>
+              
                 <div className="w-12 h-12 rounded-2xl grid place-items-center text-2xl" style={{ background: "#e6f0ff" }}>
                   {f.icon}
                 </div>
                 <h3 className="mt-5 font-bold text-lg">{f.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed" style={{ color: "#5b6577" }}>{f.desc}</p>
               </motion.div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -284,13 +284,13 @@ export default function LandingPage({ onStart, onContinue }) {
             </button>
           </div>
           <div className="lg:col-span-8 space-y-4">
-            {STEPS.map((s, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ borderColor: "#2563eb" }}
-                className="rounded-3xl border bg-white p-7 flex gap-6 items-start transition-all"
-                style={{ borderColor: "#e3e8f0", marginLeft: i * 28 }}
-              >
+            {STEPS.map((s, i) =>
+            <motion.div
+              key={i}
+              whileHover={{ borderColor: "#2563eb" }}
+              className="rounded-3xl border bg-white p-7 flex gap-6 items-start transition-all"
+              style={{ borderColor: "#e3e8f0", marginLeft: i * 28 }}>
+              
                 <div className="text-5xl font-extrabold leading-none w-20 shrink-0" style={{ background: "linear-gradient(90deg,#2563eb,#14b8a6)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
                   {s.n}
                 </div>
@@ -299,7 +299,7 @@ export default function LandingPage({ onStart, onContinue }) {
                   <p className="mt-1.5" style={{ color: "#5b6577" }}>{s.desc}</p>
                 </div>
               </motion.div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -328,8 +328,8 @@ export default function LandingPage({ onStart, onContinue }) {
             <button
               onClick={onStart}
               className="mt-10 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold hover:opacity-95 transition"
-              style={{ color: "#2563eb" }}
-            >
+              style={{ color: "#2563eb" }}>
+              
               Vyzkoušet platformu zdarma →
             </button>
           </div>
@@ -338,7 +338,7 @@ export default function LandingPage({ onStart, onContinue }) {
 
       {/* FOOTER */}
       <footer className="border-t" style={{ borderColor: "#e3e8f0" }}>
-        <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 bg-[hsl(var(--card))]">
           <div>
             <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/9adf27e99_image.png" alt="GetJob.cz" className="h-10 w-auto object-contain" />
             <p className="mt-4 text-sm max-w-xs" style={{ color: "#5b6577" }}>AI-powered job hunting platform. Made in Czechia.</p>
@@ -353,6 +353,6 @@ export default function LandingPage({ onStart, onContinue }) {
           <div className="text-xs" style={{ color: "#5b6577" }}>© 2026 GetJob.cz</div>
         </div>
       </footer>
-    </div>
-  );
+    </div>);
+
 }
