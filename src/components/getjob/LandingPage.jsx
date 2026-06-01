@@ -91,8 +91,8 @@ export default function LandingPage({ onStart, onContinue }) {
             {savedProfile ? (
               <button
                 onClick={onContinue}
-                className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm hover:opacity-90 transition"
-                style={{ background: "linear-gradient(135deg,#2563eb,#14b8a6)", boxShadow: "0 4px 16px -4px rgba(37,99,235,0.40)" }}
+                className="w-11 h-11 rounded-full flex items-center justify-center text-white hover:opacity-90 transition"
+                style={{ background: "#2563eb", boxShadow: "0 10px 40px -12px rgba(13,27,42,0.12)", fontSize: "1.1rem", fontFamily: "var(--font-poppins)", fontWeight: 800 }}
                 title={savedProfile.name}
               >
                 {savedProfile.name?.[0]?.toUpperCase() || "?"}
