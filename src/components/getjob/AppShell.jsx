@@ -84,7 +84,7 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
           <div className="flex items-center gap-3">
             <div
               className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0"
-              style={{ background: "linear-gradient(135deg,#2563eb,#0ea5e9)" }}
+              style={{ background: "linear-gradient(135deg,#2563eb,#14b8a6)" }}
             >
               {profile.name?.[0]?.toUpperCase() || "?"}
             </div>
@@ -110,7 +110,7 @@ export default function AppShell({ profile, discover, custom, tracker, onProfile
           </span>
           <div
             className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white"
-            style={{ background: "linear-gradient(135deg,#2563eb,#0ea5e9)" }}
+            style={{ background: "linear-gradient(135deg,#2563eb,#14b8a6)" }}
           >
             {profile.name?.[0]?.toUpperCase() || "?"}
           </div>
