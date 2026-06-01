@@ -164,7 +164,7 @@ export default function LandingPage({ onStart, onContinue }) {
             </form>
             {joined && <p className="mt-5 text-sm font-semibold" style={{ color: "#14b8a6" }}>✓ Přihlášení proběhlo úspěšně! Dáme vám vědět.</p>}
             <p className="mt-3 text-sm flex items-center gap-2" style={{ color: "#5b6577" }}>
-              🎓 Přístup pro prvních 500 studentů zdarma
+              🎓 Přístup pro prvních 100 uživatelů zdarma
             </p>
 
             <div className="mt-10">
@@ -361,7 +361,7 @@ export default function LandingPage({ onStart, onContinue }) {
           <div className="absolute bottom-0 left-1/3 w-[300px] h-[300px] rounded-full blur-3xl" style={{ background: "rgba(20,184,166,0.40)" }} />
           <div className="relative max-w-2xl">
             <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.05]">Buďte mezi prvními,<br />kdo najde práci s AI.</h2>
-            <p className="mt-6 text-lg" style={{ color: "rgba(255,255,255,0.85)" }}>Přidejte se na waitlist. Prvních 500 studentů získá plný přístup zdarma.</p>
+            <p className="mt-6 text-lg" style={{ color: "rgba(255,255,255,0.85)" }}>Přidejte se na waitlist. Prvních 100 uživatelů získá plný přístup zdarma.</p>
             <button
               onClick={onStart}
               className="mt-10 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold hover:opacity-95 transition"

@@ -1,0 +1,42 @@
+{
+  "name": "JobSearchRun",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "total_found": {
+      "type": "number"
+    },
+    "filtered_to": {
+      "type": "number"
+    },
+    "sources_checked": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sources_failed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "running",
+        "done",
+        "failed"
+      ],
+      "default": "running"
+    },
+    "profile_snapshot": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "user_id"
+  ]
+}

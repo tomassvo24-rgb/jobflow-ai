@@ -1,0 +1,66 @@
+{
+  "name": "JobListing",
+  "type": "object",
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "external_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "company": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "match_score": {
+      "type": "number"
+    },
+    "match_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "match_breakdown": {
+      "type": "object"
+    },
+    "posted_date": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "snippet": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "saved": {
+      "type": "boolean",
+      "default": false
+    },
+    "expires_at": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "user_id",
+    "run_id"
+  ]
+}
