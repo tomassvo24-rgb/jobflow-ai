@@ -79,7 +79,7 @@ export default function LandingPage({ onStart, onContinue }) {
       {/* NAV */}
       <header className="sticky top-0 z-50 backdrop-blur-md border-b" style={{ background: "rgba(255,255,255,0.85)", borderColor: "#e3e8f0" }}>
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/a4e34759e_getjob_logo_white-removebg-preview.png" alt="GetJob.cz" className="h-10 w-auto object-contain" />
+          <Link to="/"><img src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/a4e34759e_getjob_logo_white-removebg-preview.png" alt="GetJob.cz" className="h-10 w-auto object-contain" /></Link>
           <nav className="hidden md:flex items-center gap-10 text-sm font-semibold">
             <a href="#funkce" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>Funkce</a>
             <a href="#jak-to-funguje" className="hover:text-brand-blue transition-colors" style={{ color: "#0d1b2a" }}>Jak to funguje</a>
