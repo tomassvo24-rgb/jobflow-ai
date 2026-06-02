@@ -75,7 +75,7 @@ export default function Contact() {
             <Link to="/" className="hover:text-primary transition-colors">Domů</Link>
             <Link to="/o-nas" className="hover:text-primary transition-colors">O nás</Link>
             <Link to="/kontakt" className="text-primary font-semibold">Kontakt</Link>
-            <span className="hover:text-primary cursor-pointer transition-colors">Ochrana údajů</span>
+            <Link to="/ochrana-udaju" className="hover:text-primary transition-colors">Ochrana údajů</Link>
           </nav>
           <ThemeToggle />
         </div>

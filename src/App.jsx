@@ -9,6 +9,7 @@ import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import GetJob from "./pages/GetJob";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -40,6 +41,7 @@ const AuthenticatedApp = () => {
       <Route path="/" element={<GetJob />} />
       <Route path="/o-nas" element={<AboutUs />} />
       <Route path="/kontakt" element={<Contact />} />
+      <Route path="/ochrana-udaju" element={<PrivacyPolicy />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

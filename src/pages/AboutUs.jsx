@@ -47,7 +47,7 @@ export default function AboutUs() {
             <Link to="/" className="hover:text-primary transition-colors">Domů</Link>
             <Link to="/o-nas" className="text-primary font-semibold">O nás</Link>
             <Link to="/kontakt" className="hover:text-primary transition-colors">Kontakt</Link>
-            <span className="hover:text-primary cursor-pointer transition-colors">Ochrana údajů</span>
+            <Link to="/ochrana-udaju" className="hover:text-primary transition-colors">Ochrana údajů</Link>
           </nav>
           <ThemeToggle />
         </div>

@@ -98,6 +98,7 @@ export default function LandingPage({ onStart, onContinue }) {
             <a href="#faq" className="hover:text-primary transition-colors">FAQ</a>
             <Link to="/o-nas" className="hover:text-primary transition-colors">O nás</Link>
             <Link to="/kontakt" className="hover:text-primary transition-colors">Kontakt</Link>
+            <Link to="/ochrana-udaju" className="hover:text-primary transition-colors">Ochrana údajů</Link>
           </nav>
           <div className="flex items-center gap-3">
             <ThemeToggle />
