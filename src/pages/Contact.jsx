@@ -4,10 +4,11 @@ import ThemeToggle from "../components/getjob/ThemeToggle";
 import { base44 } from "@/api/base44Client";
 
 const SOCIAL = [
-  { label: "getjob@gmail.com", icon: "✉️", href: "mailto:getjob@gmail.com" },
+  { label: "getjobcz1@gmail.com", icon: "✉️", href: "mailto:getjobcz1@gmail.com" },
   { label: "linkedin.com/company/getjobcz", icon: "💼", href: "https://linkedin.com/company/getjobcz" },
-  { label: "@getjobcz", icon: "📘", href: "#" },
   { label: "facebook.com/getjobcz", icon: "🔵", href: "https://facebook.com/getjobcz" },
+  { label: "@getjobcz", icon: "📸", href: "https://instagram.com/getjobcz" },
+  { label: "@getjobcz", icon: "🎵", href: "https://tiktok.com/@getjobcz" },
 ];
 
 export default function Contact() {
