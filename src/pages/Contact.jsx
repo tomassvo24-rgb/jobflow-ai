@@ -1,6 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "../components/getjob/ThemeToggle";
+
+const LOGO_LIGHT = "https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/a4e34759e_getjob_logo_white-removebg-preview.png";
+const LOGO_DARK = "https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/8a276674d_e9868ad2-36e2-46c9-921c-b693ef439451.png";
+
+function useDark() {
+  const [dark, setDark] = useState(() => document.documentElement.classList.contains("dark"));
+  useEffect(() => {
+    const observer = new MutationObserver(() => setDark(document.documentElement.classList.contains("dark")));
+    observer.observe(document.documentElement, { attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
+  return dark;
+}
 import { base44 } from "@/api/base44Client";
 
 const CONTACTS = [
@@ -43,6 +56,7 @@ const CONTACTS = [
 ];
 
 export default function Contact() {
+  const dark = useDark();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
@@ -67,7 +81,7 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link to="/">
             <img
-              src="https://media.base44.com/images/public/69fc9f905d0066a88e5bce3f/a4e34759e_getjob_logo_white-removebg-preview.png"
+              src={dark ? LOGO_DARK : LOGO_LIGHT}
               alt="GetJob.cz" className="h-9 w-auto object-contain"
             />
           </Link>
