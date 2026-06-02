@@ -184,7 +184,7 @@ export default function PrivacyPolicy() {
           <Link to="/">
             <img
               src={dark ? LOGO_DARK : LOGO_LIGHT}
-              alt="GetJob.cz" className="h-9 w-auto object-contain"
+              alt="GetJob.cz" className={dark ? "h-28 w-auto object-contain" : "h-9 w-auto object-contain"}
             />
           </Link>
           <nav className="hidden md:flex items-center gap-10 text-sm font-medium text-foreground">
