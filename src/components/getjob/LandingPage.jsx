@@ -106,7 +106,7 @@ export default function LandingPage({ onStart, onContinue }) {
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <img
             src={dark ? LOGO_DARK : LOGO_LIGHT}
-            alt="GetJob.cz" className={dark ? "h-36 w-auto object-contain ml-6" : "h-9 w-auto object-contain"}
+            alt="GetJob.cz" className={dark ? "h-28 w-auto object-contain" : "h-9 w-auto object-contain"}
           />
           <nav className="hidden md:flex items-center gap-10 text-sm font-medium text-foreground">
             <a href="#funkce" className="hover:text-primary transition-colors">Funkce</a>
