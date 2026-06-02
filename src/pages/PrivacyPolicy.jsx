@@ -144,12 +144,12 @@ const SECTIONS = [
     content: (
       <div className="space-y-4 text-muted-foreground text-sm leading-relaxed">
         <p>Cookies jsou malé textové soubory, které se ukládají do vašeho prohlížeče při návštěvě webu. Na našich stránkách používáme následující typy:</p>
-        <div className="space-y-4">
-          <div className="rounded-xl border border-border bg-muted p-4">
+        <div className="space-y-3">
+          <div>
             <p className="font-semibold text-foreground mb-1">Nezbytné (technické) cookies</p>
             <p>Tyto cookies jsou nutné pro správné fungování webu — zajišťují například bezpečné načtení stránky, udržení relace a základní provoz aplikace. Bez nich web nefunguje správně, a proto je nelze vypnout. Nevyžadují váš souhlas.</p>
           </div>
-          <div className="rounded-xl border border-border bg-muted p-4">
+          <div>
             <p className="font-semibold text-foreground mb-1">Analytické cookies</p>
             <p>Pro měření návštěvnosti a zlepšování webu můžeme používat anonymizované analytické cookies. Tyto cookies nám pomáhají pochopit, jak návštěvníci web používají, a sbírají údaje v souhrnné, neidentifikovatelné podobě. Tyto cookies používáme pouze s vaším souhlasem.</p>
           </div>
@@ -175,18 +175,22 @@ const SECTIONS = [
 
 export default function PrivacyPolicy() {
   const dark = useDark();
+
   return (
     <div className="min-h-screen font-poppins bg-background text-foreground">
 
       {/* NAV */}
       <header className="sticky top-0 z-50 backdrop-blur-md border-b bg-background/90 border-border">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link to="/">
-            <img
-              src={dark ? LOGO_DARK : LOGO_LIGHT}
-              alt="GetJob.cz" className={dark ? "h-28 w-auto object-contain" : "h-9 w-auto object-contain"}
-            />
-          </Link>
+          <div className="w-48 flex items-center">
+            <Link to="/">
+              <img
+                src={dark ? LOGO_DARK : LOGO_LIGHT}
+                alt="GetJob.cz"
+                className={dark ? "h-28 w-auto object-contain" : "h-11 w-auto object-contain ml-4"}
+              />
+            </Link>
+          </div>
           <nav className="hidden md:flex items-center gap-10 text-sm font-medium text-foreground">
             <Link to="/home" className="hover:text-primary transition-colors">Domů</Link>
             <Link to="/o-nas" className="hover:text-primary transition-colors">O nás</Link>
@@ -198,49 +202,52 @@ export default function PrivacyPolicy() {
       </header>
 
       {/* HERO */}
-      <section className="relative overflow-hidden py-20 text-white" style={{ background: "linear-gradient(135deg,#2563eb 0%,#14b8a6 100%)" }}>
+      <section className="relative overflow-hidden py-24 text-white text-center" style={{ background: "linear-gradient(135deg,#2563eb 0%,#14b8a6 100%)" }}>
         <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full blur-3xl opacity-10" style={{ background: "#fff" }} />
-        <div className="max-w-4xl mx-auto px-6 relative">
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-6" style={{ background: "rgba(255,255,255,0.18)" }}>
+        <div className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full blur-3xl opacity-10" style={{ background: "#fff" }} />
+        <div className="max-w-3xl mx-auto px-6 relative">
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-6" style={{ background: "rgba(255,255,255,0.18)", color: "#fff" }}>
             🔒 Právní dokumenty
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Zásady ochrany osobních údajů</h1>
-          <p style={{ color: "rgba(255,255,255,0.80)" }} className="text-sm">Poslední aktualizace: 1. 6. 2026</p>
+          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-4">Zásady ochrany osobních údajů</h1>
+          <p className="text-sm" style={{ color: "rgba(255,255,255,0.80)" }}>Poslední aktualizace: 1. 6. 2026</p>
         </div>
       </section>
 
-      {/* INTRO */}
-      <section className="max-w-4xl mx-auto px-6 pt-12 pb-2">
-        <div className="rounded-2xl border border-border bg-card p-6 text-sm text-muted-foreground leading-relaxed">
+      {/* CONTENT */}
+      <section className="max-w-3xl mx-auto px-6 py-16">
+
+        {/* Intro */}
+        <p className="text-base text-muted-foreground leading-relaxed mb-12 pb-10 border-b border-border">
           Tyto zásady popisují, jak služba <strong className="text-foreground">GetJob.cz</strong> nakládá s osobními údaji, které nám poskytnete při přihlášení na náš waitlist (seznam zájemců) a při vyplnění dobrovolného dotazníku.
-        </div>
-      </section>
+        </p>
 
-      {/* SECTIONS */}
-      <section className="max-w-4xl mx-auto px-6 py-10 space-y-6">
-        {SECTIONS.map((s) => (
-          <div key={s.num} className="rounded-2xl border border-border bg-card p-7 hover:border-primary/40 transition-all">
-            <div className="flex items-center gap-3 mb-4">
-              <div
-                className="w-8 h-8 rounded-lg grid place-items-center text-sm font-extrabold text-white shrink-0"
-                style={{ background: "linear-gradient(135deg,#2563eb,#14b8a6)" }}
-              >
-                {s.num}
+        {/* Sections */}
+        <div className="space-y-0 divide-y divide-border">
+          {SECTIONS.map((s) => (
+            <div key={s.num} className="py-10">
+              <div className="flex items-center gap-3 mb-5">
+                <div
+                  className="w-8 h-8 rounded-lg grid place-items-center text-sm font-extrabold text-white shrink-0"
+                  style={{ background: "linear-gradient(135deg,#2563eb,#14b8a6)" }}
+                >
+                  {s.num}
+                </div>
+                <h2 className="text-xl font-bold text-foreground">{s.title}</h2>
               </div>
-              <h2 className="text-lg font-bold text-foreground">{s.title}</h2>
+              {s.content}
             </div>
-            {s.content}
-          </div>
-        ))}
+          ))}
+        </div>
 
         {/* Disclaimer */}
-        <div className="rounded-2xl border border-border bg-muted p-5 text-xs text-muted-foreground italic">
+        <p className="mt-10 text-xs text-muted-foreground italic border-t border-border pt-6">
           Tento dokument je vzorová šablona a nenahrazuje právní poradenství. Doporučujeme nechat jej před zveřejněním zkontrolovat odborníkem.
-        </div>
+        </p>
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-border bg-card mt-8">
+      <footer className="border-t border-border bg-card">
         <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <span>© 2026 GetJob.cz</span>
           <Link to="/kontakt" className="hover:text-foreground transition-colors">Kontakt</Link>
