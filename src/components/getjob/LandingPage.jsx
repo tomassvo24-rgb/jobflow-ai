@@ -365,10 +365,10 @@ export default function LandingPage({ onStart, onContinue }) {
         >
           <div className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full blur-3xl" style={{ background: "rgba(255,255,255,0.10)" }} />
           <div className="relative max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.25]">
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.4]">
               Hledání práce zabírá desítky hodin týdně.
-              <br className="mb-2" />
-              <span className="opacity-90 block mt-3">GetJob to zvládne za deset minut.</span>
+              <br className="mb-3" />
+              <span className="opacity-90 block mt-4">GetJob to zvládne za deset minut.</span>
             </h2>
             <p className="mt-5 text-lg" style={{ color: "rgba(255,255,255,0.85)" }}>
               Přidejte se na waitlist. Prvních 100 uživatelů dostane plný přístup zdarma.
