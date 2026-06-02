@@ -44,7 +44,7 @@ export default function AboutUs() {
             />
           </Link>
           <nav className="hidden md:flex items-center gap-10 text-sm font-medium text-foreground">
-            <Link to="/" className="hover:text-primary transition-colors">Domů</Link>
+            <Link to="/home" className="hover:text-primary transition-colors">Domů</Link>
             <Link to="/o-nas" className="text-primary font-semibold">O nás</Link>
             <Link to="/kontakt" className="hover:text-primary transition-colors">Kontakt</Link>
             <Link to="/ochrana-udaju" className="hover:text-primary transition-colors">Ochrana údajů</Link>
