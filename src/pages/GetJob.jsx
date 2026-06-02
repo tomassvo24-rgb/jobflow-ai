@@ -26,27 +26,15 @@ function saveStorage(key, value) {
 }
 
 export default function GetJob() {
-  const [profile, setProfile] = useState(null);
-  const [discover, setDiscover] = useState([]);
-  const [custom, setCustom] = useState([]);
-  const [tracker, setTracker] = useState([]);
-  const [view, setView] = useState("landing"); // "landing" | "onboarding" | "app"
+  const params = new URLSearchParams(window.location.search);
+  const forceHome = params.get("home") === "1";
+  const savedProfile = !forceHome ? loadStorage(STORAGE_KEYS.profile) : null;
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("home") === "1") {
-      setView("landing");
-      return;
-    }
-    const prof = loadStorage(STORAGE_KEYS.profile);
-    if (prof) {
-      setProfile(prof);
-      setDiscover(loadStorage(STORAGE_KEYS.discover) || []);
-      setCustom(loadStorage(STORAGE_KEYS.custom) || []);
-      setTracker(loadStorage(STORAGE_KEYS.tracker) || []);
-      setView("app");
-    }
-  }, []);
+  const [profile, setProfile] = useState(savedProfile);
+  const [discover, setDiscover] = useState(() => loadStorage(STORAGE_KEYS.discover) || []);
+  const [custom, setCustom] = useState(() => loadStorage(STORAGE_KEYS.custom) || []);
+  const [tracker, setTracker] = useState(() => loadStorage(STORAGE_KEYS.tracker) || []);
+  const [view, setView] = useState(forceHome ? "landing" : savedProfile ? "app" : "landing");
 
   const handleProfileSave = (prof) => {
     setProfile(prof);
