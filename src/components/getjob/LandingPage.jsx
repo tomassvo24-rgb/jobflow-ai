@@ -104,10 +104,12 @@ export default function LandingPage({ onStart, onContinue }) {
       {/* NAV */}
       <header className="sticky top-0 z-50 backdrop-blur-md border-b bg-background/90 border-border">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <img
-            src={dark ? LOGO_DARK : LOGO_LIGHT}
-            alt="GetJob.cz" className={dark ? "h-28 w-auto object-contain" : "h-11 w-auto object-contain ml-8"}
-          />
+          <div className="w-48 flex items-center">
+            <img
+              src={dark ? LOGO_DARK : LOGO_LIGHT}
+              alt="GetJob.cz" className={dark ? "h-28 w-auto object-contain" : "h-11 w-auto object-contain ml-4"}
+            />
+          </div>
           <nav className="hidden md:flex items-center gap-10 text-sm font-medium text-foreground">
             <a href="#funkce" className="hover:text-primary transition-colors">Funkce</a>
             <a href="#jak-to-funguje" className="hover:text-primary transition-colors">Jak to funguje</a>
