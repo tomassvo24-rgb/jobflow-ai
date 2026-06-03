@@ -38,28 +38,35 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
   const toggleBen = (b) => setBenFilters(f => f.includes(b) ? f.filter(x => x !== b) : [...f, b]);
 
   // Load pre-scraped jobs from DB on mount
+  // No initial load — wait for city selection
+  useEffect(() => { setInitialLoading(false); }, []);
+
+  // Load Apify jobs when city is selected
   useEffect(() => {
-    const loadGlobalJobs = async () => {
+    if (!locFilter) {
+      setJobs([]);
+      setRunMeta(null);
+      return;
+    }
+    const loadApifyJobs = async () => {
+      setInitialLoading(true);
       try {
-        const res = await base44.entities.JobListing.filter({ run_id: "global" }, "-created_date", 100);
-        if (res && res.length > 0) {
-          // Score them against current user profile
-          const scored = res.map(job => ({
-            ...job,
-            match_score: job.match_score || 0,
-            match_reasons: job.match_reasons || [],
-          }));
-          setJobs(scored);
-          setRunMeta({ sources_checked: [...new Set(scored.map(j => j.source))], total_found: scored.length, filtered_to: scored.length, sources_failed: [] });
-        }
+        const res = await base44.entities.JobListing.filter({ source: "Apify" }, "-created_date", 100);
+        const scored = (res || []).map(job => ({
+          ...job,
+          match_score: job.match_score || 0,
+          match_reasons: job.match_reasons || [],
+        }));
+        setJobs(scored);
+        setRunMeta({ total_found: scored.length, filtered_to: scored.length });
       } catch (e) {
-        // silently fail — user can still run manual discovery
+        // silently fail
       } finally {
         setInitialLoading(false);
       }
     };
-    loadGlobalJobs();
-  }, []);
+    loadApifyJobs();
+  }, [locFilter]);
 
   // Rotating loading message
   useEffect(() => {
@@ -127,8 +134,6 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
   }), [jobs, search, minScore, locFilter, salFilter, durFilter, benFilters]);
 
   const hasJobs = jobs.length > 0;
-  // Show jobs only when user has picked a city OR typed a search term
-  const canShowJobs = locFilter.length > 0 || search.trim().length > 0;
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5 items-start">
@@ -217,22 +222,8 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
             style={{ background: "white", border: "1px solid #e8edf4" }}>
             <span className="flex items-center gap-1.5" style={{ color: "#6b7280" }}>
               <IconCheck cls="w-3.5 h-3.5 text-green-500" />
-              Zdroje: <strong style={{ color: "#0d1b2a" }}>{runMeta.sources_checked?.join(", ")}</strong>
+              Nalezeno: <strong style={{ color: "#0d1b2a" }}>{runMeta.total_found}</strong> pozic
             </span>
-            <span className="flex items-center gap-1.5" style={{ color: "#6b7280" }}>
-              <IconGlobe cls="w-3.5 h-3.5" />
-              Nalezeno: <strong style={{ color: "#0d1b2a" }}>{runMeta.total_found}</strong>
-            </span>
-            <span className="flex items-center gap-1.5" style={{ color: "#6b7280" }}>
-              <IconTarget cls="w-3.5 h-3.5" />
-              Zobrazeno: <strong style={{ color: "#0d1b2a" }}>{runMeta.filtered_to}</strong>
-            </span>
-            {runMeta.sources_failed?.length > 0 && (
-              <span className="flex items-center gap-1.5" style={{ color: "#d97706" }}>
-                <IconWarning cls="w-3.5 h-3.5" />
-                Chyba: {runMeta.sources_failed.join(", ")}
-              </span>
-            )}
           </div>
         )}
 
@@ -310,22 +301,8 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
           </div>
         </div>
 
-        {/* ── Prompt to pick city/position ── */}
-        {hasJobs && !loading && !canShowJobs && (
-          <div className="text-center py-12 rounded-2xl border" style={{ background: "white", borderColor: "#e8edf4" }}>
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
-              style={{ background: "linear-gradient(135deg,#eff6ff,#e0f2fe)" }}>
-              <IconSearch cls="w-7 h-7 text-blue-400" />
-            </div>
-            <p className="font-bold text-base" style={{ color: "#0d1b2a" }}>Zvolte město nebo zadejte pozici</p>
-            <p className="mt-1.5 text-sm max-w-xs mx-auto" style={{ color: "#6b7280" }}>
-              Vyberte město ze seznamu nebo napište název pozice/firmy do vyhledávacího pole výše.
-            </p>
-          </div>
-        )}
-
         {/* ── Job list ── */}
-        {hasJobs && !loading && canShowJobs && (
+        {hasJobs && !loading && (
           <div>
             <div className="flex items-center justify-between mb-3">
               <p className="text-xs font-medium" style={{ color: "#6b7280" }}>
@@ -364,16 +341,30 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
           </div>
         )}
 
-        {/* ── Empty state ── */}
-        {!hasJobs && !loading && !error && (
+        {/* ── Empty state — no city selected ── */}
+        {!hasJobs && !loading && !error && !locFilter && (
           <div className="text-center py-16">
             <div className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-5"
               style={{ background: "linear-gradient(135deg,#eff6ff,#e0f2fe)" }}>
               <IconSearch cls="w-8 h-8 text-blue-400" />
             </div>
-            <p className="font-extrabold text-xl" style={{ color: "#0d1b2a" }}>Žádné pozice v databázi</p>
+            <p className="font-extrabold text-xl" style={{ color: "#0d1b2a" }}>Zvolte město</p>
             <p className="mt-2 text-sm" style={{ color: "#6b7280" }}>
-              Klikni na "Najít pozice pro mě" — agent prohledá 8 zdrojů a ke každé pozici vypočítá skóre shody.
+              Vyberte město z filtru výše a zobrazí se dostupné pozice.
+            </p>
+          </div>
+        )}
+
+        {/* ── Empty state — city selected but no results ── */}
+        {!hasJobs && !loading && !error && locFilter && (
+          <div className="text-center py-16">
+            <div className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-5"
+              style={{ background: "linear-gradient(135deg,#eff6ff,#e0f2fe)" }}>
+              <IconSearch cls="w-8 h-8 text-blue-400" />
+            </div>
+            <p className="font-extrabold text-xl" style={{ color: "#0d1b2a" }}>Žádné pozice pro {locFilter}</p>
+            <p className="mt-2 text-sm" style={{ color: "#6b7280" }}>
+              Zkuste jiné město nebo spusťte nové vyhledávání.
             </p>
           </div>
         )}
