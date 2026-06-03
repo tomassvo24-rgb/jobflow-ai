@@ -1,18 +1,90 @@
-import React, { useState } from "react";
-import Sidebar from "./Sidebar";
-import { IconNews, IconClose, IconChart, IconStar, IconGrad, IconMoney, IconHome, IconFile, IconAgent, IconRocket } from "./Icons";
+import React, { useState, useEffect } from "react";
+import { IconNews, IconClose, IconChart, IconStar, IconRocket } from "./Icons";
 
-const NEWS_DATA = [
-  { cat: "Trh práce", title: "AI mění svět práce — které pozice jsou nejžádanější v 2026?", date: "7. 5. 2026", Icon: IconAgent, bg: "#e8f5ee", body: "Počet pracovních míst vyžadujících znalost AI nástrojů vzrostl o 340 % za poslední rok. Nejvíce poptávané jsou pozice v data science, AI inženýrství a AI product managementu." },
-  { cat: "Studenti",  title: "5 tipů jak získat stáž v top firmě bez zkušeností", date: "5. 5. 2026", Icon: IconGrad,  bg: "#eff6ff", body: "Recruiteři z McKinsey, Deloitte a EY prozradili, co hledají u studentů bez praxe. Klíčem je prokázat analytické myšlení a zájem o obor — ne certifikáty." },
-  { cat: "Platy",     title: "Průměrné platy v IT v ČR 2026: kdo vydělává nejvíc?", date: "3. 5. 2026", Icon: IconMoney, bg: "#fef3c7", body: "Senior backend developer průměrně bere 120 000 Kč/měs., zatímco junior pozice startují na 45 000. Data science a AI role jsou nejlépe placené v celém sektoru." },
-  { cat: "Kariéra",   title: "Remote vs. office: co opravdu chtějí zaměstnanci v 2026?", date: "1. 5. 2026", Icon: IconHome, bg: "#f5f3ff", body: "Průzkum mezi 10 000 zaměstnanci ukázal, že 67 % preferuje hybridní model. Plně remote pozice jsou nejžádanější v IT, marketing a HR sektorech." },
-  { cat: "Inspirace", title: "Příběh: Z práva k venture capital — jak Tomáš vybudoval kariéru snů", date: "29. 4. 2026", Icon: IconStar, bg: "#fef2f2", body: "Tomáš studoval práva, ale vždy ho zajímaly investice. Po stáži v J&T přešel do VC fondu a dnes investuje do startupů. Jeho klíčová rada: nebát se ptát." },
-  { cat: "Tipy",      title: "Jak napsat životopis, který AI recruiteři nepřeskočí", date: "27. 4. 2026", Icon: IconFile, bg: "#e8f5ee", body: "80 % velkých firem používá ATS systémy pro třídění CV. Naučte se klíčová slova a formát, který projde automatickým filtrem a dostane se k člověku." },
+const RSS_SOURCES = [
+  { url: "https://www.jobs.cz/rss/", label: "Jobs.cz" },
+  { url: "https://forbes.cz/feed/", label: "Forbes" },
+  { url: "https://www.novinky.cz/ekonomika/rss", label: "Novinky.cz" },
 ];
 
+const API_BASE = "https://api.rss2json.com/v1/api.json?rss_url=";
+
+const CAT_COLORS = {
+  "Jobs.cz": { bg: "#e8f5ee", color: "#059669" },
+  "Forbes": { bg: "#fef3c7", color: "#d97706" },
+  "Novinky.cz": { bg: "#eff6ff", color: "#2563eb" },
+};
+
+function truncate(str, max) {
+  if (!str) return "";
+  const clean = str.replace(/<[^>]*>/g, "").trim();
+  return clean.length > max ? clean.slice(0, max) + "…" : clean;
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return "";
+  try {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString("cs-CZ", { day: "numeric", month: "long", year: "numeric" });
+  } catch {
+    return dateStr;
+  }
+}
+
 export default function NewsTab() {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [openArticle, setOpenArticle] = useState(null);
+
+  useEffect(() => {
+    async function fetchAll() {
+      setLoading(true);
+      setError(false);
+      try {
+        const results = await Promise.allSettled(
+          RSS_SOURCES.map(src =>
+            fetch(`${API_BASE}${encodeURIComponent(src.url)}`)
+              .then(r => r.json())
+              .then(data => {
+                if (data.status !== "ok") return [];
+                return (data.items || []).map(item => ({
+                  title: item.title || "",
+                  description: truncate(item.description || item.content || "", 150),
+                  date: item.pubDate || "",
+                  url: item.link || "#",
+                  source: src.label,
+                }));
+              })
+          )
+        );
+
+        let all = [];
+        results.forEach(r => {
+          if (r.status === "fulfilled") all = all.concat(r.value);
+        });
+
+        if (all.length === 0) {
+          setError(true);
+          setLoading(false);
+          return;
+        }
+
+        // Sort by date descending
+        all.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setArticles(all.slice(0, 8));
+      } catch {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchAll();
+  }, []);
+
+  const featured = articles.slice(0, 2);
+  const rest = articles.slice(2);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5 items-start">
@@ -22,36 +94,71 @@ export default function NewsTab() {
           <h2 className="font-poppins text-[22px] font-bold">Novinky & Inspirace</h2>
         </div>
 
-        {/* Featured 2 */}
-        <div className="grid grid-cols-2 gap-3 mb-5">
-          {NEWS_DATA.slice(0, 2).map((n, i) => (
-            <div key={i} onClick={() => setOpenArticle(n)}
-              className="bg-white border border-border rounded-xl overflow-hidden cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all">
-              <div className="h-28 flex items-center justify-center" style={{ background: n.bg }}>
-                <n.Icon cls="w-12 h-12 opacity-60" />
+        {/* Loading */}
+        {loading && (
+          <div className="space-y-3">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="bg-white border border-border rounded-xl p-4 animate-pulse">
+                <div className="h-4 bg-muted rounded w-3/4 mb-2" />
+                <div className="h-3 bg-muted rounded w-1/2" />
               </div>
-              <div className="p-4">
-                <div className="text-[10px] font-bold text-brand-teal uppercase tracking-wider font-mono mb-1">{n.cat}</div>
-                <div className="font-poppins font-bold text-sm text-foreground leading-snug mb-1">{n.title}</div>
-                <div className="text-[11px] text-muted-foreground font-mono">{n.date}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <p className="text-[11px] font-bold text-brand-teal uppercase tracking-wider font-mono mb-3">Nejnovější články</p>
-        {NEWS_DATA.slice(2).map((n, i) => (
-          <div key={i} onClick={() => setOpenArticle(n)}
-            className="bg-white border border-border rounded-xl p-4 mb-2.5 flex gap-4 items-start cursor-pointer hover:shadow-md transition-all">
-            <div className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0" style={{ background: n.bg }}>
-              <n.Icon cls="w-6 h-6 opacity-60" />
-            </div>
-            <div>
-              <div className="font-semibold text-sm text-foreground mb-0.5">{n.title}</div>
-              <div className="text-xs text-muted-foreground">{n.cat} · {n.date}</div>
-            </div>
+            ))}
           </div>
-        ))}
+        )}
+
+        {/* Error */}
+        {!loading && error && (
+          <div className="text-center py-12 text-muted-foreground">
+            <div className="text-4xl mb-3">📡</div>
+            <p className="font-semibold">Nepodařilo se načíst novinky</p>
+            <p className="text-sm mt-1">Zkuste to prosím znovu později.</p>
+          </div>
+        )}
+
+        {/* Content */}
+        {!loading && !error && (
+          <>
+            {/* Featured */}
+            {featured.length > 0 && (
+              <div className="grid grid-cols-2 gap-3 mb-5">
+                {featured.map((n, i) => {
+                  const style = CAT_COLORS[n.source] || { bg: "#f3f4f6", color: "#6b7280" };
+                  return (
+                    <a key={i} href={n.url} target="_blank" rel="noopener noreferrer"
+                      className="bg-white border border-border rounded-xl overflow-hidden cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all block no-underline">
+                      <div className="h-20 flex items-center justify-center px-4" style={{ background: style.bg }}>
+                        <span className="text-xs font-bold uppercase tracking-wider" style={{ color: style.color }}>{n.source}</span>
+                      </div>
+                      <div className="p-4">
+                        <div className="text-[10px] font-bold uppercase tracking-wider font-mono mb-1" style={{ color: style.color }}>{n.source}</div>
+                        <div className="font-poppins font-bold text-sm text-foreground leading-snug mb-1 line-clamp-2">{n.title}</div>
+                        <div className="text-[11px] text-muted-foreground font-mono">{formatDate(n.date)}</div>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+            )}
+
+            <p className="text-[11px] font-bold text-brand-teal uppercase tracking-wider font-mono mb-3">Nejnovější články</p>
+            {rest.map((n, i) => {
+              const style = CAT_COLORS[n.source] || { bg: "#f3f4f6", color: "#6b7280" };
+              return (
+                <a key={i} href={n.url} target="_blank" rel="noopener noreferrer"
+                  className="bg-white border border-border rounded-xl p-4 mb-2.5 flex gap-4 items-start cursor-pointer hover:shadow-md transition-all block no-underline">
+                  <div className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0 text-[9px] font-bold uppercase text-center leading-tight" style={{ background: style.bg, color: style.color }}>
+                    {n.source.split(".")[0]}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="font-semibold text-sm text-foreground mb-0.5 line-clamp-2">{n.title}</div>
+                    {n.description && <div className="text-xs text-muted-foreground mb-0.5 line-clamp-2">{n.description}</div>}
+                    <div className="text-xs text-muted-foreground">{n.source} · {formatDate(n.date)}</div>
+                  </div>
+                </a>
+              );
+            })}
+          </>
+        )}
       </div>
 
       {/* Sidebar */}
@@ -86,25 +193,6 @@ export default function NewsTab() {
           </div>
         </div>
       </div>
-
-      {/* Article modal */}
-      {openArticle && (
-        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 backdrop-blur-sm" onClick={e => e.target === e.currentTarget && setOpenArticle(null)}>
-          <div className="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden">
-            <div className="h-32 flex items-center justify-center" style={{ background: openArticle.bg }}>
-              <openArticle.Icon cls="w-16 h-16 opacity-50" />
-            </div>
-            <div className="p-6">
-              <div className="text-[10px] font-bold text-brand-teal uppercase tracking-wider font-mono mb-2">{openArticle.cat} · {openArticle.date}</div>
-              <h3 className="font-poppins text-xl font-bold mb-4 leading-snug">{openArticle.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-5">{openArticle.body}</p>
-              <button onClick={() => setOpenArticle(null)} className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-border text-sm font-medium text-muted-foreground hover:bg-secondary transition-colors">
-                <IconClose cls="w-4 h-4" /> Zavřít
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
