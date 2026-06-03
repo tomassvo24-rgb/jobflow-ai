@@ -98,7 +98,7 @@ export default function NewsTab() {
         {loading && (
           <div className="space-y-3">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="bg-white border border-border rounded-xl p-4 animate-pulse">
+              <div key={i} className="bg-card border border-border rounded-xl p-4 animate-pulse">
                 <div className="h-4 bg-muted rounded w-3/4 mb-2" />
                 <div className="h-3 bg-muted rounded w-1/2" />
               </div>
@@ -125,7 +125,7 @@ export default function NewsTab() {
                   const style = CAT_COLORS[n.source] || { bg: "#f3f4f6", color: "#6b7280" };
                   return (
                     <a key={i} href={n.url} target="_blank" rel="noopener noreferrer"
-                      className="bg-white border border-border rounded-xl overflow-hidden cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all block no-underline">
+                      className="bg-card border border-border rounded-xl overflow-hidden cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all block no-underline">
                       <div className="h-20 flex items-center justify-center px-4" style={{ background: style.bg }}>
                         <span className="text-xs font-bold uppercase tracking-wider" style={{ color: style.color }}>{n.source}</span>
                       </div>
@@ -145,7 +145,7 @@ export default function NewsTab() {
               const style = CAT_COLORS[n.source] || { bg: "#f3f4f6", color: "#6b7280" };
               return (
                 <a key={i} href={n.url} target="_blank" rel="noopener noreferrer"
-                  className="bg-white border border-border rounded-xl p-4 mb-2.5 flex gap-4 items-start cursor-pointer hover:shadow-md transition-all block no-underline">
+                  className="bg-card border border-border rounded-xl p-4 mb-2.5 flex gap-4 items-start cursor-pointer hover:shadow-md transition-all block no-underline">
                   <div className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0 text-[9px] font-bold uppercase text-center leading-tight" style={{ background: style.bg, color: style.color }}>
                     {n.source.split(".")[0]}
                   </div>
@@ -180,7 +180,7 @@ export default function NewsTab() {
           <p className="text-xs text-muted-foreground mb-3 leading-relaxed">Postav produkt za 54 hodin. Networking, mentoři, ceny.</p>
           <button className="w-full px-4 py-2 rounded-full bg-brand-blue text-white text-xs font-semibold hover:opacity-90 transition-opacity">Registrovat se</button>
         </div>
-        <div className="bg-white border border-border rounded-xl p-4 shadow-sm">
+        <div className="bg-card border border-border rounded-xl p-4 shadow-sm">
           <div className="font-poppins font-bold text-sm mb-3 flex items-center gap-2">
             <IconChart cls="w-4 h-4 text-brand-blue" /> Trh práce v číslech
           </div>
