@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { IconNews, IconClose, IconChart, IconStar, IconRocket } from "./Icons";
+import { base44 } from "@/api/base44Client";
 
 const RSS_SOURCES = [
   { url: "https://www.jobs.cz/rss/", label: "Jobs.cz" },
@@ -36,6 +37,13 @@ export default function NewsTab() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [openArticle, setOpenArticle] = useState(null);
+  const [laborStats, setLaborStats] = useState(null);
+
+  useEffect(() => {
+    base44.entities.LaborStats.list('-created_date', 1).then(data => {
+      if (data?.length > 0) setLaborStats(data[0]);
+    }).catch(() => {});
+  }, []);
 
   useEffect(() => {
     async function fetchAll() {
@@ -185,12 +193,22 @@ export default function NewsTab() {
             <IconChart cls="w-4 h-4 text-brand-blue" /> Trh práce v číslech
           </div>
           <div className="text-sm text-muted-foreground space-y-1">
-            {[["Volných míst (ČR)", "341 000", "text-blue-600"], ["Průměrná mzda", "46 500 Kč", ""], ["IT průměr", "78 000 Kč", ""], ["Nezaměstnanost", "3.9 %", ""]].map(([l, v, c]) => (
+            {[
+              ["Volných míst (ČR)", laborStats ? laborStats.job_openings?.toLocaleString("cs-CZ") : "341 000", "text-blue-600"],
+              ["Průměrná mzda", laborStats ? `${laborStats.avg_wage?.toLocaleString("cs-CZ")} Kč` : "46 500 Kč", ""],
+              ["IT průměr", laborStats ? `${laborStats.it_avg_wage?.toLocaleString("cs-CZ")} Kč` : "78 000 Kč", ""],
+              ["Nezaměstnanost", laborStats ? `${laborStats.unemployment_rate} %` : "3.9 %", ""],
+            ].map(([l, v, c]) => (
               <div key={l} className="flex justify-between py-1.5 border-b border-border last:border-0">
                 <span>{l}</span><span className={`font-semibold ${c}`}>{v}</span>
               </div>
             ))}
           </div>
+          {laborStats?.source_date && (
+            <p className="text-[10px] text-muted-foreground mt-2">
+              Data ze dne {new Date(laborStats.source_date).toLocaleDateString("cs-CZ")}
+            </p>
+          )}
         </div>
       </div>
     </div>

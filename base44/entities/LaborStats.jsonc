@@ -1,0 +1,22 @@
+{
+  "name": "LaborStats",
+  "type": "object",
+  "properties": {
+    "job_openings": {
+      "type": "number"
+    },
+    "avg_wage": {
+      "type": "number"
+    },
+    "it_avg_wage": {
+      "type": "number"
+    },
+    "unemployment_rate": {
+      "type": "number"
+    },
+    "source_date": {
+      "type": "string"
+    }
+  },
+  "required": []
+}
