@@ -1,9 +1,10 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import { base44 } from "@/api/base44Client";
 import { motion, AnimatePresence } from "framer-motion";
 import Sidebar from "./Sidebar";
 import DiscoveryJobCard from "./discovery/DiscoveryJobCard";
 import JobDetailModal from "./discovery/JobDetailModal";
+import CoverLetterModal from "./discovery/CoverLetterModal";
 import {
   IconAgent, IconSearch, IconSparkle, IconRefresh, IconLoader,
   IconCheck, IconGlobe, IconTarget, IconWarning
@@ -29,6 +30,10 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
   const [error, setError] = useState(null);
   const [runMeta, setRunMeta] = useState(null);
   const [selectedJob, setSelectedJob] = useState(null);
+  const [coverLetterJob, setCoverLetterJob] = useState(null);
+  const [coverLetter, setCoverLetter] = useState("");
+  const [coverLetterLoading, setCoverLetterLoading] = useState(false);
+  const [coverLetterError, setCoverLetterError] = useState(null);
   const [search, setSearch] = useState("");
   const [minScore, setMinScore] = useState(0);
   const [locFilter, setLocFilter] = useState("");
@@ -96,6 +101,31 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
 
   const handleSave = (job) =>
     setJobs(prev => prev.map(j => j.url === job.url ? { ...j, saved: !j.saved } : j));
+
+  const handleGenerateCoverLetter = async (job) => {
+    setCoverLetterJob(job);
+    setCoverLetter("");
+    setCoverLetterError(null);
+    setCoverLetterLoading(true);
+    const jobText = [job.title, job.company, job.location, job.snippet].filter(Boolean).join("\n");
+    const cvData = [
+      profile.name && `Jméno: ${profile.name}`,
+      profile.field && `Obor: ${profile.field}`,
+      profile.skills && `Dovednosti: ${profile.skills}`,
+      profile.level && `Úroveň: ${profile.level}`,
+      profile.city && `Město: ${profile.city}`,
+      profile.cvText && `CV: ${profile.cvText}`,
+    ].filter(Boolean).join("\n");
+    try {
+      const res = await base44.functions.invoke("generateCoverLetter", { jobText, cvData });
+      if (res.data.error) throw new Error(res.data.error);
+      setCoverLetter(res.data.letter);
+    } catch (e) {
+      setCoverLetterError(e.message);
+    } finally {
+      setCoverLetterLoading(false);
+    }
+  };
 
   const handleGenerateEmail = (job) => {
     setSelectedJob(null);
@@ -332,6 +362,7 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
                         onOpen={setSelectedJob}
                         onSave={handleSave}
                         onGenerateEmail={handleGenerateEmail}
+                        onGenerateCoverLetter={handleGenerateCoverLetter}
                       />
                     </motion.div>
                   ))}
@@ -381,6 +412,17 @@ export default function DiscoverTab({ profile, tracker, onTrackerSave, onOpenGen
           job={selectedJob}
           onClose={() => setSelectedJob(null)}
           onGenerateEmail={handleGenerateEmail}
+        />
+      )}
+
+      {/* ── Cover letter modal ── */}
+      {coverLetterJob && (
+        <CoverLetterModal
+          job={coverLetterJob}
+          letter={coverLetter}
+          loading={coverLetterLoading}
+          error={coverLetterError}
+          onClose={() => { setCoverLetterJob(null); setCoverLetter(""); setCoverLetterError(null); }}
         />
       )}
     </div>

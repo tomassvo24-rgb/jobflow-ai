@@ -1,5 +1,5 @@
 import React from "react";
-import { IconMail, IconBookmark, IconCheck, IconPin, IconExtLink } from "../Icons";
+import { IconMail, IconBookmark, IconCheck, IconPin, IconExtLink, IconFile } from "../Icons";
 
 const SOURCE_STYLE = {
   "jobs.cz":        { bg: "#eff6ff", color: "#2563eb" },
@@ -22,7 +22,7 @@ function ScorePill({ score }) {
   );
 }
 
-export default function DiscoveryJobCard({ job, onOpen, onSave, onGenerateEmail }) {
+export default function DiscoveryJobCard({ job, onOpen, onSave, onGenerateEmail, onGenerateCoverLetter }) {
   const src = SOURCE_STYLE[job.source?.toLowerCase()] || { bg: "#f3f4f6", color: "#6b7280" };
   const initials = (job.company || "??").slice(0, 2).toUpperCase();
 
@@ -88,10 +88,17 @@ export default function DiscoveryJobCard({ job, onOpen, onSave, onGenerateEmail 
       <div className="flex gap-2 px-5 pb-4" onClick={e => e.stopPropagation()}>
         <button
           onClick={() => onGenerateEmail(job)}
-          className="flex-1 inline-flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold text-white transition-opacity hover:opacity-90"
+          className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-white transition-opacity hover:opacity-90"
           style={{ background: "linear-gradient(90deg,#2563eb,#14b8a6)" }}
         >
-          <IconMail cls="w-3.5 h-3.5" /> Generovat email
+          <IconMail cls="w-3.5 h-3.5" /> Email
+        </button>
+        <button
+          onClick={() => onGenerateCoverLetter(job)}
+          className="flex-1 inline-flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold text-white transition-opacity hover:opacity-90"
+          style={{ background: "linear-gradient(90deg,#7c3aed,#2563eb)" }}
+        >
+          <IconFile cls="w-3.5 h-3.5" /> Motivační dopis
         </button>
         <button
           onClick={() => onSave(job)}
